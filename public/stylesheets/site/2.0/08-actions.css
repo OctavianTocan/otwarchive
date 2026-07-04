@@ -21,8 +21,8 @@ ul.actions {
 }
 
 .actions a, .actions a:link, .action, .action:link, .actions button, .actions input, input[type="submit"], button, .current, .actions label {
-  background: #eee;
-  color: #444;
+  background: var(--ao3-muted);
+  color: var(--ao3-fg);
   width: auto;
   font-weight: 400;
   font-size: 100%;
@@ -35,14 +35,10 @@ ul.actions {
   overflow: visible;
   position: relative;
   text-decoration: none;
-  border: 1px solid #bbb;
-  border-bottom: 1px solid #aaa;
-    background-image: -moz-linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
-    background-image: -webkit-linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
-    background-image: -o-linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
-    background-image: -ms-linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
-    background-image: linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
+  border: 1px solid var(--ao3-border);
   border-radius: var(--ao3-radius-sm);
+  cursor: pointer;
+  transition: background var(--ao3-duration) var(--ao3-ease), border-color var(--ao3-duration) var(--ao3-ease), color var(--ao3-duration) var(--ao3-ease);
   box-shadow: none;
 }
 
@@ -88,10 +84,20 @@ ol.pagination, div.pagination, ol.year {
 }
 
 .actions a:hover, .actions button:hover, .actions input:hover, .actions a:focus, .actions button:focus, .actions input:focus, label.action:hover, .action:hover, .action:focus {
-  color: #900;
-  border-top: 1px solid #999;
-  border-left: 1px solid #999;
-    box-shadow: var(--ao3-shadow-xs);
+  background: var(--ao3-border);
+  color: var(--ao3-fg);
+  border-color: var(--ao3-border-strong);
+  box-shadow: none;
+}
+
+.actions a:focus-visible, .actions button:focus-visible, .actions input:focus-visible, .action:focus-visible, input[type="submit"]:focus-visible, button:focus-visible {
+  outline: none;
+  border-color: var(--ao3-ring);
+  box-shadow: 0 0 0 3px rgba(166, 166, 169, 0.5);
+}
+
+.actions a:active, .actions button:active, .actions input:active, .action:active {
+  transform: translateY(1px);
 }
 
 .actions a:active, .current, a.current, a:link.current, .current a:visited {

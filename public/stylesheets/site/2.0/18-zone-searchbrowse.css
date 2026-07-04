@@ -196,9 +196,7 @@ https://browserstrangeness.github.io/css_hacks.html
   border: 1px solid;
   margin-right: 0.25em;
   text-align: center;
-    background-image: -moz-linear-gradient(top, #fff 2%, #ddd 95%, #bbb 100%);
-    background-image: -webkit-linear-gradient(top, #fff 2%, #ddd 95%, #bbb 100%);
-    background-image: linear-gradient(#fff 2%, #ddd 95%, #bbb 100%);
+    background: var(--ao3-muted);
 }
 
 .filters input:focus + .indicator + span {
@@ -222,9 +220,7 @@ https://browserstrangeness.github.io/css_hacks.html
 .filters [type="checkbox"]:checked + .indicator:before {
   background: #deffde;
   color: #008000;
-    background-image: -moz-linear-gradient(top, #fff 2%, #d1f0d1 95%, #b3ccb3 100%);
-    background-image: -webkit-linear-gradient(top, #fff 2%, #d1f0d1 95%, #b3ccb3 100%);
-    background-image: linear-gradient(#fff 2%, #d1f0d1 95%, #b3ccb3 100%);
+    background: #d1f0d1;
 }
 
 .filters [type="radio"] + .indicator:before {
@@ -250,11 +246,9 @@ https://browserstrangeness.github.io/css_hacks.html
 }
 
 .filters .exclude [type="checkbox"]:checked + .indicator:before {
-  background: #fedede;
+  background: #fedene;
   color: #f00;
-    background-image: -moz-linear-gradient(top, #fff 2%, #efd1d1 95%, #d8bebe 100%);
-    background-image: -webkit-linear-gradient(top, #fff 2%, #efd1d1 95%, #d8bebe 100%);
-    background-image: linear-gradient(#fff 2%, #efd1d1 95%, #d8bebe 100%);
+    background: #efd1d1;
 }
 
 /* END== */
