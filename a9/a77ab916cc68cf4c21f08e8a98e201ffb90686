@@ -1,0 +1,21 @@
+public/stylesheets/site/2.0/21-userstuff.css
+  s_f71499f48bc257::t_6ff8b9f2dd1dbf 214-234
+public/stylesheets/site/2.0/02-elements.css
+  s_f71499f48bc257::t_22c0c02617a228 30-31,33-41,45,48-49,52-55,63-64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a9a77ab916cc68cf4c21f08e8a98e201ffb90686",
+  "prompts": {},
+  "sessions": {
+    "s_f71499f48bc257": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d0d6ff3effeT2bpx1X8ODaLp9",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
