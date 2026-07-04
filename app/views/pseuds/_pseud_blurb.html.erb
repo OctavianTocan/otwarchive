@@ -35,6 +35,7 @@
                       t(".delete_landmark_text", pseud: pseud.name),
                       class: "landmark")),
                   user_pseud_path(@user, pseud),
+                  class: "action destructive",
                   data: { confirm: t(".confirm_delete") },
                   id: "delete_#{pseud.name.underscore}",
                   method: :delete

@@ -20,7 +20,7 @@
     </p>
 
     <p class="submit cancel actions">
-		  <%= submit_tag ts("Submit"), data: {confirm: t(".confirm")} %> <%= submit_tag t(".cancel"), :name => 'cancel_button', :class => 'cancel' %>
+		  <%= submit_tag ts("Submit"), class: "action destructive", data: {confirm: t(".confirm")} %> <%= submit_tag t(".cancel"), :name => 'cancel_button', :class => 'cancel' %>
     </p>
   <% end %>
 <% end %>

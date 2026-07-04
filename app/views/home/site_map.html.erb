@@ -55,6 +55,7 @@
       <li>
         <%= link_to t(".change_your_account_settings.delete_my_account"),
               user_path(current_user),
+              class: "action destructive",
               data: { confirm: t(".change_your_account_settings.delete_account_confirmation") },
               method: :delete %>
       </li>

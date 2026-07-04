@@ -73,7 +73,7 @@
     </dt>
     <dd>
       <%= form_for [current_user, subscription], html: { method: :delete } do |f| %>
-        <%= f.submit t(".button_html", name: subscription.name) %>
+        <%= f.submit t(".button_html", name: subscription.name), class: "action destructive" %>
       <% end %>
     </dd>
   <% end %>

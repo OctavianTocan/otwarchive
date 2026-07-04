@@ -45,13 +45,13 @@
           <% end %>
         </ul>
       </li>
-      <li><%= link_to t(".nav.log_out"), destroy_user_session_path(return_to: request.fullpath.start_with?(destroy_user_session_path) ? params[:return_to] : request.fullpath), method: :delete %></li>
+      <li><%= link_to t(".nav.log_out"), destroy_user_session_path(return_to: request.fullpath.start_with?(destroy_user_session_path) ? params[:return_to] : request.fullpath), class: "action destructive", method: :delete %></li>
     </ul>
 
     <% elsif logged_in_as_admin? %>
       <ul class="user navigation actions">
         <li><%= link_to t(".nav.greeting", current_user: current_admin.login), admins_path %></li>
-        <li><%= link_to t(".nav.log_out"), destroy_admin_session_path, method: :delete %></li>
+        <li><%= link_to t(".nav.log_out"), destroy_admin_session_path, class: "action destructive", method: :delete %></li>
       </ul>
     <% end %>
   <p class="icon"><%= icon_display(current_user) %></p>
