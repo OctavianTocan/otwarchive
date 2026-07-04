@@ -1,0 +1,38 @@
+app/views/admin_posts/show.html.erb
+  s_899c5d27098811::t_8c5b13a9642316 25
+app/views/admin_posts/_admin_post_blurb.html.erb
+  s_899c5d27098811::t_671e4d9683a2ed 16
+  s_899c5d27098811::t_5ddff494582113 21
+app/views/admin/sessions/confirm_logout.html.erb
+  s_899c5d27098811::t_21a3c55e6ea1dc 6
+app/views/skins/confirm_delete.html.erb
+  s_899c5d27098811::t_e0f90fc3e820b5 10
+app/views/skins/_skin_actions.html.erb
+  s_899c5d27098811::t_6f7f345110ce79 20
+app/views/admin/banners/confirm_delete.html.erb
+  s_899c5d27098811::t_e1f7564fab1bc3 12
+app/views/admin/_admin_nav.html.erb
+  s_899c5d27098811::t_01b315025a4c05 24
+app/views/admin/blacklisted_emails/index.html.erb
+  s_899c5d27098811::t_956792a4583b6d 52
+app/views/admin/_admin_options.html.erb
+  s_899c5d27098811::t_53ab26a06f365c 66
+app/views/admin/support_notices/confirm_delete.html.erb
+  s_899c5d27098811::t_596fb9346aebe6 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b03006bb375f30bd1366da4945b4b7ebf8540b3e",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
