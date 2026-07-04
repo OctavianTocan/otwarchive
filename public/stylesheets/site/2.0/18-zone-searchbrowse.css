@@ -216,7 +216,7 @@ https://browserstrangeness.github.io/css_hacks.html
 .filters [type="checkbox"] + .indicator:before {
   content: " \2713";
   padding: 0 0.25em;
-    border-radius: 0.25em;
+    border-radius: var(--ao3-radius-sm);
 }
 
 .filters [type="checkbox"]:checked + .indicator:before {

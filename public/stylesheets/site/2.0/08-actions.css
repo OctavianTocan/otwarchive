@@ -42,12 +42,12 @@ ul.actions {
     background-image: -o-linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
     background-image: -ms-linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
     background-image: linear-gradient(#fff 2%,#ddd 95%, #bbb 100%);
-    border-radius: 0.25em;
-    box-shadow: none;
+  border-radius: var(--ao3-radius-sm);
+  box-shadow: none;
 }
 
 button {
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif, 'GNU Unifont';
+  font-family: 'Geist Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif, 'GNU Unifont';
   box-sizing: content-box;
 }
 
@@ -154,7 +154,7 @@ h2.landmark {
   overflow: hidden;
   right: 2.5em;
     box-shadow: 2px 2px 5px #bbb;
-    border-radius: 0.15em;
+    border-radius: var(--ao3-radius-lg);
 }
 
 /* CONTEXTS */

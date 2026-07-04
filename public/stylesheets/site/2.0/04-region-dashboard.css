@@ -54,7 +54,7 @@ https://otwcode.github.io/docs/patterns/regions.html#dashboard-region
   border-top: 15px solid #900;
   border-bottom: 15px solid #900;
     opacity: 1.0;
-    border-radius: 0.25em;
+    border-radius: var(--ao3-radius-lg);
 }
 
 /* END == */

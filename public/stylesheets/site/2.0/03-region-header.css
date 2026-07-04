@@ -125,7 +125,7 @@ notice that CSS3 declarations sit are indented twice (four spaces) and always co
 
 #header .user a:hover, #header .user a:focus {
   color: #900;
-    border-radius: 0.25em;
+    border-radius: var(--ao3-radius-sm);
 }
 
 #login .open a:hover, #login .open a:focus {

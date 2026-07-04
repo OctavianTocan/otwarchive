@@ -10,7 +10,7 @@ https://otwcode.github.io/docs/classes-taxonomy.html#modifiers
 .draft {
   border: 2px dashed #aaa;
   padding: 0.643em;
-    border-radius: 0.5em;
+    border-radius: var(--ao3-radius-lg);
 }
 
 /* (these states spoof the ".navigation .current" style) */
@@ -30,7 +30,7 @@ span.unread, .replied, span.claimed, .actions span.defaulted {
   text-decoration: none;
   border: 1px solid #bbb;
   border-bottom: 1px solid #aaa;
-    border-radius: 0.25em;
+    border-radius: var(--ao3-radius-sm);
 }
 
 .actions span.defaulted {

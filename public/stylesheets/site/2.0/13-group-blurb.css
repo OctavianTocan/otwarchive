@@ -338,6 +338,7 @@ blurbs on the manage collection items pages, mostly reseting styles inherited fr
 
 .bookmark .user {
   border: 1px solid #ccc;
+  border-radius: var(--ao3-radius-lg);
   margin-top: 0.643em;
   padding: 0.429em 0.75em;
   overflow: hidden;
@@ -345,7 +346,7 @@ blurbs on the manage collection items pages, mostly reseting styles inherited fr
 
 .bookmark .user .meta {
 	display: inline;
-	font-family: Georgia, serif;
+	font-family: "Redaction", Georgia, serif;
 	font-size: 0.875em;
 	line-height: 2;
 }
@@ -427,7 +428,7 @@ blurbs on the manage collection items pages, mostly reseting styles inherited fr
 
 .prompt .blurb h6 {
   display: inline-block;
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif;
+  font-family: 'Geist Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif;
   font-size: 1em;
   margin: 0.643em 0 0;
 }

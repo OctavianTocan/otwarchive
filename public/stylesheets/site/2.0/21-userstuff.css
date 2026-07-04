@@ -3,6 +3,9 @@
 .userstuff {
     word-wrap: break-word;
     line-height: 1.5;
+    /* Preserve the original body face inside authored work content so the
+       chrome typeface change does not override each author's typography. */
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif, 'GNU Unifont';
 }
 
 .userstuff p, .userstuff details {

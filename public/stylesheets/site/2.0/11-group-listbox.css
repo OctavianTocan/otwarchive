@@ -6,6 +6,7 @@ https://otwcode.github.io/docs/patterns/listbox.html
   clear: right;
   background: #ddd;
   border: 2px solid #ccc;
+  border-radius: var(--ao3-radius-lg);
   padding: 0;
   margin: 0.643em auto;
   overflow: hidden;

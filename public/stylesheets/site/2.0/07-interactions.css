@@ -199,8 +199,8 @@ We only use error messages for LiveValidation. Style spoofs the system error mes
   border: 1px solid #900;
   color: #900;
   padding: 0.25em 0.375em;
-    box-shadow: 1px 1px 2px;
-    border-radius: 0.25em;
+    box-shadow: var(--ao3-shadow-sm);
+    border-radius: var(--ao3-radius-sm);
 }
 
 .LV_invalid_field, input.LV_invalid_field:hover, input.LV_invalid_field:active, textarea.LV_invalid_field:hover, textarea.LV_invalid_field:active {
