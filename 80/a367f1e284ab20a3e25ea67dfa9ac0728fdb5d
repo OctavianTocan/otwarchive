@@ -1,0 +1,38 @@
+app/views/pseuds/_pseud_blurb.html.erb
+  s_899c5d27098811::t_fb8c12f486a9da 38
+app/views/muted/users/confirm_unmute.html.erb
+  s_899c5d27098811::t_a02f9204ddadd5 17
+app/views/users/sessions/confirm_logout.html.erb
+  s_899c5d27098811::t_3d503bc9fb1877 7
+app/views/users/sessions/_greeting.html.erb
+  s_899c5d27098811::t_c00fbb825a2570 54
+  s_899c5d27098811::t_62e6cba032aefc 48
+app/views/home/site_map.html.erb
+  s_899c5d27098811::t_2a113507faaa7d 58
+app/views/users/delete_preview.html.erb
+  s_899c5d27098811::t_e1436a2fb94135 70
+app/views/profile/show.html.erb
+  s_899c5d27098811::t_afcc98713070ba 36
+app/views/subscriptions/index.html.erb
+  s_899c5d27098811::t_36d39ab3093157 76
+app/views/blocked/users/confirm_unblock.html.erb
+  s_899c5d27098811::t_79eb4d6987f1be 19
+app/views/pseuds/delete_preview.html.erb
+  s_899c5d27098811::t_9b237c2cac81b5 23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "80a367f1e284ab20a3e25ea67dfa9ac0728fdb5d",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
