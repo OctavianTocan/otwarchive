@@ -1,0 +1,33 @@
+app/views/prompts/_prompt_controls.html.erb
+  s_899c5d27098811::t_d42199dcb14d71 48
+  s_899c5d27098811::t_d6ce3dc6392260 33
+  s_899c5d27098811::t_bffa2584e29855 24
+app/views/challenge/shared/_challenge_form_delete.html.erb
+  s_899c5d27098811::t_76176a77b9ec8c 7
+app/views/challenge_signups/_signup_controls.html.erb
+  s_899c5d27098811::t_0036329a350fe5 38,43
+app/views/prompts/_prompt_navigation.html.erb
+  s_899c5d27098811::t_69a71af79cba91 7
+app/views/challenge_claims/_unposted_claim_blurb.html.erb
+  s_899c5d27098811::t_c81d7c0619d206 56
+app/views/potential_matches/_no_potential_givers.html.erb
+  s_899c5d27098811::t_e5666c5bf55364 20
+app/views/potential_matches/_no_potential_recipients.html.erb
+  s_899c5d27098811::t_de06ceaa453101 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "84f9c49067179ba8b070a74c1c61bda6aea3f4d9",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
