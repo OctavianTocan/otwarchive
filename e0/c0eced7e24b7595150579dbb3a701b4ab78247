@@ -1,0 +1,25 @@
+public/stylesheets/site/2.0/01-core.css
+  s_f71499f48bc257::t_a24803ac8c9127 6-7
+  s_f71499f48bc257::t_d3043ae928f1e6 8,14
+  s_f71499f48bc257::t_8981d0f9340081 36
+public/stylesheets/site/2.0/02-elements.css
+  s_f71499f48bc257::t_23ec9ef6b7746a 59,68-73
+  s_f71499f48bc257::t_de135632d23c71 26-27
+  s_f71499f48bc257::t_69703f21146323 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "e0c0eced7e24b7595150579dbb3a701b4ab78247",
+  "prompts": {},
+  "sessions": {
+    "s_f71499f48bc257": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d0d6ff3effeT2bpx1X8ODaLp9",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
