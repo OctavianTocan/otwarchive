@@ -14,7 +14,7 @@
             <dd><%= text_field_tag "num_#{type}", params["num_#{type}"] || @challenge.required(type), :class => "number" %></dd>
           <% end %>
           <dt class="landmark"><%= ts("Submit") %></dt>
-          <dd class="submit"><%= submit_tag ts('Update Form') %></dd>
+          <dd class="submit"><%= submit_tag ts('Update Form'), class: "action primary" %></dd>
         </dl>
       </fieldset>
     <% end %>

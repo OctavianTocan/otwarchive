@@ -12,7 +12,7 @@
           <% end %>
         </li>
       <% else %>
-        <li><%= submit_tag ts("Save Assignment Changes") %></li>
+        <li><%= submit_tag ts("Save Assignment Changes"), class: "action primary" %></li>
         <li><%= button_to ts("Regenerate Assignments"), generate_collection_assignments_path(@collection),
                   data: { confirm: ts("Are you sure? This will delete all current assignments.") },
                   method: :post %></li>

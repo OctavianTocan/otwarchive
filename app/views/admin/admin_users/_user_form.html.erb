@@ -20,6 +20,6 @@
       <%= link_to user.fannish_next_of_kin.kin_name, user_path(user.fannish_next_of_kin.kin_name) %>
     <% end %>
   </td>
-  <td class="actions"><%= submit_tag ts("Update") %></td>
+  <td class="actions"><%= submit_tag ts("Update"), class: "action primary" %></td>
   <td class="actions"><%= link_to ts("Details"), admin_user_path(user) %></td>
 <% end %>

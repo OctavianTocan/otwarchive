@@ -11,7 +11,7 @@
           <%= label_tag "num_questions", ts("Questions:") %>
           <%= text_field_tag "num_questions", params["num_questions"], class: "number" %>
         </p>
-        <p class="submit"><%= submit_tag ts("Update Form") %></p>
+        <p class="submit"><%= submit_tag ts("Update Form"), class: "action primary" %></p>
       </fieldset>
     <% end %>
     <% end %>
@@ -55,7 +55,7 @@
     <legend><%= ts("Submit") %></legend>
     <h3 class="landmark heading"><%= ts("Submit") %></h3>
     <p class="submit actions">
-      <%= submit_tag ts("Post"), name: "post_button" %>
+      <%= submit_tag ts("Post"), name: "post_button", class: "action primary" %>
     </p>
   </fieldset>
 <% end %>

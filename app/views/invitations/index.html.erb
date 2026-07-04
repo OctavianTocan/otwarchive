@@ -2,7 +2,7 @@
 <% if logged_in_as_admin?  %>
   <h2 class="heading"><%= ts('Create more invitations for this user') %></h2>
   <%= form_for :invitation, url: user_invitations_url(@user) do |f| %>
-    <p><%= label_tag "invitation[number_of_invites]", ts('Number of invitations:') %> <%= f.text_field :number_of_invites  %> <%= submit_tag 'Create' %></p>
+    <p><%= label_tag "invitation[number_of_invites]", ts('Number of invitations:') %> <%= f.text_field :number_of_invites  %> <%= submit_tag 'Create', class: "action primary" %></p>
   <% end %>
 <% else %>
 
