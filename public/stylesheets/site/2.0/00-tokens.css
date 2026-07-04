@@ -4,17 +4,17 @@
 */
 
 :root {
-  /* Palette — warm neutral, flattened from comcom OKLCH hue 85 */
-  --ao3-bg: #fcfcfb;
+  /* Palette — warm neutral, amplified from comcom OKLCH hue 85 for visible warmth */
+  --ao3-bg: #faf9f6;
   --ao3-fg: #151518;
   --ao3-card: #ffffff;
-  --ao3-muted: #f4f4f2;
-  --ao3-muted-fg: #7a7a7d;
-  --ao3-border: #ededec;
-  --ao3-border-strong: #d8d8d6;
+  --ao3-muted: #f1f0eb;
+  --ao3-muted-fg: #6b6862;
+  --ao3-border: #e4e1da;
+  --ao3-border-strong: #d0ccc3;
   --ao3-primary: #1e1e22;
   --ao3-primary-fg: #fcfcfb;
-  --ao3-destructive: #e5484d;
+  --ao3-destructive: #d93b41;
   --ao3-destructive-fg: #151518;
   --ao3-ring: #a6a6a9;
 
@@ -24,13 +24,13 @@
   --ao3-radius-lg: 0.5em;
   --ao3-radius-xl: 0.75em;
 
-  /* Elevation — comcom layered shadows (light mode) */
-  --ao3-shadow-xs: 0 1px 1px -0.5px rgb(0 0 0 / 0.06);
-  --ao3-shadow-sm: 0 1px 1px -0.5px rgb(0 0 0 / 0.06), 0 2px 2px -1px rgb(0 0 0 / 0.06);
-  --ao3-shadow-md: 0 1px 1px -0.5px rgb(0 0 0 / 0.08), 0 2px 2px -1px rgb(0 0 0 / 0.08), 0 4px 4px -2px rgb(0 0 0 / 0.08);
-  --ao3-shadow-lg: 0 1px 1px -0.5px rgb(0 0 0 / 0.1), 0 3px 3px -1.5px rgb(0 0 0 / 0.1), 0 6px 6px -3px rgb(0 0 0 / 0.1);
-  --ao3-shadow-card: 0 0 0 1px rgba(0,0,0,0.07), 0 1px 1px -0.5px rgba(0,0,0,0.06), 0 3px 3px -1.5px rgba(0,0,0,0.06), 0 6px 6px -3px rgba(0,0,0,0.03), 0 12px 12px -6px rgba(0,0,0,0.02), 0 24px 24px -12px rgba(0,0,0,0.03);
-  --ao3-shadow-popover: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 6px -1px rgba(0,0,0,0.08), 0 10px 15px -3px rgba(0,0,0,0.08);
+  /* Elevation — comcom layered shadows, opacities bumped for visible float */
+  --ao3-shadow-xs: 0 1px 2px rgb(0 0 0 / 0.08);
+  --ao3-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.08), 0 2px 4px rgb(0 0 0 / 0.08);
+  --ao3-shadow-md: 0 2px 4px rgb(0 0 0 / 0.10), 0 4px 8px rgb(0 0 0 / 0.08), 0 8px 16px rgb(0 0 0 / 0.06);
+  --ao3-shadow-lg: 0 4px 8px rgb(0 0 0 / 0.10), 0 8px 16px rgb(0 0 0 / 0.08), 0 16px 32px rgb(0 0 0 / 0.08);
+  --ao3-shadow-card: 0 0 0 1px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.06), 0 12px 24px rgba(0,0,0,0.06), 0 24px 48px -12px rgba(0,0,0,0.08);
+  --ao3-shadow-popover: 0 0 0 1px rgba(0,0,0,0.10), 0 8px 16px rgba(0,0,0,0.12), 0 20px 40px rgba(0,0,0,0.10);
 
   /* Motion */
   --ao3-duration: 150ms;
