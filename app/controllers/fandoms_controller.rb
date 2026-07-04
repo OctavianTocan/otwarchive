@@ -20,7 +20,7 @@ class FandomsController < ApplicationController
       flash[:notice] = t(".choose_media")
       redirect_to media_index_path and return
     end
-    @fandoms_by_letter = @fandoms.group_by { |f| f.sortable_name[0].upcase }
+    @fandoms_by_letter = @fandoms.group_by { |f| (f.sortable_name.to_s[0] || "?").upcase }
   end
 
   def show
