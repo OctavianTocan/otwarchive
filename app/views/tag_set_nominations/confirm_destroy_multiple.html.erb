@@ -5,7 +5,7 @@
 <%= form_for(@tag_set, :url => destroy_multiple_tag_set_nominations_path(@tag_set), :html => {:class => "simple destroy"}, method: :delete) do |f| %>
   <p><%= ts("Are you certain you want to clear all Tag Set Nominations?") %></p>
   <p>
-    <%= f.submit ts("Yes, Clear Tag Set Nominations") %>
+    <%= f.submit ts("Yes, Clear Tag Set Nominations"), class: "action destructive" %>
     <%= link_to ts("Back to the Tag Set Nominations"), tag_set_path(@tag_set) %>
   </p>
 <% end %>
