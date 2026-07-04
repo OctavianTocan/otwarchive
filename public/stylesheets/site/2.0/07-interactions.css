@@ -227,7 +227,7 @@ We only use error messages for LiveValidation. Style spoofs the system error mes
   color: #000;
   display: block;
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--ao3-shadow-lg);
 }
 
 .autocomplete ul li {
@@ -280,7 +280,7 @@ form li ul.autocomplete li.input {
   background: #ddd;
   border: 2px solid #999;
   cursor: move;
-    box-shadow: 1px 1px 3px #bbb;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 .ui-sortable input {
@@ -299,7 +299,7 @@ form li ul.autocomplete li.input {
 
 .ui-draggable form {
   cursor: move;
-    box-shadow: 0 0 3px #555;
+    box-shadow: var(--ao3-shadow-md);
 }
 
 .ui-draggable a {
@@ -314,7 +314,7 @@ form li ul.autocomplete li.input {
   overflow: hidden;
   padding: 0.643em;
   font-size: 87.5%;
-    box-shadow: 3px 3px 5px;
+    box-shadow: var(--ao3-shadow-lg);
 }
 
 .ui-datepicker dt, .ui-datepicker dd, .ui-datepicker-buttonpane, .ui-timepicker-div, a.ui-datepicker-prev {
@@ -462,7 +462,7 @@ a.modal.help {
   text-align: left;
   width: 80%;
   z-index: 501;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--ao3-shadow-popover);
 }
 
 #modal .content {
@@ -529,7 +529,7 @@ a.modal.help {
   border: 1px solid rgba(0, 0, 0, 0.5);
   max-height: 100%;
   max-width: 100%;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--ao3-shadow-popover);
 }
 
 #modal .footer {
@@ -547,7 +547,7 @@ a.modal.help {
   color: #fff;
   position: fixed;
   text-align: center;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--ao3-shadow-md);
 }
 
 #modal .footer .action.modal-closer {
@@ -580,7 +580,7 @@ form.verbose legend, .verbose form legend {
   background: #fff;
   border: 2px solid #ddd;
   padding: 0.5em;
-    box-shadow: 1px 2px 3px #999;
+    box-shadow: var(--ao3-shadow-sm);
     opacity: 1;
 }
 
@@ -661,7 +661,7 @@ form.single .autocomplete + input + span.submit input[type="submit"] {
   padding: 0.5em;
   border: 2px solid #ccc;
   background: #fff;
-    box-shadow: 1px 2px 5px;
+    box-shadow: var(--ao3-shadow-md);
 }
 
 .dynamic form fieldset, .toggled form fieldset, .toggled form dl, .secondary .toggled form, .secondary form {

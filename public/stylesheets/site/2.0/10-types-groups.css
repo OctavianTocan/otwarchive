@@ -97,7 +97,7 @@ https://otwcode.github.io/docs/classes-taxonomy.html#grouping-and-spacing
 */
 
 .wrapper {
-    box-shadow: 1px 1px 5px #aaa;
+    box-shadow: var(--ao3-shadow-md);
 }
 
 #outer.wrapper {

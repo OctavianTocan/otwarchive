@@ -121,7 +121,7 @@ ol.pagination, div.pagination, ol.year {
   font-weight: 900;
   margin-right: 0.375em;
   padding: 0 0.1em 0.15em;
-    box-shadow: -1px -1px 2px rgba(0,0,0,0.75);
+    box-shadow: var(--ao3-shadow-sm);
     border-radius: 0.875em;
 }
 
@@ -153,7 +153,7 @@ h2.landmark {
   padding: 0 0.375em;
   overflow: hidden;
   right: 2.5em;
-    box-shadow: 2px 2px 5px #bbb;
+    box-shadow: var(--ao3-shadow-md);
     border-radius: var(--ao3-radius-lg);
 }
 
@@ -236,7 +236,7 @@ parent when JavaScript is disabled and put it back when it's enabled. */
 .work.navigation .download, .javascript .work.navigation .download .secondary {
   background: #fff;
   border: 2px solid #bbb;
-    box-shadow: 2px 2px 5px #bbb;
+    box-shadow: var(--ao3-shadow-md);
 }
 
 .work.navigation .download .secondary, .javascript .work.navigation .download {

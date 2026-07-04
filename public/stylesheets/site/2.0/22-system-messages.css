@@ -49,7 +49,7 @@ div.error {
 .error, .comment_error, .kudos_error, .alert.flash {
   background: #efd1d1;
   border-color: #900;
-    box-shadow: 1px 1px 2px;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 /* p.notes should be deprecated in favor of p.note and the .notes class reserved for containers that could hold multiple notes, e.g., div, ul, section */
@@ -58,7 +58,7 @@ p.notes, p.note {
 }
 
 form .notice, form ul.notes {
-    box-shadow: 0px 0 3px #fff;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 .notice p {
