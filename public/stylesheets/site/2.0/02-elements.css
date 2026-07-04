@@ -27,24 +27,32 @@ body {
   color: var(--ao3-fg);
 }
 
-a, a:link, a:visited:hover {
-  color: #111;
+a, a:link {
+  color: #900;
   text-decoration: none;
-  border-bottom: 1px solid;
-}
-
-a:visited {
-  color: #666;
-  text-decoration: none;
-  border-bottom: 1px dashed;
+  border-bottom: 0;
+  transition: color var(--ao3-duration) var(--ao3-ease);
 }
 
 a:hover {
-  color: #999;
+  color: #b30000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
 }
 
-a:active, a:focus, button:focus {
-  outline: 1px dotted;
+a:visited {
+  color: #7a0040;
+}
+
+a:active {
+  color: #900;
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--ao3-ring);
+  outline-offset: 2px;
+  border-radius: var(--ao3-radius-sm);
 }
 
 a img {
@@ -52,7 +60,8 @@ a img {
 }
 
 a:focus img {
-  outline: 1px dotted;
+  outline: 2px solid var(--ao3-ring);
+  outline-offset: 2px;
 }
 
 h1, h2, h3, h4, h5, h6, .heading {

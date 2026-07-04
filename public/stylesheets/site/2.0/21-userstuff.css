@@ -211,4 +211,25 @@
   margin: 0.75em 0;
 }
 
+/* Preserve AO3's classic link treatment inside authored work content
+   so the chrome link modernization does not affect each author's text. */
+.userstuff a, .userstuff a:link {
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.userstuff a:visited {
+  color: #666;
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+}
+.userstuff a:hover {
+  color: #999;
+  text-decoration: none;
+}
+.userstuff a:focus-visible {
+  outline: 2px solid var(--ao3-ring);
+  outline-offset: 2px;
+}
+
 /* END == */
