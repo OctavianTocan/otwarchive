@@ -1,0 +1,25 @@
+app/views/inbox/_delete_form.html.erb
+  s_899c5d27098811::t_23602b39620cdf 5
+app/views/inbox/show.html.erb
+  s_899c5d27098811::t_023fd3302716d9 28,93
+app/views/invitations/_user_invitations.html.erb
+  s_899c5d27098811::t_0ef212df4fbd78 35
+app/views/invite_requests/manage.html.erb
+  s_899c5d27098811::t_243e4f879a3bc1 52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "566097e17d9db98b588379f294f8569b8e8e144a",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
