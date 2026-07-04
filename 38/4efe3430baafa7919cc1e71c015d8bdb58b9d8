@@ -1,0 +1,19 @@
+public/stylesheets/site/2.0/00-tokens.css
+  s_f71499f48bc257::t_6001e7a4dcea0b 7-8,11-14,17,27-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "384efe3430baafa7919cc1e71c015d8bdb58b9d8",
+  "prompts": {},
+  "sessions": {
+    "s_f71499f48bc257": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d0d6ff3effeT2bpx1X8ODaLp9",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
