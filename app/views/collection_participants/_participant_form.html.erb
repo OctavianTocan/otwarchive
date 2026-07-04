@@ -10,6 +10,7 @@
       <li><%= form.submit ts("Update"), id: participant.pseud.user.login + "_submit" %></li>
   <% end %>
       <li><%= button_to ts("Remove"), collection_participant_path(@collection, participant),
+                class: "action destructive",
                 data: { confirm: t(".remove.confirm", participant: participant.pseud.byline) },
                 method: :delete %>
       </li>
