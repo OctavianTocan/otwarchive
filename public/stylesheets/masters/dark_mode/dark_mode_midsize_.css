@@ -10,7 +10,7 @@
 
 #dashboard .secondary {
   background: #2a2a2a;
-    box-shadow: 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 .javascript {

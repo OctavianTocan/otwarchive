@@ -1,5 +1,15 @@
 /* 01-CORE, 02-ELEMENTS: Very basics */
 
+/* === Dark-mode shadow token overrides (comcom elevation w/ inset bevel) === */
+:root {
+  --ao3-shadow-xs: inset 0 1px 0 0 rgb(255 255 255 / 0.04), 0 1px 1px -0.5px rgb(0 0 0 / 0.18);
+  --ao3-shadow-sm: inset 0 1px 0 0 rgb(255 255 255 / 0.05), 0 1px 1px -0.5px rgb(0 0 0 / 0.18), 0 2px 2px -1px rgb(0 0 0 / 0.18);
+  --ao3-shadow-md: inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 1px 1px -0.5px rgb(0 0 0 / 0.18), 0 2px 2px -1px rgb(0 0 0 / 0.18), 0 4px 4px -2px rgb(0 0 0 / 0.18);
+  --ao3-shadow-lg: inset 0 1px 0 0 rgb(255 255 255 / 0.07), inset 0 0 0 1px rgb(255 255 255 / 0.03), 0 1px 1px -0.5px rgb(0 0 0 / 0.18), 0 3px 3px -1.5px rgb(0 0 0 / 0.18), 0 6px 6px -3px rgb(0 0 0 / 0.18);
+  --ao3-shadow-card: inset 0 1px 0 0 rgb(255 255 255 / 0.06), inset 0 0 0 1px rgb(255 255 255 / 0.04), 0 1px 1px -0.5px rgb(0 0 0 / 0.18), 0 3px 3px -1.5px rgb(0 0 0 / 0.18), 0 6px 6px -3px rgb(0 0 0 / 0.18), 0 12px 12px -6px rgb(0 0 0 / 0.22), 0 24px 24px -12px rgb(0 0 0 / 0.22);
+  --ao3-shadow-popover: inset 0 1px 0 0 rgb(255 255 255 / 0.06), inset 0 0 0 1px rgb(255 255 255 / 0.04), 0 4px 6px -1px rgb(0 0 0 / 0.22), 0 10px 15px -3px rgb(0 0 0 / 0.22);
+}
+
 body,
 .toggled form,
 .dynamic form,
@@ -21,7 +31,7 @@ a:visited {
 }
 
 table {
-    box-shadow: 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 table,
@@ -84,7 +94,6 @@ form dl {
 }
 
 #header .menu {
-    box-shadow: 1px 1px 3px -1px #000;
 }
 
 #header .dropdown .menu a:hover,
@@ -106,7 +115,6 @@ form dl {
 #dashboard a:hover {
   background: #2a2a2a;
   color: #c2c2c2;
-    box-shadow: inset 2px 2px 2px #000;
 }
 
 #dashboard ul {
@@ -116,7 +124,7 @@ form dl {
 #dashboard .current {
   background: #222;
   border: 1px solid #555;
-    box-shadow: -1px -1px 3px #000;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 #dashboard,
@@ -152,7 +160,6 @@ input,
 textarea {
   background: #333;
   border-color: #222;
-    box-shadow: none;
 }
 
 fieldset fieldset,
@@ -164,7 +171,6 @@ form blockquote.userstuff {
 input,
 textarea {
   color: #eee;
-    box-shadow: inset 0 1px 2px #000;
 }
 
 input:focus,
@@ -201,7 +207,6 @@ form dd.required {
   background: #333;
   border-color: #ff7575;
   color: #ffada8;
-    box-shadow: none;
 }
 
 .LV_invalid_field,
@@ -246,24 +251,20 @@ textarea.LV_invalid_field:focus {
 .ui-sortable li {
   background: #2a2a2a;
   border-color: #222;
-    box-shadow: 1px 1px 3px transparent;
 }
 
 .ui-sortable li:hover {
   background: #333;
   border-color: #555;
-    box-shadow: 1px 1px 3px #000;
 }
 
 .ui-draggable form {
-    box-shadow: 0 0 3px #000;
 }
 
 /* widget: datepicker, timepicker */
 
 #ui-datepicker-div {
   background: #333;
-    box-shadow: 3px 3px 5px #000;
 }
 
 .ui-datepicker table {
@@ -305,7 +306,6 @@ form.single fieldset {
 .toggled form,
 .dynamic form {
   border-color: #222;
-    box-shadow: none;
 }
 
 .post .required .warnings {
@@ -337,7 +337,6 @@ button,
   background: #555;
   border-color: #222;
   color: #eee;
-    box-shadow: inset 0 -8px 4px #232323, inset 0 8px 7px #555;
     text-shadow: none;
 }
 
@@ -359,7 +358,6 @@ label.action:hover,
 .action:focus {
   border-color: #000;
   color: #fafafa;
-    box-shadow: inset 2px 2px 2px #000;
 }
 
 .actions a:active,
@@ -374,7 +372,6 @@ span.claimed,
   background: #555;
   border-color: #fff;
   color: #fff;
-    box-shadow: inset 1px 1px 3px #333;
 }
 
 .current,
@@ -382,7 +379,7 @@ a.current,
 a:link.current {
   background: #222;
   border-color: #555;
-    box-shadow: -1px -1px 3px #000;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 .actions label.disabled {
@@ -402,7 +399,6 @@ span.delete {
 .secondary {
   background: #2a2a2a;
   border-color: #555;
-    box-shadow: 1px 1px 3px #000;
 }
 
 /* context: work navigation actions with secondary navigation */
@@ -411,7 +407,6 @@ span.delete {
 .javascript .work.navigation .download .secondary {
   background: #2a2a2a;
   border-color: #555;
-    box-shadow: 1px 1px 3px #000;
 }
 
 /* don't let iOS add its special styling for dark buttons */
@@ -440,7 +435,7 @@ span.claimed,
 .actions span.defaulted {
   background: #222;
   border-color: #555;
-    box-shadow: -1px -1px 3px #000;
+    box-shadow: var(--ao3-shadow-xs);
 }
 
 .draggable,
@@ -478,7 +473,6 @@ a.tag:hover,
 }
 
 .wrapper {
-    box-shadow: 1px 1px 3px #000;
 }
 
 dl.index dd,
@@ -512,7 +506,6 @@ span.series .divider {
 fieldset fieldset.listbox {
   background: #2a2a2a;
   border-color: #555;
-    box-shadow: 1px 1px 3px #000;
 }
 
 .listbox > .heading {
@@ -525,7 +518,6 @@ fieldset fieldset.listbox {
 
 .listbox .index {
   background: #2a2a2a;
-    box-shadow: inset 1px 1px 3px #000;
 }
 
 /* 12-GROUP-META */
@@ -542,12 +534,12 @@ dl.meta .wrapper {
 
 li.blurb,
 .listbox li.blurb {
-    box-shadow: 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-card);
 }
 
 .blurb .blurb {
   background: #2a2a2a;
-    box-shadow: inset 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 .blurb h4 a:link {
@@ -575,7 +567,7 @@ li.blurb,
 div.comment,
 li.comment {
   border-color: #555;
-    box-shadow: 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-card);
 }
 
 .comment h4.byline {
@@ -619,7 +611,7 @@ li.comment {
 .splash .module div.account {
   background: transparent;
   border-color: #555;
-    box-shadow: 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-card);
 }
 
 /* module: news */
@@ -684,7 +676,7 @@ form.search input[type="text"] {
 
 form.filters fieldset {
   border: 1px solid #555;
-    box-shadow: 1px 1px 3px #000;
+    box-shadow: var(--ao3-shadow-card);
 }
 
 .filters .expander {
@@ -743,14 +735,12 @@ ul.notes,
 .qtip-content {
   background: #333;
   border-color: #75bcff;
-    box-shadow: none;
 }
 
 .caution {
   background: #333;
   border-color: #ffd875;
   color: #ffe6a8;
-    box-shadow: none;
 }
 
 .error,
@@ -760,12 +750,10 @@ ul.notes,
   background: #333;
   border-color: #ff7575;
   color: #ffada8;
-    box-shadow: none;
 }
 
 form .notice,
 form ul.notes {
-    box-shadow: none;
 }
 
 .annotation {
@@ -783,7 +771,6 @@ span.question {
   background: #95c6f4;
   border-color: #111;
   color: #111;
-    box-shadow: none;
 }
 
 /* 24-ROLE-ADMIN */
