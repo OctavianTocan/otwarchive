@@ -1,0 +1,19 @@
+.agent/memory/2026-07-05-surface-modernization-postmortem.md
+  s_f71499f48bc257::t_369f931b23a6cf 1-305
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "099b835cc27b8a8f8842a42d7ca229e4ef9292e0",
+  "prompts": {},
+  "sessions": {
+    "s_f71499f48bc257": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d0d6ff3effeT2bpx1X8ODaLp9",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
