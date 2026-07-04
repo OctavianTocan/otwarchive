@@ -219,9 +219,7 @@ notice that CSS3 declarations sit are indented twice (four spaces) and always co
   background: #900 url(/images/skins/textures/tiles/red-ao3.png);
   padding: 0 0;
   width: 100%;
-    box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.35),
-    1px 1px 3px -1px rgba(0, 0, 0, 0.25),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.85); /* instead of a bottom border to keep the container the same height as its contents */
+    box-shadow: var(--ao3-shadow-sm);
 }
 
 #header .primary > li:first-of-type {

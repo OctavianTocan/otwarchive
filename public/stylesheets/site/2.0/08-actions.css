@@ -91,14 +91,14 @@ ol.pagination, div.pagination, ol.year {
   color: #900;
   border-top: 1px solid #999;
   border-left: 1px solid #999;
-    box-shadow: inset 2px 2px 2px #bbb;
+    box-shadow: var(--ao3-shadow-xs);
 }
 
 .actions a:active, .current, a.current, a:link.current, .current a:visited {
   color: #111;
   background: #ccc;
   border-color: #fff;
-    box-shadow: inset 1px 1px 3px #333;
+  box-shadow: none;
 }
 
 .actions label.disabled {

@@ -38,7 +38,7 @@ https://otwcode.github.io/docs/patterns/listbox.html
   float: none;
   clear: right;
   background: #fff;
-    box-shadow: inset 1px 1px 3px #bbb;
+    box-shadow: none;
 }
 
 .listbox .index:after {

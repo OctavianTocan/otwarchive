@@ -35,7 +35,7 @@ div.error {
   margin: 0.643em auto;
   padding: 0.25em 0.375em;
   clear: right;
-    box-shadow: inset 1px 1px 2px;
+    box-shadow: var(--ao3-shadow-xs);
     border-radius: var(--ao3-radius-sm);
     word-wrap: break-word;
 }

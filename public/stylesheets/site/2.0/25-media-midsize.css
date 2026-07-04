@@ -37,7 +37,7 @@
 #dashboard .secondary {
   background: #eee;
   padding: 0.375em 0 0.625em;
-    box-shadow: inset 2px 2px 5px #bbb;
+    box-shadow: var(--ao3-shadow-xs);
 }
 
 #dashboard .secondary a {

@@ -32,7 +32,7 @@ fieldset, form dl, fieldset dl dl, fieldset fieldset fieldset, fieldset fieldset
   border: 2px solid #f3efec;
   margin: 0.643em;
   padding: 0.643em;
-    box-shadow: inset 1px 0 5px #999;
+    box-shadow: var(--ao3-shadow-xs);
 }
 
 fieldset dl, fieldset.actions, fieldset dl fieldset dl {
@@ -74,7 +74,7 @@ input, textarea {
   font: 100% 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif, 'GNU Unifont';
   width: 100%;
   border: 1px solid #bbb;
-    box-shadow: inset 0 1px 2px #ccc;
+    box-shadow: none;
 }
 
 textarea {
@@ -726,6 +726,12 @@ form.single .autocomplete + input + span.submit input[type="submit"] {
 .blurb form li.input {
   display: list-item;
   padding-left: 0;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--ao3-ring);
+  box-shadow: 0 0 0 3px rgba(166, 166, 169, 0.5);
 }
 
 /* END == */
