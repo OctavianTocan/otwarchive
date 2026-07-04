@@ -21,6 +21,7 @@
     <li>
       <%= link_to ts("Delete Prompt"),
         collection_prompt_path(collection, prompt),
+        class: "action destructive",
         data: { confirm: ts("Are you sure? All information in this prompt will be lost.") },
         method: :delete %>
     </li>
@@ -29,6 +30,7 @@
     <% if collection.user_is_maintainer?(current_user) && collection.challenge_type == "PromptMeme" %>
       <li><%= link_to ts("Delete Sign-up"),
                   collection_signup_path(collection, challenge_signup),
+                  class: "action destructive",
                   data: { confirm: ts("Are you sure? All prompts in this sign-up will be lost.") },
                   method: :delete %>
       </li>
@@ -43,7 +45,7 @@
           <li><%= link_to ts("Fulfill"), new_collection_work_path(collection, :claim_id => claim.id) %></li>
         <% end %>
         <% # The drop claim link should show up if the current user has claimed the prompt %>
-        <li><%= link_to ts("Drop Claim"), collection_claim_path(collection, claim), data: { confirm: ts("Do you really want to drop this claim?") }, method: :delete %></li>
+        <li><%= link_to ts("Drop Claim"), collection_claim_path(collection, claim), class: "action destructive", data: { confirm: ts("Do you really want to drop this claim?") }, method: :delete %></li>
         <% # The claim link should show up if the user has not already claimed the prompt %>
         <% else %>
         <li>

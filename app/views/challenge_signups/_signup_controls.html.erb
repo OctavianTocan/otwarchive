@@ -35,10 +35,12 @@
           <% if collection.potential_matches.count == 0 %>
             <%= link_to ts("Delete Sign-up"),
               confirm_delete_collection_signup_path(collection, challenge_signup),
+              class: "action destructive",
               data: {confirm: ts("Are you sure? All prompts in this sign-up will be lost.")} %>
           <% else %>
             <%= link_to ts("Delete Sign-up"),
               confirm_delete_collection_signup_path(collection, challenge_signup),
+              class: "action destructive",
               data: {confirm: ts("Are you sure? Potential matches will need to be regenerated afterwards.")} %>
           <% end %>
         </li>

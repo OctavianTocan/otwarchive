@@ -17,6 +17,7 @@
             <li>
               <%= link_to ts("Delete"),
                     collection_signup_path(@collection, assignment.request_signup),
+                    class: "action destructive",
                     data: { confirm: ts("Are you sure?") },
                     method: :delete %>
             </li>

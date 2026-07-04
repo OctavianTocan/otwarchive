@@ -4,6 +4,7 @@
   <li>
     <%= link_to ts("Delete Sign-up"),
       collection_signup_path(@collection, @challenge_signup),
+      :class => "action destructive",
       data: {confirm: ts("Are you sure? All prompts in this sign-up will be lost.")},
       :method => :delete %>
   </li>
