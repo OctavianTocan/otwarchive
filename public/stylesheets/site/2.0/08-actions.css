@@ -298,4 +298,37 @@ display: none and secondary will always be open. */
   padding: 0;
 }
 
+/* === Button variants (opt-in via ERB class) === */
+
+.action.primary, .actions .primary {
+  background: var(--ao3-primary);
+  color: var(--ao3-primary-fg);
+  border-color: var(--ao3-primary);
+}
+.action.primary:hover, .actions .primary:hover,
+.action.primary:focus, .actions .primary:focus {
+  background: #3a3a3e;
+  color: var(--ao3-primary-fg);
+  border-color: #3a3a3e;
+}
+.action.primary:focus-visible {
+  border-color: var(--ao3-ring);
+  box-shadow: 0 0 0 3px rgba(166, 166, 169, 0.5);
+}
+
+.action.destructive, .actions .destructive {
+  background: rgba(229, 72, 77, 0.10);
+  color: var(--ao3-destructive);
+  border-color: transparent;
+}
+.action.destructive:hover, .actions .destructive:hover,
+.action.destructive:focus, .actions .destructive:focus {
+  background: rgba(229, 72, 77, 0.18);
+  color: var(--ao3-destructive);
+}
+.action.destructive:focus-visible {
+  border-color: var(--ao3-destructive);
+  box-shadow: 0 0 0 3px rgba(229, 72, 77, 0.20);
+}
+
 /* END== */
