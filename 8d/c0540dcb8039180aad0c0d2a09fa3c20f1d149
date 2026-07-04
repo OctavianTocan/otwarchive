@@ -1,0 +1,60 @@
+app/views/known_issues/_known_issues_form.html.erb
+  s_806ed787410f7c::t_f2ea4c66fa11b6 33
+app/views/unsorted_tags/index.html.erb
+  s_806ed787410f7c::t_1e923103237a67 11,40
+app/views/collection_participants/_add_participants_form.html.erb
+  s_806ed787410f7c::t_df146b11582657 7
+app/views/challenge_signups/_signup_form.html.erb
+  s_806ed787410f7c::t_82983124a0c304 17
+app/views/chapters/manage.html.erb
+  s_806ed787410f7c::t_deabf004bfe685 55
+app/views/chapters/_chapter_management.html.erb
+  s_806ed787410f7c::t_1ef6bb8a963bad 6
+app/views/potential_matches/_match_navigation.html.erb
+  s_806ed787410f7c::t_953b513b85811e 15
+app/views/wrangling_guidelines/_wrangling_guideline_order.html.erb
+  s_806ed787410f7c::t_0dc84db5f2b10a 12
+app/views/works/edit_multiple.html.erb
+  s_806ed787410f7c::t_075f3208020990 114
+app/views/invitations/index.html.erb
+  s_806ed787410f7c::t_e51455bede583e 5
+app/views/admin/skins/index.html.erb
+  s_806ed787410f7c::t_29dd835450278e 63
+app/views/tag_set_nominations/_review.html.erb
+  s_806ed787410f7c::t_412ccd9ec4a977 63
+app/views/questions/manage.html.erb
+  s_806ed787410f7c::t_5d68a63ec72034 18
+app/views/archive_faqs/_archive_faq_questions_order.html.erb
+  s_806ed787410f7c::t_089fc1a6a3210b 12
+app/views/admin/admin_users/_user_form.html.erb
+  s_806ed787410f7c::t_a6734d39b93f93 23
+app/views/admin/skins/index_approved.html.erb
+  s_806ed787410f7c::t_bb3266ac677d87 84
+app/views/series/_series_order.html.erb
+  s_806ed787410f7c::t_6aa14e8a0b45ae 14
+app/views/archive_faqs/_archive_faq_order.html.erb
+  s_806ed787410f7c::t_019d52fc0dd930 12
+app/views/admin/skins/index_rejected.html.erb
+  s_806ed787410f7c::t_4bf6e68212616f 43
+app/views/user_invite_requests/index.html.erb
+  s_806ed787410f7c::t_4a505f8a47ef1d 36
+app/views/archive_faqs/_archive_faq_form.html.erb
+  s_806ed787410f7c::t_c0f40858d9997d 58
+  s_806ed787410f7c::t_f5a9c9e1f3f500 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "8dc0540dcb8039180aad0c0d2a09fa3c20f1d149",
+  "prompts": {},
+  "sessions": {
+    "s_806ed787410f7c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d0852c48ffeZzJ4wnIC97uQbv",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
