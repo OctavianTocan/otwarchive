@@ -1,0 +1,55 @@
+public/stylesheets/site/2.0/22-system-messages.css
+  s_f71499f48bc257::t_0e926a01b7cc77 29
+  s_f71499f48bc257::t_335c3a5a162e96 39
+public/stylesheets/site/2.0/09-roles-states.css
+  s_f71499f48bc257::t_c7a59b7db860af 13
+  s_f71499f48bc257::t_519647cdf7b0cc 33
+public/stylesheets/site/2.0/00-fonts.css
+  s_f71499f48bc257::t_252c2a95875656 1-68
+public/stylesheets/site/2.0/03-region-header.css
+  s_f71499f48bc257::t_48f698547f80d4 128
+public/stylesheets/site/2.0/15-group-comments.css
+  s_f71499f48bc257::t_f062914d963dd1 18
+public/stylesheets/site/2.0/21-userstuff.css
+  s_f71499f48bc257::t_0a1efcecb822a3 6-8
+public/stylesheets/site/2.0/11-group-listbox.css
+  s_f71499f48bc257::t_b38258c688184b 9
+public/stylesheets/site/2.0/08-actions.css
+  s_f71499f48bc257::t_9cb6cf9c3f7216 45-46
+  s_f71499f48bc257::t_d1b4036bf47d64 50
+  s_f71499f48bc257::t_daaabeb123ddbf 157
+public/stylesheets/site/2.0/07-interactions.css
+  s_f71499f48bc257::t_98a3f0af472301 202-203
+public/stylesheets/site/2.0/12-group-meta.css
+  s_f71499f48bc257::t_75c51816896a37 7
+public/stylesheets/site/2.0/04-region-dashboard.css
+  s_f71499f48bc257::t_3a8376089bfce1 57
+public/stylesheets/site/2.0/18-zone-searchbrowse.css
+  s_f71499f48bc257::t_9bc3c88dbdeef3 219
+public/stylesheets/site/2.0/13-group-blurb.css
+  s_f71499f48bc257::t_f81f716f8d5cf7 349
+  s_f71499f48bc257::t_b645375632aba2 431
+  s_f71499f48bc257::t_9678d6b51b913f 341
+public/stylesheets/site/2.0/01-core.css
+  s_f71499f48bc257::t_d7106975c16fb7 37
+public/stylesheets/site/2.0/25-media-midsize.css
+  s_f71499f48bc257::t_f661cf112972c6 18
+public/stylesheets/site/2.0/16-zone-system.css
+  s_f71499f48bc257::t_c90448116308cd 127
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "2c0fd82ee47c85fe54d117780cc18aa1d4ef13f2",
+  "prompts": {},
+  "sessions": {
+    "s_f71499f48bc257": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d0d6ff3effeT2bpx1X8ODaLp9",
+        "model": "glm-5.2"
+      },
+      "human_author": null
+    }
+  }
+}
