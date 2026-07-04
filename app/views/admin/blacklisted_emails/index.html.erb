@@ -49,6 +49,7 @@
           <li>
             <%= link_to ts("Remove %{email}", email: blacklisted_email.email),
                         blacklisted_email,
+                        class: "action destructive",
                         method: :delete,
                         data: { confirm: t(".confirm_remove", email: blacklisted_email.email) } %>
           </li>

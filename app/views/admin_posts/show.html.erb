@@ -22,6 +22,7 @@
             <li>
               <%= link_to @admin_post.posted? ? t(".navigation.admin.delete") : t(".navigation.admin.delete_draft"),
                     @admin_post,
+                    class: "action destructive",
                     data: { confirm: t(".navigation.admin.confirm_delete") },
                     method: :delete %>
             </li>

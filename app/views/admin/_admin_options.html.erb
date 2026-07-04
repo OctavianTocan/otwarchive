@@ -63,6 +63,7 @@
       <li>
         <%= link_to t(".delete.#{item_type}"),
                     admin_user_creation_path(item, creation_type: item.class),
+                    class: "action destructive",
                     data: {
                             confirm: t(".delete.confirmation")
                           },

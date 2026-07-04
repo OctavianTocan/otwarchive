@@ -13,12 +13,12 @@
     <% if policy(admin_post).edit? %>
       <li><%= link_to t(".edit"), edit_admin_post_path(admin_post) %></li>
       <% if admin_post.posted %>
-        <li><%= link_to t(".delete"), admin_post, data: { confirm: t(".confirm_delete") }, method: :delete %></li>
+        <li><%= link_to t(".delete"), admin_post, class: "action destructive", data: { confirm: t(".confirm_delete") }, method: :delete %></li>
       <% else %>
         <% if policy(AdminPost).can_post? && (admin_post.translated_post.blank? || admin_post.translated_post.posted?) %>
           <li><%= link_to t(".draft.post"), post_admin_post_path(admin_post), method: :put %></li>
         <% end %>
-        <li><%= link_to t(".draft.delete"), admin_post, data: { confirm: t(".confirm_delete") }, method: :delete %></li>
+        <li><%= link_to t(".draft.delete"), admin_post, class: "action destructive", data: { confirm: t(".confirm_delete") }, method: :delete %></li>
       <% end %>
     <% end %>
   </ul>
