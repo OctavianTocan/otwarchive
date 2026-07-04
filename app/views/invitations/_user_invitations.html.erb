@@ -32,7 +32,7 @@
           <% if logged_in_as_admin? && invitation.redeemed_at.blank? %>
             <td>
               <%= link_to(t(".table.actions.delete"),
-                    invitation, data: { confirm: t(".table.actions.delete_confirmation") }, method: :delete) %>
+                    invitation, class: "action destructive", data: { confirm: t(".table.actions.delete_confirmation") }, method: :delete) %>
             </td>
           <% end %>
         </tr>

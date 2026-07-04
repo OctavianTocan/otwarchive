@@ -49,7 +49,7 @@
           <td><%= ip_address %></td>
           <td>
             <%= form_tag invite_request_path(request, page: params[:page], query: params[:query]), method: "delete", class: "ajax-remove" do |f| %>
-              <%= submit_tag ts("Delete") %>
+              <%= submit_tag ts("Delete"), class: "action destructive" %>
             <% end %>
           </td>
         </tr>

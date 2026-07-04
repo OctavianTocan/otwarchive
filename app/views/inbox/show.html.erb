@@ -25,7 +25,7 @@
         <li><a class="check_none"><%= ts("Select None") %></a></li>
         <li><%= submit_tag ts("Mark Read"), name: "read" %></li>
         <li><%= submit_tag ts("Mark Unread"), name: "unread" %></li>
-        <li><%= submit_tag ts("Delete From Inbox"), name: "delete" %></li>
+        <li><%= submit_tag ts("Delete From Inbox"), class: "action destructive", name: "delete" %></li>
       </ul>
     </fieldset>
 
@@ -90,7 +90,7 @@
         <li><a class="check_none"><%= ts("Select None") %></a></li>
         <li><%= submit_tag ts("Mark Read"), name: "read" %></li>
         <li><%= submit_tag ts("Mark Unread"), name: "unread" %></li>
-        <li><%= submit_tag ts("Delete From Inbox"), name: "delete" %></li>
+        <li><%= submit_tag ts("Delete From Inbox"), class: "action destructive", name: "delete" %></li>
       </ul>
     </fieldset>
     <!-- coming soon <%= submit_tag ts("mass reply") %> -->
