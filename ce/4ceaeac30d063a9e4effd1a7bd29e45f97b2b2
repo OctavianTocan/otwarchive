@@ -1,0 +1,33 @@
+app/views/chapters/edit.html.erb
+  s_899c5d27098811::t_a7e27e6588ec6d 13
+  s_899c5d27098811::t_f45c33b7306dfc 20
+app/views/works/_standard_form.html.erb
+  s_899c5d27098811::t_c26b84bd1e4bda 193
+  s_899c5d27098811::t_d795e1e131e967 150
+app/views/works/confirm_delete_multiple.html.erb
+  s_899c5d27098811::t_45986ffd21f6b8 19
+app/views/works/_work_blurb.html.erb
+  s_899c5d27098811::t_1f88b8496b13cb 17
+app/views/series/_series_navigation.html.erb
+  s_899c5d27098811::t_3b504f8f748ebe 10
+  s_899c5d27098811::t_14a0a34db6160e 4
+app/views/chapters/manage.html.erb
+  s_899c5d27098811::t_feb8d4f4080ee6 34
+  s_899c5d27098811::t_0e7d2ad5b9927c 42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ce4ceaeac30d063a9e4effd1a7bd29e45f97b2b2",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
