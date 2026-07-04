@@ -1,0 +1,27 @@
+app/views/comments/_confirm_delete.html.erb
+  s_899c5d27098811::t_d3e291d8ac1b65 4
+app/views/tag_wranglers/index.html.erb
+  s_899c5d27098811::t_1e346efc75ec05 41
+app/views/tag_set_nominations/show.html.erb
+  s_899c5d27098811::t_62e82f85685b18 16
+app/views/tag_set_nominations/confirm_destroy_multiple.html.erb
+  s_899c5d27098811::t_91ace41eeca1aa 8
+app/views/owned_tag_sets/_navigation.html.erb
+  s_899c5d27098811::t_c5f033446a6dab 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4536e250576d33436cce95da9861fa6f499e0c59",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
