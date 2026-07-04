@@ -1,0 +1,21 @@
+app/views/wrangling_guidelines/_admin_index.html.erb
+  s_899c5d27098811::t_6fd9565e74bcaa 24
+app/views/known_issues/_admin_index.html.erb
+  s_899c5d27098811::t_ee112e5bdfb516 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "86486cc791e11e16fe142b4f63137027c7439407",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
