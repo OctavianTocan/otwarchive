@@ -31,6 +31,7 @@
           <% if @work.chapters.count > 1 %>
             <li>
               <%= link_to ts("Delete"), [@work, chapter],
+                                        class: "action destructive",
                                         data: { confirm: ts("Are you sure?") },
                                         method: :delete %>
             </li>
@@ -38,6 +39,7 @@
               <li>
                 <%= link_to ts("Remove Me As Chapter Co-Creator"),
                       remove_user_creatorship_chapter_path(chapter),
+                      class: "action destructive",
                       data: { confirm: ts("Are you sure you want to remove yourself as a co-creator of this chapter?") },
                       method: :patch %>
               </li>

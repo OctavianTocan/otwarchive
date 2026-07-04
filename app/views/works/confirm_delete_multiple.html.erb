@@ -16,7 +16,7 @@
   </p>
 
   <ul class="actions">
-    <li><%= submit_tag ts("Yes, Delete Works") %></li>
+    <li><%= submit_tag ts("Yes, Delete Works"), class: "action destructive" %></li>
     <li><%= link_to ts("Orphan Works Instead"), new_orphan_path(:work_ids => @works.collect(&:id)) %></li>
     <li><%= link_to ts("Cancel"), show_multiple_user_works_path(@user) %></li>
   </ul>

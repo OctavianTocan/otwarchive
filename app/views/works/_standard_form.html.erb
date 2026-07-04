@@ -147,7 +147,7 @@
                       <% end %>
                     </li>
                     <li>
-                      <%= link_to t(".remove"), related_work, data: { confirm: t(".remove_confirm") }, method: :delete %>
+                      <%= link_to t(".remove"), related_work, class: "action destructive", data: { confirm: t(".remove_confirm") }, method: :delete %>
                     </li>
                   </ul>
                 </dd>
@@ -190,7 +190,7 @@
                       </li>
                       <li>
                         <%= link_to ts("Remove Work From Series"), serial_work_path(serial),
-                                method: :delete %>
+                                class: "action destructive", method: :delete %>
                       </li>
                     </ul>
                   </dd>
