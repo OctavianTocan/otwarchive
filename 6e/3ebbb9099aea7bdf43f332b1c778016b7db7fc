@@ -1,0 +1,27 @@
+app/views/collection_participants/_participant_form.html.erb
+  s_899c5d27098811::t_67bdb092d592d8 13
+app/views/readings/_reading_blurb.html.erb
+  s_899c5d27098811::t_650f1a90422b94 57
+app/views/collection_profile/show.html.erb
+  s_899c5d27098811::t_e491441cb73c37 115
+app/views/collections/_collection_form_delete.html.erb
+  s_899c5d27098811::t_683dbe9f767a2c 4
+app/views/collections/_header.html.erb
+  s_899c5d27098811::t_ad6e4edbd93717 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "6e3ebbb9099aea7bdf43f332b1c778016b7db7fc",
+  "prompts": {},
+  "sessions": {
+    "s_899c5d27098811": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0d08b46baffemM7o5k51WvtOSN",
+        "model": "glm-5.2"
+      },
+      "human_author": "Octavian Tocan <contact@octaviantocan.com>"
+    }
+  }
+}
