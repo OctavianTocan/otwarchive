@@ -14,10 +14,11 @@ test note: have put clearfixes on listbox, blurb and comments here, to allow for
 
 div.comment, li.comment {
   position: relative;
-  border: 1px solid #ddd;
+  border: 0;
   border-radius: var(--ao3-radius-lg);
   overflow: visible;
   text-align: start;
+  box-shadow: var(--ao3-shadow-card);
 }
 
 .comment:after,

@@ -3,12 +3,13 @@ https://otwcode.github.io/docs/patterns/meta.html
 */
 
 dl.meta {
-  border: 1px solid #ccc;
+  border: 0;
   border-radius: var(--ao3-radius-lg);
   clear: right;
   padding: 1.286em 0.75em;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--ao3-shadow-card);
 }
 
 .meta dt {

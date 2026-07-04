@@ -148,12 +148,12 @@ h2.landmark {
   background: #fff;
   position: absolute;
   z-index: 54; /* lower than the z-index of #header .menu */
-  border: 2px solid #bbb;
+  border: 0;
   margin: auto;
   padding: 0 0.375em;
   overflow: hidden;
   right: 2.5em;
-    box-shadow: var(--ao3-shadow-md);
+    box-shadow: var(--ao3-shadow-card);
     border-radius: var(--ao3-radius-lg);
 }
 

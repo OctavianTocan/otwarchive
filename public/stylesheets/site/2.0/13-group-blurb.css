@@ -337,11 +337,12 @@ blurbs on the manage collection items pages, mostly reseting styles inherited fr
 }
 
 .bookmark .user {
-  border: 1px solid #ccc;
+  border: 0;
   border-radius: var(--ao3-radius-lg);
   margin-top: 0.643em;
   padding: 0.429em 0.75em;
   overflow: hidden;
+  box-shadow: var(--ao3-shadow-card);
 }
 
 .bookmark .user .meta {

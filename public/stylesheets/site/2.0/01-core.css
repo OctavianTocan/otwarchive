@@ -33,10 +33,11 @@ a, a:link {
 }
 
 li.blurb, fieldset, form dl {
-  border: 1px solid var(--ao3-border);
+  border: 0;
   border-radius: var(--ao3-radius-lg);
   padding: 1em;
   overflow: hidden;
+  box-shadow: var(--ao3-shadow-card);
 }
 
 .blurb li, .actions>*, .stats>*, .meta ul li {
