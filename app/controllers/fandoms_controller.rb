@@ -21,6 +21,12 @@ class FandomsController < ApplicationController
       redirect_to media_index_path and return
     end
     @fandoms_by_letter = @fandoms.group_by { |f| (f.sortable_name.to_s[0] || "?").upcase }
+
+    # React by default for the per-medium listing (?ui=legacy → ERB). The
+    # collection-scoped variant keeps ERB for its media filter form.
+    return if @collection.nil? && render_react("FandomsIndex") do
+      FandomsIndexPresenter.new(fandoms_by_letter: @fandoms_by_letter, medium: @medium, heading: @page_subtitle, counts: @counts).as_props
+    end
   end
 
   def show

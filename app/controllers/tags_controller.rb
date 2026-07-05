@@ -33,6 +33,12 @@ class TagsController < ApplicationController
         @tags = []
       end
     end
+
+    # React by default for the popular/random tag cloud (?ui=legacy → ERB). The
+    # collection-scoped variant keeps ERB.
+    return if @collection.nil? && render_react("TagsIndex") do
+      TagsIndexPresenter.new(tags: @tags, show: params[:show], heading: ts("Tags"), logged_in: logged_in?).as_props
+    end
   end
 
   def search
