@@ -25,6 +25,10 @@ class GiftsController < ApplicationController
              end
     @works = @works.in_collection(@collection) if @collection
     @works = @works.order("revised_at DESC").paginate(page: params[:page], per_page: ArchiveConfig.ITEMS_PER_PAGE)
+
+    return if render_react("GiftsIndex") do
+      GiftsIndexPresenter.new(works: @works, heading: @page_subtitle).as_props
+    end
   end
 
   def toggle_rejected

@@ -43,6 +43,10 @@ class SkinsController < ApplicationController
         @page_subtitle = t(".public_site_page_title")
       end
     end
+
+    return if render_react("SkinsIndex") do
+      SkinsIndexPresenter.new(skins: @skins, heading: @title, is_work_skin: is_work_skin, owner: @user).as_props
+    end
   end
 
   # GET /skins/1

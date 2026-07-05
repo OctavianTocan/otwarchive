@@ -12,6 +12,12 @@ class ArchiveFaqsController < ApplicationController
     unless logged_in_as_admin?
       @archive_faqs = @archive_faqs.with_translations(I18n.locale)
     end
+
+    return if render_react("FaqIndex") do
+      next nil if policy(ArchiveFaq).translation_access?
+      FaqIndexPresenter.new(archive_faqs: @archive_faqs, heading: ts("Archive FAQ"), language_id: params[:language_id]).as_props
+    end
+
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -33,6 +39,11 @@ class ArchiveFaqsController < ApplicationController
       end
     end
     @page_subtitle = @archive_faq.title + ts(" FAQ")
+
+    return if render_react("FaqShow") do
+      next nil if policy(ArchiveFaq).translation_access?
+      FaqShowPresenter.new(archive_faq: @archive_faq, questions: @questions, heading: @page_subtitle, language_id: params[:language_id]).as_props
+    end
 
     respond_to do |format|
       format.html # show.html.erb

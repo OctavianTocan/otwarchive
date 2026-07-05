@@ -23,6 +23,7 @@ module InertiaConvertible
   # `return if render_react(...)` and otherwise fall through to ERB.
   def render_react(component)
     return false if params[:ui] == "legacy"
+    return false if request.format.js? || request.format.atom? || request.format.rss? || request.format.xml?
 
     props = yield
     return false if props.nil?

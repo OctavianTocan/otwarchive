@@ -10,6 +10,10 @@ class PeopleController < ApplicationController
       @people = @search.search_results.scope(:for_search)
       flash_search_warnings(@people)
     end
+
+    render_react("PeopleSearch") do
+      PeopleSearchPresenter.new(search: @search, results: @people, heading: ts("People Search")).as_props
+    end
   end
 
   def index
