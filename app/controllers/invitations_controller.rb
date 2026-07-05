@@ -17,6 +17,10 @@ class InvitationsController < ApplicationController
 
   def index
     @unsent_invitations = @user.invitations.unsent.limit(5)
+
+    return if @user.present? && render_react("InvitationsIndex") do
+      InvitationsIndexPresenter.new(user: @user, heading: (@page_subtitle.presence || "Invitations")).as_props
+    end
   end
 
   def manage
