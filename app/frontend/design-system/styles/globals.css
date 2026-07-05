@@ -95,3 +95,23 @@
   * { border-color: var(--border); }
   body { background: var(--background); color: var(--foreground); font-family: var(--font-family-sans); letter-spacing: -0.011em; }
 }
+
+/* AO3 static/userstuff content rendered inside React (StaticPage, etc.). The
+   ERB bodies ship semantic HTML with AO3's .userstuff/.heading/.landmark
+   classes; these rules give them modern prose styling without AO3's CSS. */
+.ao3-prose .landmark { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ao3-prose h2 { font-size: 1.25rem; font-weight: 600; line-height: 1.25; margin: 1.5rem 0 0.5rem; }
+.ao3-prose h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 1.25rem 0 0.4rem; }
+.ao3-prose h4 { font-weight: 600; margin: 1rem 0 0.35rem; }
+.ao3-prose > h2:first-child, .ao3-prose > .heading:first-child { margin-top: 0; }
+.ao3-prose p { margin: 0.7rem 0; line-height: 1.6; }
+.ao3-prose ul, .ao3-prose ol { margin: 0.7rem 0; padding-left: 1.5rem; }
+.ao3-prose ul { list-style: disc; }
+.ao3-prose ol { list-style: decimal; }
+.ao3-prose li { margin: 0.25rem 0; }
+.ao3-prose a { color: var(--link); }
+.ao3-prose a:hover { text-decoration: underline; }
+.ao3-prose blockquote { border-left: 3px solid var(--border); padding-left: 1rem; margin: 0.7rem 0; color: var(--muted-foreground); }
+.ao3-prose dl { margin: 0.7rem 0; }
+.ao3-prose dt { font-weight: 600; margin-top: 0.5rem; }
+.ao3-prose hr { border: 0; border-top: 1px solid var(--border); margin: 1.25rem 0; }
