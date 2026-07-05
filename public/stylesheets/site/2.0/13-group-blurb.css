@@ -439,3 +439,77 @@ blurbs on the manage collection items pages, mostly reseting styles inherited fr
 }
 
 /* END== */
+
+/* == FLAT FEED (comcom pass): blurbs render as divider-separated rows, not cards.
+   Scoped to .blurb; keeps AO3's icon-gutter geometry intact. == */
+
+li.blurb {
+  border: 0;
+  border-bottom: 1px solid var(--ao3-border);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0.429em 0.75em 1.25em;
+}
+
+li.blurb:last-child {
+  border-bottom: 0;
+}
+
+/* Title prominent; fandom + date quiet. */
+.blurb .header h4.heading {
+  font-size: 1.2em;
+  line-height: 1.25;
+}
+
+.blurb h5.fandoms {
+  font-size: 0.9em;
+}
+
+.blurb .datetime {
+  color: var(--ao3-muted-fg);
+  font-size: 0.85em;
+}
+
+/* Tags as subtle chips (suppress the inline commas). */
+.blurb ul.tags li {
+  display: inline-block;
+  margin: 0.15em 0.3em 0.15em 0;
+  padding: 0.1em 0.55em;
+  background: var(--ao3-muted);
+  border-radius: var(--ao3-radius-md);
+  font-size: 0.82em;
+  line-height: 1.7;
+}
+
+.blurb ul.tags.commas li:after {
+  content: none;
+}
+
+/* Summary: left-aligned, comfortable. */
+.blurb blockquote.summary {
+  text-align: left;
+  margin: 0.75em 0;
+}
+
+/* Stats: a quiet inline row at the foot of the item. */
+.blurb dl.stats {
+  float: none;
+  text-align: left;
+  margin-top: 0.75em;
+  font-size: 0.85em;
+  color: var(--ao3-muted-fg);
+}
+
+.blurb dl.stats a:link {
+  color: var(--ao3-muted-fg);
+}
+
+/* Flatten the nested bookmark user-card + drop its leftover serif meta. */
+.bookmark .user {
+  border: 1px solid var(--ao3-border);
+  box-shadow: var(--ao3-shadow-xs);
+}
+
+.bookmark .user .meta {
+  font-family: var(--ao3-font-sans);
+}
