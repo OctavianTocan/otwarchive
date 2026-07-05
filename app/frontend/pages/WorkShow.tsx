@@ -1,6 +1,7 @@
 import { Card } from "@/design-system/components/ui/card";
 import AppShell from "../components/AppShell";
 import KudosButton from "../components/KudosButton";
+import SubscribeButton from "../components/SubscribeButton";
 import { Button } from "@/design-system/components/ui/button";
 import { Badge } from "@/design-system/components/ui/badge";
 
@@ -198,9 +199,11 @@ export default function WorkShow(props: Props) {
 
         {/* Kudos */}
         <div className="mt-6 flex flex-col gap-2 border-border border-t pt-5 text-sm">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             <KudosButton workId={(work as { id: number }).id} />
-            <h3 className="font-semibold text-muted-foreground text-xs uppercase tracking-wide">Kudos ({n(kudosCount)})</h3>
+            <SubscribeButton workId={(work as { id: number }).id} />
+            <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}/bookmarks/new`} />}>☆ Bookmark</Button>
+            <h3 className="ml-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide">Kudos ({n(kudosCount)})</h3>
           </div>
           {kudosNames.length > 0 && (
             <p className="text-foreground/90">
