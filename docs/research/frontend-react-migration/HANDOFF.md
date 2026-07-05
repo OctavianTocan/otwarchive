@@ -125,9 +125,21 @@ against an empty DB (shape-verified via a Rails runner, not live rows).
   byline, work/rec counts, default badge, and owner edit/orphan/delete actions
   (delete via Inertia `router.delete`).
 
+### 3e. Static content pages (batch)
+
+`HomeController`'s static actions (tos, tos_faq, takedown, diversity, donate,
+about, lost_cookie, site_map, privacy, content) now render React through one
+generic `StaticPage` shell: `render_static(view)` renders the existing ERB body
+to a string and hands it to `StaticPage`, styled by a new `.ao3-prose` block in
+`globals.css` (handles AO3's `.userstuff`/`.heading`/`.landmark` markup).
+`render_static` **falls back to ERB** if a body can't be string-rendered, so no
+route/Warden edge can 500 the page. This is the reusable recipe for any
+remaining static/legal pages elsewhere in the app.
+
 ### Current totals
 
-**44 React pages · 40 presenters · 32 controllers wired.** Parity harness 11/11.
+**45 page components (incl. `StaticPage` covering ~10 static routes) · 40
+presenters · 32 controllers wired.** Parity harness 11/11.
 
 ---
 
