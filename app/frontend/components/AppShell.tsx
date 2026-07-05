@@ -81,8 +81,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       <Drawer.Root open={open} onOpenChange={setOpen} direction="left">
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-50 bg-black/40 md:hidden" />
-          <Drawer.Content className="fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col border-border border-r bg-sidebar p-3 outline-none md:hidden after:!w-0">
-            <div className="mx-auto mb-3 h-1 w-10 shrink-0 self-center rounded-full bg-border" aria-hidden />
+          <Drawer.Content className="fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col border-border border-r bg-sidebar p-3 outline-none md:hidden">
             <a href="/" onClick={() => setOpen(false)} className="mb-3 flex items-center gap-2 px-1 font-semibold hover:no-underline">
               <img src="/images/ao3_logos/logo.png" alt="AO3" className="h-8 w-auto object-contain" />
               <span className="text-[15px]">Archive of Our Own</span>
