@@ -18,6 +18,10 @@ class ReadingsController < ApplicationController
     end
     @readings = @readings.order("last_viewed DESC").includes(work: :pseuds)
     @pagy, @readings = pagy(@readings)
+
+    return if @user.present? && render_react("ReadingsIndex") do
+      ReadingsIndexPresenter.new(readings: @readings, heading: @page_subtitle, pagy: @pagy).as_props
+    end
   end
 
   def destroy
