@@ -69,7 +69,7 @@ export default function Stats({ context, totals, fandoms }: Props) {
             {fandoms.length === 0 ? (
               <p className="py-8 text-muted-foreground">No fandom statistics yet.</p>
             ) : (
-              <div className="overflow-x-auto rounded-lg border border-border bg-card">
+              <div className="overflow-x-auto bg-card">
                 <table className="w-full text-sm tabular-nums">
                   <thead>
                     <tr className="border-border border-b text-left text-muted-foreground text-xs">

@@ -49,6 +49,10 @@ class OwnedTagSetsController < ApplicationController
       end
     end
     @tag_sets = @tag_sets.paginate(per_page: (params[:per_page] || ArchiveConfig.ITEMS_PER_PAGE), page: (params[:page] || 1))
+
+    return if @tag_sets.respond_to?(:total_pages) && render_react("TagSetsIndex") do
+      TagSetsIndexPresenter.new(results: @tag_sets, heading: (@page_subtitle.presence || "Tag Sets")).as_props
+    end
   end
 
   def show_options

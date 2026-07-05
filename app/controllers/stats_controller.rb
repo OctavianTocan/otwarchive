@@ -67,6 +67,10 @@ class StatsController < ApplicationController
     end
     @totals[:user_subscriptions] = Subscription.where(subscribable_id: @user.id, subscribable_type: 'User').count
 
+    return if @user.present? && render_react("Stats") do
+      StatsPresenter.new(user: @user, stats: { works: @works, totals: @totals }, heading: @page_subtitle).as_props
+    end
+
     # graph top 5 works
     @chart_data = GoogleVisualr::DataTable.new
     @chart_data.new_column('string', 'Title')
