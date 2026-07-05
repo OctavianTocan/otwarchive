@@ -116,8 +116,15 @@ function ItemRow({ item }: { item: Item }) {
 }
 
 export default function RelatedWorksIndex({ context, items, pagination }: Props) {
-  // The controller emits items already grouped by section label; insert a
-  // heading each time the label changes to reproduce the four ERB sections.
+  // The controller emits items already grouped by section label; collect
+  // consecutive runs of the same label into the four ERB sections.
+  const sections: { label: string; items: Item[] }[] = [];
+  for (const item of items) {
+    const last = sections[sections.length - 1];
+    if (last && last.label === item.groupLabel) last.items.push(item);
+    else sections.push({ label: item.groupLabel, items: [item] });
+  }
+
   return (
     <AppShell>
 
@@ -126,17 +133,13 @@ export default function RelatedWorksIndex({ context, items, pagination }: Props)
           <h2 className="font-bold text-2xl">{context.heading}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} related works</p>
           {items.length === 0 && <p className="py-6 text-muted-foreground">No related works to show.</p>}
-          {items.map((item, i) => (
-            <div key={item.id}>
-              {(i === 0 || items[i - 1].groupLabel !== item.groupLabel) && (
-                <h3 className="mt-6 mb-2 font-semibold text-muted-foreground text-sm uppercase tracking-wide">{item.groupLabel}</h3>
-              )}
-              {(i === 0 || items[i - 1].groupLabel !== item.groupLabel) ? (
-                <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
-                  <li><ItemRow item={item} /></li>
-                </ol>
-              ) : null}
-            </div>
+          {sections.map((section) => (
+            <section key={section.label}>
+              <h3 className="mt-6 mb-2 font-semibold text-muted-foreground text-sm uppercase tracking-wide">{section.label}</h3>
+              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+                {section.items.map((item) => <li key={item.id}><ItemRow item={item} /></li>)}
+              </ol>
+            </section>
           ))}
         </main>
       </div>

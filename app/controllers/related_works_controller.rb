@@ -11,14 +11,28 @@ class RelatedWorksController < ApplicationController
     @translations_by_user = @user.parent_work_relationships.posted.where(translation: true)
     @remixes_by_user = @user.parent_work_relationships.posted.where(translation: false)
 
-    return if @user == current_user
-
     # Extra constraints on what we display if someone else is viewing @user's
     # related works page:
-    @translations_of_user = @translations_of_user.merge(Work.revealed.non_anon).where(reciprocal: true)
-    @remixes_of_user = @remixes_of_user.merge(Work.revealed.non_anon).where(reciprocal: true)
-    @translations_by_user = @translations_by_user.merge(Work.revealed.non_anon).where(reciprocal: true)
-    @remixes_by_user = @remixes_by_user.merge(Work.revealed.non_anon).where(reciprocal: true)
+    unless @user == current_user
+      @translations_of_user = @translations_of_user.merge(Work.revealed.non_anon).where(reciprocal: true)
+      @remixes_of_user = @remixes_of_user.merge(Work.revealed.non_anon).where(reciprocal: true)
+      @translations_by_user = @translations_by_user.merge(Work.revealed.non_anon).where(reciprocal: true)
+      @remixes_by_user = @remixes_by_user.merge(Work.revealed.non_anon).where(reciprocal: true)
+    end
+
+    return if render_react("RelatedWorksIndex") do
+      next nil if @user.blank?
+
+      login = @user.login
+      related_works =
+        [[@translations_of_user, "Translations of #{login}'s works"],
+         [@translations_by_user, "Works translated by #{login}"],
+         [@remixes_of_user,      "Works inspired by #{login}"],
+         [@remixes_by_user,      "Works that inspired #{login}"]]
+        .flat_map { |scope, label| scope.map { |rw| { record: rw, label: label } } }
+
+      RelatedWorksIndexPresenter.new(related_works: related_works, heading: @page_subtitle).as_props
+    end
   end
 
   # GET /related_works/1
