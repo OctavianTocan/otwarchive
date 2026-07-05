@@ -16,6 +16,10 @@ class MediaController < ApplicationController
       end
     end
     @page_subtitle = t(".browser_title")
+
+    return if render_react("MediaIndex") do
+      MediaIndexPresenter.new(media: @media, heading: @page_subtitle).as_props
+    end
   end
 
   def show
