@@ -13,6 +13,10 @@ class CreatorshipsController < ApplicationController
     @page_subtitle = ts("Co-Creator Requests")
     @creatorships = @creatorships.unapproved.order(id: :desc).
                     paginate(page: params[:page])
+
+    return if @user.present? && render_react("CreatorshipsIndex") do
+      CreatorshipsIndexPresenter.new(creatorships: @creatorships, heading: @page_subtitle).as_props
+    end
   end
 
   # Update the selected creatorships.
