@@ -153,6 +153,13 @@ class BookmarksController < ApplicationController
       elsif @bookmarkable_items.respond_to?(:total_pages)
         pagy_query_result(@bookmarkable_items)
       end
+
+    # React by default (?ui=legacy keeps ERB). Only the faceted user/pseud
+    # bookmark-list path; tag/collection and latest paths fall through to ERB.
+    return if @owner.present? && @search.present? && @bookmarks.respond_to?(:facets) &&
+              render_react("BookmarksIndex") do
+      BookmarksIndexPresenter.new(results: @bookmarks, owner: @owner, search: @search, heading: @page_subtitle).as_props
+    end
   end
 
   # GET    /:locale/bookmark/:id
