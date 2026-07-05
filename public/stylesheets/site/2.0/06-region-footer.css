@@ -5,7 +5,7 @@ clean hover links.
 */
 
 #footer {
-  background: #900;
+  background: #900 url("/images/skins/textures/tiles/red-ao3.png");
   border-top: 0;
   color: rgba(255, 255, 255, 0.72);
   float: left;
