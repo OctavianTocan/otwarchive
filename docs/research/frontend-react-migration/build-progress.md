@@ -1,31 +1,29 @@
 # React Migration — Build Progress
 
-**Updated:** 2026-07-05. Branch `design/comcom-pass-1`. Tracks the program plan `docs/plans/2026-07-05-react-migration-program.md`.
+**Updated:** 2026-07-05. Branch `design/comcom-pass-1`. Tracks `docs/plans/2026-07-05-react-migration-program.md`.
 
 ## Done + verified live (committed & pushed)
 
-| Phase | What | Verification | Commit |
-|---|---|---|---|
-| **P0** Foundation | `InertiaConvertible` concern (`render_react`, React default + `?ui=legacy` ERB, applicability guard); `inertia_share` flash/currentUser/csrf; `InertiaPresenter` base | React default + `?ui=legacy` ERB + bare `/works` no-500; shared props present; parity 5/5 | `110d5cfe8` |
-| **P1.1** Work-show | Detail page (single + `?view_full_work` multi-chapter; adult/chaptered/unrevealed guards preserved; sanitize_field parity; scoped work-skin CSS); `WorkShow.tsx` | Single→React, multi→redirect unless full-work, `?ui=legacy`→ERB; parity 3/3 | `e7d27fe53` |
-| **P1.2** Work-form | New/edit via Inertia; **validation errors round-trip as props** (create/update failure branches → `render inertia:`); multiparam `published_at` + named submit buttons; CSRF over session | Authed GET→React form; invalid POST→errors-as-props; **valid POST→creates work id=108 + 302 to React work-show** | `e7d27fe53` |
-| **P2.2** CI parity | `workshow.mjs` suite, `run.sh`, `.github/workflows/react-parity.yml` | 8/8 local (index 5/5 + show 3/3); CI file needs first-run validation | `4b695d499` |
+| Phase | What | Verification |
+|---|---|---|
+| **P0** Foundation | `InertiaConvertible` concern (`render_react`: React **default**, `?ui=legacy` → ERB, applicability guard); `inertia_share` flash/currentUser/csrf; `InertiaPresenter` base (work-blurb/tag/stats) | parity 5/5; bare `/works` no-500; shared props present |
+| **P1.1** Work-show | Detail page (single + `?view_full_work` multi; adult/chaptered/unrevealed guards preserved; `sanitize_field` parity; scoped work-skin CSS) | single→React, multi→redirect, `?ui=legacy`→ERB; parity 3/3 |
+| **P1.2** Work-form | New/edit via Inertia; **validation errors round-trip as props**; multiparam `published_at` + named submit buttons; CSRF over session | invalid POST→errors; **valid POST→created work + redirect to React work-show** |
+| **P2.2** CI parity | `harness.mjs`/`workshow.mjs`/`bookmarks.mjs`/`smoke.mjs` + `run.sh` + `.github/workflows/react-parity.yml` | **11/11 local** (index 5 + show 3 + bookmarks 1 + smoke 2) |
+| **P3** Bookmarks index | user/pseud faceted path; reuses `work_blurb` for Work bookmarkables | React default, `?ui=legacy` ERB; parity 1/1 |
+| **P3** Collections index | ES-faceted; all index variants; status/type badges | React default, 9 collections live |
+| **P3** Series index | plain-AR; creators/fandoms/stats | React default, "Test Series" live |
 
-## In progress
+**Seven page shapes converted** (works-index + all owner variants tag/user/pseud/collection/language, work-show, work-form CRUD, bookmarks, collections, series), all React-by-default with the `?ui=legacy` ERB baseline retained. Built partly by parallel subagents at low marginal cost.
 
-- **P3** Bookmarks index (proving the pattern generalizes to non-works lists) — subagent conversion underway.
+## Remaining (pattern proven; each now incremental)
 
-## Remaining (pattern proven; each is now incremental)
+- **P2.1 SSR** — Node sidecar + unicorn-vs-Puma ADR (biggest infra decision; gates public SEO). Not started.
+- **P2.3 i18n** — Rails-I18n→props bridge (pages currently ship English).
+- **Form depth** — TinyMCE rich-text, tag autocomplete wiring (endpoint URLs already in props), co-creators/series/collection pickers, per-chapter `ChaptersController#show`.
+- **More P3** — tags index, comments, user/pseud profile + dashboard; write actions (kudos/bookmark/subscribe/comment).
+- **P4 cutover** — app-wide nav shell, remaining filter controls (exclude-facets/autocomplete/date), caching/perf parity, admin area, retire ERB.
 
-- **P2.1 SSR** — Node sidecar + unicorn-vs-Puma ADR (biggest infra decision; gates public SEO). NOT started.
-- **P2.3 i18n** — systematic Rails-I18n→props bridge. Pages currently ship English; retrofit after.
-- **P1/P3 form depth** — TinyMCE (rich-text), tag autocomplete wiring (endpoints already passed as props), co-creators/series/collections pickers, per-chapter `ChaptersController#show`.
-- **P3 breadth** — remaining index pages (tags, collections, comments, series), user/pseud/dashboard, write actions (kudos/bookmark/subscribe/comment).
-- **P4 cutover** — app-wide nav shell, remaining filter controls, caching/perf parity, admin area, retire ERB (keep `?ui=legacy` until confident).
+## Marginal cost per new page (established)
 
-## Key facts established by the build
-
-- Full toolchain works in the Rack-2.2 / Node-less container; React client host-built to `public/vite-inertia/`.
-- **Forms are tractable** (the plan's make-or-break): errors round-trip cleanly through existing controllers; multiparam dates + named buttons handled; CSRF rides the session — no auth rework.
-- Marginal cost per page is now: controller one-liner (`render_react`) + a PORO presenter (subclass `InertiaPresenter`) + a React page + a parity fixture.
-- The `?ui=legacy` escape hatch + "View legacy page" links keep the ERB reachable for parity/reference/rollback (per requirement).
+controller one-liner (`render_react`) + a PORO presenter (`< InertiaPresenter`) + a React page (DS Card/Badge/Button) + a parity fixture. Subagent-buildable in parallel.
