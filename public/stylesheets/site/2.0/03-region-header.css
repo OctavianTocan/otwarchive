@@ -284,13 +284,14 @@ notice that CSS3 declarations sit are indented twice (four spaces) and always co
   top: 0;
   left: 0;
   bottom: 0;
-  width: 16rem;
+  width: var(--ao3-sidebar-w, 16rem);
+  overflow: visible;
   z-index: 60;
 }
 #header { margin: 0; }
 #outer.wrapper {
   box-sizing: border-box;
-  padding-left: 16rem;
+  padding-left: var(--ao3-sidebar-w, 16rem);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
