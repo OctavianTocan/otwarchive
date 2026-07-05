@@ -1,4 +1,5 @@
 import { router } from "@inertiajs/react";
+import WorkSheet from "../components/WorkSheet";
 import AppShell from "../components/AppShell";
 import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
@@ -44,12 +45,12 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
   return <Badge variant={variant ?? "secondary"} render={<a href={t.url ?? "#"} />}>{t.name}</Badge>;
 }
 
-function Blurb({ w }: { w: WorkBlurb }) {
+function Blurb({ w, onOpen }: { w: WorkBlurb; onOpen?: (w: WorkBlurb) => void }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-[15px] leading-snug">
-          <a href={w.url} className="text-link hover:underline">{w.title}</a>
+          <a href={w.url} className="text-link hover:underline" onClick={(e) => { if (onOpen && typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches) { e.preventDefault(); onOpen(w); } }}>{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
             <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
@@ -102,6 +103,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
   const [inc, setInc] = useState<Record<string, string[]>>(filters.include ?? {});
   const [ws, setWs] = useState<Record<string, string>>(filters.work_search ?? {});
   const [busy, setBusy] = useState(false);
+  const [sheet, setSheet] = useState<{ id: number; url: string } | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const go = (page = 1, nextInc = inc, nextWs = ws) => {
@@ -186,7 +188,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
           <h2 className="font-semibold text-base">{context.heading || context.ownerName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} works · page {pagination.page} of {pagination.pages}</p>
           {works.length === 0 && <p className="py-6 text-muted-foreground">No works matched these filters.</p>}
-          <ol className="flex flex-col divide-y divide-border">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+          <ol className="flex flex-col divide-y divide-border">{works.map((w) => <li key={w.id}><Blurb w={w} onOpen={(x) => setSheet({ id: x.id, url: x.url })} /></li>)}</ol>
           {pagination.pages > 1 && (
             <nav className="mt-6 flex items-center justify-center gap-4 text-muted-foreground">
               <Button variant="outline" size="sm" disabled={pagination.page <= 1 || busy} onClick={() => go(pagination.page - 1)}>← Prev</Button>
@@ -196,6 +198,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
           )}
         </main>
       </div>
+      <WorkSheet workId={sheet?.id ?? null} workUrl={sheet?.url ?? null} onClose={() => setSheet(null)} />
     </AppShell>
   );
 }
