@@ -167,6 +167,9 @@ class BookmarksController < ApplicationController
   # GET    /:locale/works/:work_id/bookmark/:id
   # GET    /:locale/external_works/:external_work_id/bookmark/:id
   def show
+    return if @bookmark.present? && render_react("BookmarkShow") do
+      BookmarkShowPresenter.new(bookmark: @bookmark, heading: "Bookmark").as_props
+    end
   end
 
   # GET /bookmarks/new
