@@ -35,7 +35,7 @@ function formatDate(iso: string | null) {
 
 function CommentCard({ c }: { c: InboxComment }) {
   return (
-    <Card className="flex flex-col gap-2.5 px-5 transition-shadow hover:shadow-md">
+    <Card className="flex flex-col gap-2.5 px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           {c.commenterUrl && c.commenter ? (
@@ -102,7 +102,7 @@ export default function Inbox({ context, comments, pagination }: Props) {
 
           {comments.length === 0 && <p className="py-6 text-muted-foreground">Your inbox is empty.</p>}
 
-          <ol className="grid gap-3.5">
+          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
             {comments.map((c, i) => (
               <li key={i}><CommentCard c={c} /></li>
             ))}

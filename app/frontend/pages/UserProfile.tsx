@@ -35,7 +35,7 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
 function Blurb({ w }: { w: WorkBlurb }) {
   const hasWarnings = w.warnings.some((x) => x.name !== "No Archive Warnings Apply");
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
@@ -76,7 +76,7 @@ function Blurb({ w }: { w: WorkBlurb }) {
 
 function SeriesCard({ s }: { s: SeriesRef }) {
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
         {s.url
           ? <a href={s.url} className="text-link hover:underline">{s.title}</a>
@@ -156,13 +156,13 @@ export default function UserProfile({ context, pseuds, bioHtml, joined, counts, 
 
           {recentWorks.length > 0 && (
             <Section title="Recent works">
-              <ol className="grid gap-3.5">{recentWorks.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{recentWorks.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
             </Section>
           )}
 
           {recentSeries.length > 0 && (
             <Section title="Recent series">
-              <ol className="grid gap-3.5">{recentSeries.map((s) => <li key={s.id}><SeriesCard s={s} /></li>)}</ol>
+              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{recentSeries.map((s) => <li key={s.id}><SeriesCard s={s} /></li>)}</ol>
             </Section>
           )}
 

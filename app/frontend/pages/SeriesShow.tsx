@@ -45,7 +45,7 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
 function WorkCard({ part, w }: { part: number | null; w: WorkBlurb }) {
   const hasWarnings = w.warnings.some((x) => x.name !== "No Archive Warnings Apply");
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           {part != null && <span className="mr-1.5 font-normal text-muted-foreground tabular-nums">Part {part}</span>}
@@ -139,7 +139,7 @@ export default function SeriesShow({ context, title, creators, summaryHtml, note
           <section className="flex flex-col gap-3.5">
             <h3 className="font-semibold text-lg">Works in this series</h3>
             {works.length === 0 && <p className="py-6 text-muted-foreground">No works to show.</p>}
-            <ol className="grid gap-3.5">
+            <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
               {works.map((sw) => (
                 <li key={sw.blurb.id}><WorkCard part={sw.part} w={sw.blurb} /></li>
               ))}

@@ -1,8 +1,9 @@
 import { usePage } from "@inertiajs/react";
 import { useState, type ReactNode } from "react";
+import { Drawer } from "vaul-base";
 import {
   HomeIcon, BookOpenIcon, BookmarkIcon, FolderIcon, TagIcon,
-  SearchIcon, MenuIcon, XIcon, UserIcon,
+  SearchIcon, MenuIcon, UserIcon,
 } from "lucide-react";
 
 const NAV = [
@@ -76,16 +77,15 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </a>
       </header>
 
-      {open && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <aside className="absolute inset-y-0 left-0 flex w-64 flex-col bg-sidebar p-3 shadow-lg">
-            <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}
-              className="mb-1 ml-auto grid size-8 place-items-center rounded-md hover:bg-muted"><XIcon className="size-5" /></button>
+            <Drawer.Root open={open} onOpenChange={setOpen} direction="left">
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 z-50 bg-black/40 md:hidden" />
+          <Drawer.Content className="fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col border-border border-r bg-sidebar p-3 outline-none md:hidden after:!w-0">
+            <div className="mx-auto mb-2 h-1 w-10 shrink-0 self-center rounded-full bg-border" aria-hidden />
             <SidebarBody currentUser={currentUser} current={current} onNavigate={() => setOpen(false)} />
-          </aside>
-        </div>
-      )}
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
 
       <main className="min-w-0 flex-1 overflow-x-hidden">{children}</main>
     </div>

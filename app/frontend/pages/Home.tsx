@@ -77,7 +77,7 @@ function Section({ title, link, children }: { title: string; link?: React.ReactN
 function Blurb({ w }: { w: WorkBlurb }) {
   const hasWarnings = w.warnings.some((x) => x.name !== "No Archive Warnings Apply");
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
@@ -177,10 +177,10 @@ function NewsList({ news }: { news: NewsPost[] }) {
       title="News"
       link={<a href="/admin_posts" className="text-link text-sm hover:underline">All News</a>}
     >
-      <ol className="grid gap-3.5">
+      <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
         {news.map((p) => (
           <li key={p.id}>
-            <Card className="px-5 transition-shadow hover:shadow-md">
+            <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
               <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
                 <a href={p.url ?? "#"} className="text-link hover:underline" dangerouslySetInnerHTML={{ __html: p.title }} />
               </h4>
@@ -221,7 +221,7 @@ export default function Home({ loggedIn, intro, favorites, browse, news, reading
               link={<a href={readingsUrl ?? "#"} className="text-link text-sm hover:underline">My History</a>}
             >
               <p className="mb-3 text-muted-foreground text-sm">Some works you've marked for later.</p>
-              <ol className="grid gap-3.5">{readings.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{readings.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
             </Section>
           )}
 

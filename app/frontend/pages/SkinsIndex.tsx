@@ -32,7 +32,7 @@ function StatusBadge({ status }: { status: Status }) {
 
 function SkinCard({ s, isOwner }: { s: Skin; isOwner: boolean }) {
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           {s.url
@@ -115,7 +115,7 @@ export default function SkinsIndex({ context, skins }: Props) {
           {skins.length === 0
             ? <p className="py-6 text-muted-foreground">{context.emptyText}</p>
             : (
-              <ol className="grid gap-3.5">
+              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
                 {skins.map((s) => <li key={s.id}><SkinCard s={s} isOwner={context.isOwner} /></li>)}
               </ol>
             )}

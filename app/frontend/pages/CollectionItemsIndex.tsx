@@ -97,7 +97,7 @@ function BookmarkBlurbCard({ b }: { b: BookmarkBlurb }) {
 
 function ItemCard({ item }: { item: Item }) {
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       {item.type === "Work"
         ? <WorkBlurbCard w={item.blurb as WorkBlurb} />
         : <BookmarkBlurbCard b={item.blurb as BookmarkBlurb} />}
@@ -133,7 +133,7 @@ export default function CollectionItemsIndex({ context, items, pagination }: Pro
           <h2 className="font-bold text-2xl">{context.heading || context.collectionName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} items · page {pagination.page} of {pagination.pages}</p>
           {items.length === 0 && <p className="py-6 text-muted-foreground">Nothing to review here!</p>}
-          <ol className="grid gap-3.5">{items.map((item) => <li key={item.id}><ItemCard item={item} /></li>)}</ol>
+          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{items.map((item) => <li key={item.id}><ItemCard item={item} /></li>)}</ol>
           {pagination.pages > 1 && (
             <nav className="mt-6 flex items-center justify-center gap-4 text-muted-foreground">
               <Button variant="outline" size="sm" disabled={pagination.page <= 1 || busy} onClick={() => go(pagination.page - 1)}>← Prev</Button>

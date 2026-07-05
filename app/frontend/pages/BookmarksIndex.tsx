@@ -100,7 +100,7 @@ function BookmarkCard({ b }: { b: Bookmark }) {
   const bm = b.bookmarkable;
   const blurb = bm.blurb;
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       {blurb ? (
         <WorkHeader w={blurb} />
       ) : (
@@ -221,7 +221,7 @@ export default function BookmarksIndex({ context, bookmarks, pagination, facets,
           <h2 className="font-bold text-2xl">{context.heading || context.ownerName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} bookmarks · page {pagination.page} of {pagination.pages}</p>
           {bookmarks.length === 0 && <p className="py-6 text-muted-foreground">No bookmarks matched these filters.</p>}
-          <ol className="grid gap-3.5">{bookmarks.map((b) => <li key={b.id}><BookmarkCard b={b} /></li>)}</ol>
+          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{bookmarks.map((b) => <li key={b.id}><BookmarkCard b={b} /></li>)}</ol>
           {pagination.pages > 1 && (
             <nav className="mt-6 flex items-center justify-center gap-4 text-muted-foreground">
               <Button variant="outline" size="sm" disabled={pagination.page <= 1 || busy} onClick={() => go(pagination.page - 1)}>← Prev</Button>

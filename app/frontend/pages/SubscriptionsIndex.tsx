@@ -16,7 +16,7 @@ const n = (v?: number) => (v ?? 0).toLocaleString("en-US");
 
 function SubscriptionCard({ s }: { s: Subscription }) {
   return (
-    <Card className="flex flex-col gap-2 px-5 transition-shadow hover:shadow-md sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+    <Card className="flex flex-col gap-2 px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
       <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
         {s.url ? (
           <a href={s.url} className="text-link hover:underline">{s.name}</a>
@@ -60,7 +60,7 @@ export default function SubscriptionsIndex({ context, subscriptions, pagination 
 
           {subscriptions.length === 0 && <p className="py-6 text-muted-foreground">You are not subscribed to anything yet.</p>}
 
-          <ol className="grid gap-3.5">
+          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
             {subscriptions.map((s, i) => (
               <li key={i}><SubscriptionCard s={s} /></li>
             ))}

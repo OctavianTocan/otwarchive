@@ -38,7 +38,7 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
 
 function Blurb({ w }: { w: WorkBlurb }) {
   return (
-    <Card className="px-5 transition-shadow hover:shadow-md">
+    <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
@@ -129,7 +129,7 @@ export default function WorksSearch({ context, works, pagination, resultCount, f
         {works.length === 0 ? (
           <p className="py-6 text-muted-foreground">No results found. You may want to edit your search to make it less specific.</p>
         ) : (
-          <ol className="grid gap-3.5">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
         )}
 
         {pagination.pages > 1 && (

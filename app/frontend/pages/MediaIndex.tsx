@@ -15,7 +15,7 @@ type Props = {
 function MediumCard({ m }: { m: Medium }) {
   const href = m.fandomsUrl ?? m.url ?? undefined;
   return (
-    <Card className="flex items-center justify-between gap-3 px-5 py-4 transition-shadow hover:shadow-md">
+    <Card className="flex items-center justify-between gap-3 px-5 py-4 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <h3 className="min-w-0 break-words font-semibold text-base leading-snug">
         {href
           ? <a href={href} className="text-link hover:underline">{m.name}</a>
