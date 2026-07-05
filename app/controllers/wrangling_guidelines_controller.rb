@@ -4,11 +4,13 @@ class WranglingGuidelinesController < ApplicationController
   # GET /wrangling_guidelines
   def index
     @wrangling_guidelines = WranglingGuideline.order("position ASC")
+    return if render_react("WranglingGuidelinesIndex") { ContentPagePresenter.new.index_props(@wrangling_guidelines, heading: "Wrangling Guidelines", path_helper: :wrangling_guideline_path) }
   end
 
   # GET /wrangling_guidelines/1
   def show
     @wrangling_guideline = WranglingGuideline.find(params[:id])
+    return if render_react("WranglingGuidelineShow") { ContentPagePresenter.new.show_props(@wrangling_guideline, heading: "Wrangling Guidelines", index_url: wrangling_guidelines_path) }
   end
 
   # GET /wrangling_guidelines/new

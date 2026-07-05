@@ -19,6 +19,10 @@ class InboxController < ApplicationController
     @unread = @user.inbox_comments.with_bad_comments_removed.count_unread
     @filters = filter_params || {}
     @inbox_comments = @user.inbox_comments.with_bad_comments_removed.find_by_filters(@filters).page(params[:page])
+
+    return if @user.present? && render_react("Inbox") do
+      InboxPresenter.new(comments: @inbox_comments, heading: @page_subtitle).as_props
+    end
   end
 
   def reply

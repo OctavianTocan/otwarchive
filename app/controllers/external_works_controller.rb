@@ -39,6 +39,9 @@ class ExternalWorksController < ApplicationController
 
   def show
     @external_work = ExternalWork.find(params[:id])
+    return if @external_work.present? && render_react("ExternalWorkShow") do
+      ExternalWorkShowPresenter.new(external_work: @external_work, heading: @external_work.title).as_props
+    end
   end
 
   def edit

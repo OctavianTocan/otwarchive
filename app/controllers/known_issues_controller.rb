@@ -4,11 +4,13 @@ class KnownIssuesController < ApplicationController
   # GET /known_issues
   def index
     @known_issues = KnownIssue.all
+    return if render_react("KnownIssuesIndex") { ContentPagePresenter.new.index_props(@known_issues, heading: "Known Issues", path_helper: :known_issue_path) }
   end
 
   # GET /known_issues/1
   def show
     @known_issue = authorize KnownIssue.find(params[:id])
+    return if render_react("KnownIssueShow") { ContentPagePresenter.new.show_props(@known_issue, heading: "Known Issues", index_url: known_issues_path) }
   end
 
   # GET /known_issues/new
