@@ -11,8 +11,14 @@ Legend: ✅ done+verified · ⬜ todo
 **Account/social:** ✅ home (landing + dashboard) · ✅ inbox (read-only) · ✅ gifts · ✅ subscriptions
 **Content/other:** ✅ AO3 news (admin_posts) · ✅ invitations · ✅ stats · ✅ tag sets · ✅ related works · ✅ skins · ✅ FAQ (index+show) · ✅ known issues (index+show) · ✅ wrangling guidelines (index+show)
 
+## Interactions (write) — done
+✅ Kudos · ✅ Subscribe · ✅ Bookmark form (create) — Inertia POSTs, CSRF over session, verified persisting.
+
+## Experiments
+✅ Mobile bottom-sheet fic reader (tap a work → cogram slide-up sheet, scroll-locked).
+
 ## Foundation & chrome (done)
-✅ Inverted switch + presenter base + shared props · ✅ cogram-style sidebar + sticky mobile + AO3 logo · ✅ AO3 palette (warm-mono + red brand/links) · ✅ SSR ADR 0001 · ✅ CI parity harness (11/11) · ✅ feed/JS format-guard · ✅ modern-red palette · ✅ de-surfaced flat aesthetic · ✅ vaul mobile drawer
+✅ Inverted switch + presenter base + shared props · ✅ cogram-style sidebar + sticky mobile + AO3 logo · ✅ AO3 palette (warm-mono + red brand/links) · ✅ SSR ADR 0001 · ✅ CI parity harness (11/11) · ✅ feed/JS format-guard · ✅ modern-red palette · ✅ de-surfaced flat aesthetic · ✅ vaul mobile drawer (from the right) · ✅ collapsible desktop sidebar · ✅ OG-sized logo/type
 
 ## Remaining (tracked; each = the same incremental recipe)
 - ⬜ **Write actions:** kudos, bookmark create/edit, subscribe/unsubscribe, comment post, work post-to-collection, inbox reply/approve, collection-items moderate — need Inertia form POSTs (pattern proven by work-form).
