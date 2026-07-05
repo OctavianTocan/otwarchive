@@ -41,7 +41,7 @@ a, a:link {
   display: none;
 }
 
-li.blurb, fieldset, form dl {
+fieldset, form dl {
   border: 1px solid var(--ao3-border);
   border-radius: var(--ao3-radius-xl);
   padding: 1em;

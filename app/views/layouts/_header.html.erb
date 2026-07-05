@@ -38,10 +38,6 @@
         <%= render "menu/menu_fandoms" %>
       </li>
       <li class="dropdown">
-        <%= link_to t(".nav.browse"), menu_browse_path %>
-        <%= render "menu/menu_browse" %>
-      </li>
-      <li class="dropdown">
         <%= link_to t(".nav.search"), menu_search_path %>
         <%= render "menu/menu_search" %>
       </li>
@@ -49,7 +45,6 @@
         <%= link_to t(".nav.about"), menu_about_path %>
         <%= render "menu/menu_about" %>
       </li>
-      <li class="search"><%= render "works/search_box" %></li>
     </ul>
   </nav>
 

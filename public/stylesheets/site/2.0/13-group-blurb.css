@@ -485,6 +485,11 @@ li.blurb:last-child {
   content: none;
 }
 
+.blurb ul.tags li a:link,
+.blurb ul.tags li a:visited {
+  border-bottom: 0;
+}
+
 /* Summary: left-aligned, comfortable. */
 .blurb blockquote.summary {
   text-align: left;
