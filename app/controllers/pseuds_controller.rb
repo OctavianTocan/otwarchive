@@ -17,6 +17,11 @@ class PseudsController < ApplicationController
     @work_counts = Pseud.work_counts_for_pseuds(@pseuds)
     @pseuds_with_works = Pseud.has_works_for(@pseuds.collect(&:id)) if @user == current_user
     @page_subtitle = @user.login
+
+    return if render_react("PseudsIndex") do
+      PseudsIndexPresenter.new(user: @user, pseuds: @pseuds, work_counts: @work_counts, rec_counts: @rec_counts,
+                               pseuds_with_works: @pseuds_with_works, is_owner: @user == current_user, heading: @page_subtitle).as_props
+    end
   end
 
   # GET /users/:user_id/pseuds/:id
