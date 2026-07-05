@@ -34,10 +34,10 @@ function SeriesCard({ s }: { s: Series }) {
     <Card className="px-5 transition-shadow hover:shadow-md">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
-          {s.url ? <a href={s.url} className="text-primary hover:underline">{s.title}</a> : s.title}
+          {s.url ? <a href={s.url} className="text-link hover:underline">{s.title}</a> : s.title}
           <span className="font-normal text-muted-foreground"> by </span>
           {s.creators.map((c, i) => (
-            <span key={i}>{i > 0 && ", "}<a href={c.url ?? "#"} className="text-primary hover:underline">{c.name}</a></span>
+            <span key={i}>{i > 0 && ", "}<a href={c.url ?? "#"} className="text-link hover:underline">{c.name}</a></span>
           ))}
         </h4>
         <div className="flex shrink-0 flex-wrap justify-end gap-1">

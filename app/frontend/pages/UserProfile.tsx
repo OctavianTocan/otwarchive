@@ -38,10 +38,10 @@ function Blurb({ w }: { w: WorkBlurb }) {
     <Card className="px-5 transition-shadow hover:shadow-md">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
-          <a href={w.url} className="text-primary hover:underline">{w.title}</a>
+          <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
-            <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-primary hover:underline">{a.name}</a></span>
+            <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
           ))}
         </h4>
         <div className="flex shrink-0 flex-wrap justify-end gap-1">
@@ -79,7 +79,7 @@ function SeriesCard({ s }: { s: SeriesRef }) {
     <Card className="px-5 transition-shadow hover:shadow-md">
       <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
         {s.url
-          ? <a href={s.url} className="text-primary hover:underline">{s.title}</a>
+          ? <a href={s.url} className="text-link hover:underline">{s.title}</a>
           : <span>{s.title}</span>}
       </h4>
       {s.summaryHtml && (
@@ -121,7 +121,7 @@ export default function UserProfile({ context, pseuds, bioHtml, joined, counts, 
                       <span key={i}>
                         {i > 0 && ", "}
                         {p.url
-                          ? <a href={p.url} className="text-primary hover:underline">{p.name}</a>
+                          ? <a href={p.url} className="text-link hover:underline">{p.name}</a>
                           : <span>{p.name}</span>}
                       </span>
                     ))}

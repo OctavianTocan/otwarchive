@@ -49,10 +49,10 @@ function Blurb({ w }: { w: WorkBlurb }) {
     <Card className="px-5 transition-shadow hover:shadow-md">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
-          <a href={w.url} className="text-primary hover:underline">{w.title}</a>
+          <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
-            <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-primary hover:underline">{a.name}</a></span>
+            <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
           ))}
         </h4>
         <div className="flex shrink-0 flex-wrap justify-end gap-1">
@@ -126,7 +126,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
           <Card className="max-h-[calc(100svh-2rem)] gap-0 overflow-auto px-4">
             <button type="button" onClick={() => setFiltersOpen((o) => !o)}
               className="flex w-full items-center gap-2 pb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide md:pointer-events-none">
-              Sort & Filter {busy && <span className="text-primary">…</span>}
+              Sort & Filter {busy && <span className="text-link">…</span>}
               <span className="ml-auto text-sm md:hidden">{filtersOpen ? "▲" : "▼"}</span>
             </button>
 

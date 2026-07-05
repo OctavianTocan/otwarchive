@@ -18,7 +18,7 @@ export default function AppShellHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-primary text-primary-foreground">
+    <header className="bg-brand text-brand-foreground">
       <div className="mx-auto flex max-w-[1180px] items-center gap-3 px-4 py-3 md:px-5">
         <a href="/" className="font-bold text-lg hover:no-underline">Archive of Our Own</a>
         <nav className="ml-6 hidden items-center gap-1 md:flex">

@@ -120,12 +120,12 @@ export default function WorkShow(props: Props) {
           <div>
             <h1 className="font-bold text-2xl leading-tight">
               {work.restricted && <span title="Restricted" className="mr-1 align-middle text-base">🔒</span>}
-              <a href={work.url ?? "#"} className="text-primary hover:underline">{work.title}</a>
+              <a href={work.url ?? "#"} className="text-link hover:underline">{work.title}</a>
             </h1>
             <p className="mt-1 text-muted-foreground">
               by{" "}
               {work.authors.map((a, i) => (
-                <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-primary hover:underline">{a.name}</a></span>
+                <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
               ))}
               {gifts.length > 0 && <span> for {gifts.join(", ")}</span>}
             </p>
@@ -150,7 +150,7 @@ export default function WorkShow(props: Props) {
             {series.length > 0 && (
               <MetaRow label="Series">
                 {series.map((s, i) => (
-                  <span key={i}>{i > 0 && ", "}Part {s.part} of <a href={s.url ?? "#"} className="text-primary hover:underline">{s.name}</a></span>
+                  <span key={i}>{i > 0 && ", "}Part {s.part} of <a href={s.url ?? "#"} className="text-link hover:underline">{s.name}</a></span>
                 ))}
               </MetaRow>
             )}

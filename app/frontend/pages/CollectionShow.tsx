@@ -57,7 +57,7 @@ export default function CollectionShow({
             {parentUrl && (
               <p className="text-muted-foreground text-sm">
                 Part of a{" "}
-                <a href={parentUrl} className="text-primary hover:underline">
+                <a href={parentUrl} className="text-link hover:underline">
                   parent collection
                 </a>
                 .
@@ -112,7 +112,7 @@ export default function CollectionShow({
                 {maintainers.map((m, i) => (
                   <li key={i}>
                     {m.url ? (
-                      <a href={m.url} className="text-primary hover:underline">
+                      <a href={m.url} className="text-link hover:underline">
                         {m.name}
                       </a>
                     ) : (

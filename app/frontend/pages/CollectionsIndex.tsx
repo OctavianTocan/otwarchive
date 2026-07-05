@@ -55,7 +55,7 @@ function CollectionCard({ c }: { c: Collection }) {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
           {c.url
-            ? <a href={c.url} className="text-primary hover:underline">{c.title}</a>
+            ? <a href={c.url} className="text-link hover:underline">{c.title}</a>
             : <span>{c.title}</span>}
           <span className="ml-1.5 font-normal text-muted-foreground text-sm">({c.name})</span>
         </h4>
@@ -69,7 +69,7 @@ function CollectionCard({ c }: { c: Collection }) {
             <span key={i}>
               {i > 0 && ", "}
               {m.url
-                ? <a href={m.url} className="font-medium text-primary hover:underline">{m.name}</a>
+                ? <a href={m.url} className="font-medium text-link hover:underline">{m.name}</a>
                 : <span className="font-medium">{m.name ?? "unknown"}</span>}
             </span>
           ))}

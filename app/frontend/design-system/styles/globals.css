@@ -2,45 +2,59 @@
 
 @source "../../**/*.{ts,tsx}";
 
+/* Tokens mirror AO3's modernized warm-monochrome system
+   (public/stylesheets/site/2.0/00-tokens.css) — primary is warm near-black,
+   AO3's red is preserved only as the link/brand accent. */
 :root,
 .light {
-  --font-family-sans: "Geist Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-family-sans: "Geist Sans", "Lucida Grande", Verdana, Helvetica, ui-sans-serif, system-ui, sans-serif;
   --font-family-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-family-display: "Redaction", Georgia, serif;
 
-  /* AO3-tuned surfaces + red identity over the ai-app-template palette */
   --background: #fdfcfb;
-  --foreground: #2a2a2a;
+  --foreground: #232220;
   --card: #ffffff;
-  --card-foreground: #2a2a2a;
+  --card-foreground: #232220;
   --popover: #ffffff;
-  --popover-foreground: #2a2a2a;
-  --primary: #990000;
-  --primary-foreground: #fff7f5;
-  --secondary: #f2efe9;
-  --secondary-foreground: #2a2a2a;
-  --muted: #f4f0ea;
-  --muted-foreground: #6b6b6b;
-  --accent: #f4e9e6;
-  --accent-foreground: #7a0000;
-  --destructive: #b23a2e;
-  --destructive-foreground: #fff7f5;
-  --success: #007846;
-  --border: #e7e2da;
+  --popover-foreground: #232220;
+  --primary: #2b2a27;
+  --primary-foreground: #fdfcfb;
+  --primary-hover: #3d3b37;
+  --secondary: #f4f3f1;
+  --secondary-foreground: #232220;
+  --muted: #f4f3f1;
+  --muted-foreground: #7c7a77;
+  --accent: #f4f3f1;
+  --accent-foreground: #2b2a27;
+  --destructive: #dc4b3e;
+  --destructive-foreground: #ffffff;
+  --success: #2e7d55;
+  --border: #e8e6e1;
+  --border-strong: #d6d3cc;
   --input: #ffffff;
-  --ring: #cc7d5e;
-  --radius: 0.6rem;
+  --ring: #adaba8;
+  --radius: 0.5rem;
+
+  /* AO3 red identity — link/brand accent only */
+  --brand: #900;
+  --brand-foreground: #ffffff;
+  --link: #990000;
+  --link-hover: #b30000;
+  --link-visited: #7a0040;
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #2a2a2a;
-  --sidebar-border: #e7e2da;
+  --sidebar-foreground: #232220;
+  --sidebar-border: #e8e6e1;
 
-  --elevation-sm: 0 1px 2px rgb(0 0 0 / 0.05);
-  --elevation-md: 0 4px 18px rgb(0 0 0 / 0.06);
+  --elevation-sm: 0 1px 2px -0.5px rgb(0 0 0 / 0.07), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  --elevation-md: 0 2px 4px -1px rgb(0 0 0 / 0.07), 0 6px 12px -3px rgb(0 0 0 / 0.08), 0 12px 20px -8px rgb(0 0 0 / 0.06);
+  --elevation-card: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -0.5px rgb(0 0 0 / 0.06), 0 4px 8px -3px rgb(0 0 0 / 0.05), 0 12px 20px -8px rgb(0 0 0 / 0.05);
 }
 
 @theme inline {
   --font-sans: var(--font-family-sans);
   --font-mono: var(--font-family-mono);
+  --font-display: var(--font-family-display);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -61,18 +75,23 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-border: var(--sidebar-border);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
   --shadow-sm: var(--elevation-sm);
   --shadow-md: var(--elevation-md);
+  --shadow-card: var(--elevation-card);
 }
 
 @layer base {
   * { border-color: var(--border); }
-  body { background: var(--background); color: var(--foreground); font-family: var(--font-family-sans); }
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-family-sans); letter-spacing: -0.011em; }
 }

@@ -71,10 +71,10 @@ function WorkHeader({ w }: { w: WorkBlurb }) {
     <>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
-          <a href={w.url} className="text-primary hover:underline">{w.title}</a>
+          <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
-            <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-primary hover:underline">{a.name}</a></span>
+            <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
           ))}
         </h4>
         <div className="flex shrink-0 flex-wrap justify-end gap-1">
@@ -106,7 +106,7 @@ function BookmarkCard({ b }: { b: Bookmark }) {
       ) : (
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
-            {bm.url ? <a href={bm.url} className="text-primary hover:underline">{bm.title ?? "(untitled)"}</a> : (bm.title ?? "(deleted)")}
+            {bm.url ? <a href={bm.url} className="text-link hover:underline">{bm.title ?? "(untitled)"}</a> : (bm.title ?? "(deleted)")}
           </h4>
           <Badge variant="outline" className="shrink-0">{bm.type}</Badge>
         </div>
@@ -117,7 +117,7 @@ function BookmarkCard({ b }: { b: Bookmark }) {
           <span>
             Bookmarked by{" "}
             {b.bookmarker.url
-              ? <a href={b.bookmarker.url} className="font-medium text-primary hover:underline">{b.bookmarker.name}</a>
+              ? <a href={b.bookmarker.url} className="font-medium text-link hover:underline">{b.bookmarker.name}</a>
               : <span className="font-medium">{b.bookmarker.name ?? "unknown"}</span>}
           </span>
           {b.rec && <Badge variant="default">Rec</Badge>}
@@ -175,7 +175,7 @@ export default function BookmarksIndex({ context, bookmarks, pagination, facets,
         <aside className="self-start md:sticky md:top-4">
           <Card className="max-h-[calc(100svh-2rem)] gap-0 overflow-auto px-4">
             <div className="flex items-center gap-2 pb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide">
-              Sort & Filter {busy && <span className="text-primary">…</span>}
+              Sort & Filter {busy && <span className="text-link">…</span>}
             </div>
 
             <FacetSection title="Sort by">
