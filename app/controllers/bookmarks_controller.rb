@@ -173,6 +173,7 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/new.xml
   def new
     @bookmark = Bookmark.new
+    return if render_react("BookmarkNew") { BookmarkFormPresenter.new(bookmark: @bookmark, bookmarkable: @bookmarkable, current_user: current_user).as_props }
     respond_to do |format|
       format.html
       format.js {
@@ -206,7 +207,9 @@ class BookmarksController < ApplicationController
       flash[:notice] += t("bookmarks.create.warnings.private_bookmark_added_to_collection") if bookmark_params[:collection_names].present?
       redirect_to(bookmark_path(@bookmark))
     else
-      render :new
+      unless render_react("BookmarkNew") { BookmarkFormPresenter.new(bookmark: @bookmark, bookmarkable: @bookmarkable, current_user: current_user, errors: @bookmark.errors.to_hash(true)).as_props }
+        render :new
+      end
     end
   end
 
