@@ -464,3 +464,58 @@ body.sidebar-collapsed #header .heading .sidebar-toggle { margin-left: 0; }
 
 /* Tidy leftovers from the old top bar. */
 #header .clear, #header .search { display: none; }
+
+/* == SIDEBAR FIXES: neutralize global .actions styling (the nav ul is .actions),
+   and bridge the flyout hover gap so menus don't close mid-move. == */
+
+#header .primary,
+#header #login p.user,
+#header #greeting > ul {
+  float: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+#header .primary { padding: 0 0.25rem; }
+
+#header .primary > li > a,
+#header #login a,
+#header .user > a,
+#header #greeting > ul > li > a {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  width: 100%;
+  box-sizing: border-box;
+  height: 2rem;
+}
+#header .primary > li > a:hover,
+#header .primary .dropdown:hover > a,
+#header #login a:hover,
+#header #greeting > ul > li > a:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Transparent bridge covering the item->flyout gap (keeps :hover alive). */
+#header .dropdown > .menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.6rem;
+  width: 0.6rem;
+}
+
+/* Login: clean red-surface sidebar item (overrides the global .actions button;
+   its wrapper + container carried stray white backgrounds). Form flies out on open. */
+#header #login,
+#header #login p.user,
+#header #login p.user a {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#header #login p.user a { color: #fff !important; }
+#header #login a:hover { background: rgba(255, 255, 255, 0.14) !important; }
+#header #login #small_login { display: none; }
+#header #login p.open + #small_login { display: block; }
