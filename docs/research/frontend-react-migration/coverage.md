@@ -9,7 +9,7 @@ Legend: ✅ done+verified · ⬜ todo
 **Bookmarks/Collections/Series:** ✅ bookmarks index · ✅ collections index · ✅ collection show · ✅ collection items · ✅ series index · ✅ series show
 **People/Tags:** ✅ user profile · ✅ pseud show · ✅ people search · ✅ tag show · ✅ media/fandoms browse
 **Account/social:** ✅ home (landing + dashboard) · ✅ inbox (read-only) · ✅ gifts · ✅ subscriptions
-**Content/other:** ✅ stats · ✅ tag sets · ✅ related works · ✅ skins · ✅ FAQ (index+show) · ✅ known issues (index+show) · ✅ wrangling guidelines (index+show)
+**Content/other:** ✅ AO3 news (admin_posts) · ✅ invitations · ✅ stats · ✅ tag sets · ✅ related works · ✅ skins · ✅ FAQ (index+show) · ✅ known issues (index+show) · ✅ wrangling guidelines (index+show)
 
 ## Foundation & chrome (done)
 ✅ Inverted switch + presenter base + shared props · ✅ cogram-style sidebar + sticky mobile + AO3 logo · ✅ AO3 palette (warm-mono + red brand/links) · ✅ SSR ADR 0001 · ✅ CI parity harness (11/11) · ✅ feed/JS format-guard · ✅ modern-red palette · ✅ de-surfaced flat aesthetic · ✅ vaul mobile drawer
