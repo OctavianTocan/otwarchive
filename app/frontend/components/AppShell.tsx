@@ -39,9 +39,9 @@ function NavItems({ current, onNavigate }: { current: string; onNavigate?: () =>
 function SidebarBody({ currentUser, current, onNavigate }: Shared & { current: string; onNavigate?: () => void }) {
   return (
     <>
-      <a href="/" onClick={onNavigate} className="mb-4 flex items-center gap-2.5 px-1 font-semibold text-base hover:no-underline">
-        <img src="/images/ao3_logos/logo.png" alt="AO3" className="size-8 shrink-0 object-contain" />
-        <span className="leading-tight">Archive of Our Own</span>
+      <a href="/" onClick={onNavigate} className="mb-4 flex items-center gap-2 px-1 font-semibold text-[1.35rem] leading-none hover:no-underline">
+        <img src="/images/ao3_logos/logo.png" alt="AO3" className="h-[42px] w-auto shrink-0 object-contain" />
+        <span className="leading-[1.05]">Archive of Our Own</span>
       </a>
       <NavItems current={current} onNavigate={onNavigate} />
       <div className="mt-auto border-border border-t pt-3">
@@ -71,8 +71,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 flex items-center gap-2 border-border border-b bg-sidebar px-4 py-2.5 md:hidden">
         <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}
           className="grid size-9 place-items-center rounded-md hover:bg-muted"><MenuIcon className="size-5" /></button>
-        <a href="/" className="flex items-center gap-2 font-semibold hover:no-underline">
-          <img src="/images/ao3_logos/logo.png" alt="AO3" className="size-7 object-contain" />
+        <a href="/" className="flex items-center gap-2 font-semibold text-lg hover:no-underline">
+          <img src="/images/ao3_logos/logo.png" alt="AO3" className="h-9 w-auto object-contain" />
           Archive of Our Own
         </a>
       </header>

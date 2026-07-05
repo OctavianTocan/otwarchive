@@ -115,7 +115,7 @@ export default function SkinsIndex({ context, skins }: Props) {
           {skins.length === 0
             ? <p className="py-6 text-muted-foreground">{context.emptyText}</p>
             : (
-              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+              <ol className="flex flex-col divide-y divide-border">
                 {skins.map((s) => <li key={s.id}><SkinCard s={s} isOwner={context.isOwner} /></li>)}
               </ol>
             )}

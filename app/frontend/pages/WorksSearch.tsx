@@ -129,7 +129,7 @@ export default function WorksSearch({ context, works, pagination, resultCount, f
         {works.length === 0 ? (
           <p className="py-6 text-muted-foreground">No results found. You may want to edit your search to make it less specific.</p>
         ) : (
-          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+          <ol className="flex flex-col divide-y divide-border">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
         )}
 
         {pagination.pages > 1 && (

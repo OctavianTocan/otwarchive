@@ -36,10 +36,10 @@
   --radius: 0.5rem;
 
   /* AO3 red identity — link/brand accent only */
-  --brand: #900;
+  --brand: #dc2626;
   --brand-foreground: #ffffff;
-  --link: #990000;
-  --link-hover: #b30000;
+  --link: #c1121f;
+  --link-hover: #e11d48;
   --link-visited: #7a0040;
 
   --sidebar: #f7f5f2;

@@ -96,7 +96,7 @@ export default function GiftsIndex({ context, works, pagination }: Props) {
           <h2 className="font-bold text-2xl">{context.heading}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} works · page {pagination.page} of {pagination.pages}</p>
           {works.length === 0 && <p className="py-6 text-muted-foreground">No works have been gifted here yet.</p>}
-          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+          <ol className="flex flex-col divide-y divide-border">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
           {pagination.pages > 1 && (
             <nav className="mt-6 flex items-center justify-center gap-4 text-muted-foreground">
               <Button variant="outline" size="sm" disabled={pagination.page <= 1 || busy} onClick={() => go(pagination.page - 1)}>← Prev</Button>

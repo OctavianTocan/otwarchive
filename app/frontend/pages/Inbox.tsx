@@ -102,7 +102,7 @@ export default function Inbox({ context, comments, pagination }: Props) {
 
           {comments.length === 0 && <p className="py-6 text-muted-foreground">Your inbox is empty.</p>}
 
-          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+          <ol className="flex flex-col divide-y divide-border">
             {comments.map((c, i) => (
               <li key={i}><CommentCard c={c} /></li>
             ))}

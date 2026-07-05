@@ -112,7 +112,7 @@ export default function PeopleSearch({ context, people, pagination, resultCount 
         {context.query == null ? null : people.length === 0 ? (
           <p className="py-6 text-muted-foreground">No results found. You may want to edit your search to make it less specific.</p>
         ) : (
-          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{people.map((p, i) => <li key={`${p.userLogin}-${p.name}-${i}`}><PersonBlurb p={p} /></li>)}</ol>
+          <ol className="flex flex-col divide-y divide-border">{people.map((p, i) => <li key={`${p.userLogin}-${p.name}-${i}`}><PersonBlurb p={p} /></li>)}</ol>
         )}
 
         {pagination.pages > 1 && (

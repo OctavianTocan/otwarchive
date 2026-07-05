@@ -177,7 +177,7 @@ function NewsList({ news }: { news: NewsPost[] }) {
       title="News"
       link={<a href="/admin_posts" className="text-link text-sm hover:underline">All News</a>}
     >
-      <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+      <ol className="flex flex-col divide-y divide-border">
         {news.map((p) => (
           <li key={p.id}>
             <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
@@ -221,7 +221,7 @@ export default function Home({ loggedIn, intro, favorites, browse, news, reading
               link={<a href={readingsUrl ?? "#"} className="text-link text-sm hover:underline">My History</a>}
             >
               <p className="mb-3 text-muted-foreground text-sm">Some works you've marked for later.</p>
-              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{readings.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+              <ol className="flex flex-col divide-y divide-border">{readings.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
             </Section>
           )}
 

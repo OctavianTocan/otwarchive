@@ -139,7 +139,7 @@ export default function SeriesShow({ context, title, creators, summaryHtml, note
           <section className="flex flex-col gap-3.5">
             <h3 className="font-semibold text-lg">Works in this series</h3>
             {works.length === 0 && <p className="py-6 text-muted-foreground">No works to show.</p>}
-            <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+            <ol className="flex flex-col divide-y divide-border">
               {works.map((sw) => (
                 <li key={sw.blurb.id}><WorkCard part={sw.part} w={sw.blurb} /></li>
               ))}

@@ -60,7 +60,7 @@ export default function SubscriptionsIndex({ context, subscriptions, pagination 
 
           {subscriptions.length === 0 && <p className="py-6 text-muted-foreground">You are not subscribed to anything yet.</p>}
 
-          <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+          <ol className="flex flex-col divide-y divide-border">
             {subscriptions.map((s, i) => (
               <li key={i}><SubscriptionCard s={s} /></li>
             ))}

@@ -156,13 +156,13 @@ export default function UserProfile({ context, pseuds, bioHtml, joined, counts, 
 
           {recentWorks.length > 0 && (
             <Section title="Recent works">
-              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{recentWorks.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
+              <ol className="flex flex-col divide-y divide-border">{recentWorks.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
             </Section>
           )}
 
           {recentSeries.length > 0 && (
             <Section title="Recent series">
-              <ol className="grid overflow-hidden rounded-lg border border-border bg-card">{recentSeries.map((s) => <li key={s.id}><SeriesCard s={s} /></li>)}</ol>
+              <ol className="flex flex-col divide-y divide-border">{recentSeries.map((s) => <li key={s.id}><SeriesCard s={s} /></li>)}</ol>
             </Section>
           )}
 

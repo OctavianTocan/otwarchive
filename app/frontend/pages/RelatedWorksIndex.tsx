@@ -1,8 +1,5 @@
-import { router } from "@inertiajs/react";
 import AppShell from "../components/AppShell";
-import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
-import { Button } from "@/design-system/components/ui/button";
 import { Badge } from "@/design-system/components/ui/badge";
 
 type TagRef = { name: string; url: string | null; type: string };
@@ -15,17 +12,17 @@ type WorkBlurb = {
   stats: { language?: string; words?: number; chapters?: string; comments?: number; kudos?: number; bookmarks?: number; hits?: number };
   published?: string; updated?: string; complete?: boolean;
 };
-type BookmarkBlurb = { id: number | null; title: string; url: string | null };
-type ApprovalStatus = "approved" | "rejected" | "unreviewed";
-type Item = {
-  id: number;
-  type: string;
-  blurb: WorkBlurb | BookmarkBlurb;
+type ParentRef = { title: string | null; url: string | null; external: boolean; unrevealed: boolean };
+type Relationship = {
+  kind: "translation" | "inspired";
   approved: boolean;
-  status: { collection: ApprovalStatus; user: ApprovalStatus };
+  parent: ParentRef | null;
+  languageFrom: string | null;
+  languageTo: string | null;
 };
+type Item = { id: number; groupLabel: string; blurb: WorkBlurb | null; relationship: Relationship };
 type Props = {
-  context: { heading: string; collectionName: string };
+  context: { heading: string };
   items: Item[];
   pagination: { page: number; pages: number; count: number };
 };
@@ -36,15 +33,33 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
   return <Badge variant={variant ?? "outline"} render={<a href={t.url ?? "#"} />}>{t.name}</Badge>;
 }
 
-function StatusBadge({ label, status }: { label: string; status: ApprovalStatus }) {
-  const variant = status === "rejected" ? "destructive" : status === "approved" ? "secondary" : "outline";
-  return <Badge variant={variant}>{label}: {status}</Badge>;
+function ParentLink({ p }: { p: ParentRef | null }) {
+  if (!p) return null;
+  if (p.unrevealed || !p.title) return <span className="italic">a work in an unrevealed collection</span>;
+  return p.url
+    ? <a href={p.url} className="text-link hover:underline">{p.title}</a>
+    : <span>{p.title}</span>;
 }
 
-function WorkBlurbCard({ w }: { w: WorkBlurb }) {
+function RelationshipLine({ r }: { r: Relationship }) {
+  return (
+    <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-sm">
+      <span>
+        {r.kind === "translation" ? "Translation of " : "Inspired by "}
+        <ParentLink p={r.parent} />
+      </span>
+      {r.kind === "translation" && r.languageFrom && r.languageTo && (
+        <span className="tabular-nums">· {r.languageFrom} → {r.languageTo}</span>
+      )}
+      <Badge variant={r.approved ? "outline" : "secondary"}>{r.approved ? "Approved" : "Unapproved"}</Badge>
+    </div>
+  );
+}
+
+function Blurb({ w }: { w: WorkBlurb }) {
   const scaryWarnings = w.warnings.filter((x) => x.name !== "No Archive Warnings Apply");
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
@@ -83,64 +98,46 @@ function WorkBlurbCard({ w }: { w: WorkBlurb }) {
         <span><dt className="inline font-semibold">Bookmarks:</dt> <dd className="inline">{n(w.stats.bookmarks)}</dd></span>
         <span><dt className="inline font-semibold">Hits:</dt> <dd className="inline">{n(w.stats.hits)}</dd></span>
       </dl>
-    </>
+    </div>
   );
 }
 
-function BookmarkBlurbCard({ b }: { b: BookmarkBlurb }) {
-  return (
-    <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
-      {b.url ? <a href={b.url} className="text-link hover:underline">{b.title}</a> : <span className="text-muted-foreground">{b.title}</span>}
-    </h4>
-  );
-}
-
-function ItemCard({ item }: { item: Item }) {
+function ItemRow({ item }: { item: Item }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
-      {item.type === "Work"
-        ? <WorkBlurbCard w={item.blurb as WorkBlurb} />
-        : <BookmarkBlurbCard b={item.blurb as BookmarkBlurb} />}
-      <div className="flex flex-wrap items-center gap-1 border-border border-t border-dashed pt-3">
-        <StatusBadge label="Collection" status={item.status.collection} />
-        <StatusBadge label="User" status={item.status.user} />
-        {item.approved && <Badge variant="secondary">Approved by both</Badge>}
+      <div className="flex flex-col gap-3">
+        <RelationshipLine r={item.relationship} />
+        {item.blurb
+          ? <Blurb w={item.blurb} />
+          : <p className="italic text-muted-foreground">A work in an unrevealed collection</p>}
       </div>
     </Card>
   );
 }
 
-function buildUrl(page: number) {
-  const p = new URLSearchParams(window.location.search);
-  if (page > 1) p.set("page", String(page)); else p.delete("page");
-  const q = p.toString();
-  return q ? `${window.location.pathname}?${q}` : window.location.pathname;
-}
-
-export default function CollectionItemsIndex({ context, items, pagination }: Props) {
-  const [busy, setBusy] = useState(false);
-
-  const go = (page: number) => {
-    setBusy(true);
-    router.get(buildUrl(page), {}, { preserveScroll: true, preserveState: false, onFinish: () => setBusy(false) });
-  };
-
+export default function RelatedWorksIndex({ context, items, pagination }: Props) {
+  // The controller emits items already grouped by section label; insert a
+  // heading each time the label changes to reproduce the four ERB sections.
   return (
     <AppShell>
 
       <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main>
-          <h2 className="font-bold text-2xl">{context.heading || context.collectionName}</h2>
-          <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} items · page {pagination.page} of {pagination.pages}</p>
-          {items.length === 0 && <p className="py-6 text-muted-foreground">Nothing to review here!</p>}
-          <ol className="flex flex-col divide-y divide-border">{items.map((item) => <li key={item.id}><ItemCard item={item} /></li>)}</ol>
-          {pagination.pages > 1 && (
-            <nav className="mt-6 flex items-center justify-center gap-4 text-muted-foreground">
-              <Button variant="outline" size="sm" disabled={pagination.page <= 1 || busy} onClick={() => go(pagination.page - 1)}>← Prev</Button>
-              <span className="tabular-nums">Page {pagination.page} / {pagination.pages}</span>
-              <Button variant="outline" size="sm" disabled={pagination.page >= pagination.pages || busy} onClick={() => go(pagination.page + 1)}>Next →</Button>
-            </nav>
-          )}
+          <h2 className="font-bold text-2xl">{context.heading}</h2>
+          <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} related works</p>
+          {items.length === 0 && <p className="py-6 text-muted-foreground">No related works to show.</p>}
+          {items.map((item, i) => (
+            <div key={item.id}>
+              {(i === 0 || items[i - 1].groupLabel !== item.groupLabel) && (
+                <h3 className="mt-6 mb-2 font-semibold text-muted-foreground text-sm uppercase tracking-wide">{item.groupLabel}</h3>
+              )}
+              {(i === 0 || items[i - 1].groupLabel !== item.groupLabel) ? (
+                <ol className="grid overflow-hidden rounded-lg border border-border bg-card">
+                  <li><ItemRow item={item} /></li>
+                </ol>
+              ) : null}
+            </div>
+          ))}
         </main>
       </div>
     </AppShell>
