@@ -7,6 +7,8 @@ class AdminPostsController < Admin::BaseController
   def index
     @page_subtitle = t(".page_title")
     @pagy, @admin_posts = pagy(@admin_posts.posted.order(published_at: :desc))
+
+    return if render_react("AdminPostsIndex") { AdminPostsPresenter.new(posts: @admin_posts, heading: @page_subtitle, pagy: @pagy).index_props }
   end
 
   # GET /admin_posts/drafts
@@ -34,6 +36,9 @@ class AdminPostsController < Admin::BaseController
       @next_admin_post = admin_posts.unposted.order(created_at: :asc).where("created_at > ?", @admin_post.created_at).first
       @page_subtitle = t(".page_title_draft", title: @admin_post.title.html_safe)
     end
+
+    return if render_react("AdminPostShow") { AdminPostsPresenter.new(post: @admin_post, heading: @admin_post.title, prev_post: @previous_admin_post, next_post: @next_admin_post).show_props }
+
     respond_to do |format|
       format.html # show.html.erb
       format.js
