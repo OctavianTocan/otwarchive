@@ -219,6 +219,11 @@ class WorksController < ApplicationController
                       current_user.subscriptions.build(subscribable: @work)
     end
 
+    if render_react("WorkShow") { WorkShowPresenter.new(work: @work, chapters: @chapters, kudos: @kudos).as_props }
+      Reading.update_or_create(@work, current_user) if current_user
+      return
+    end
+
     render :show
     Reading.update_or_create(@work, current_user) if current_user
   end
@@ -285,6 +290,8 @@ class WorksController < ApplicationController
     if params[:import]
       @page_subtitle = ts("Import New Work")
       render(:new_import)
+    elsif render_react("WorkForm") { work_form_props }
+      # React WorkForm rendered
     elsif @work.persisted?
       render(:edit)
     else
@@ -305,12 +312,12 @@ class WorksController < ApplicationController
     set_work_form_fields
 
     if work_cannot_be_saved?
-      render :new
+      render_work_form(:new)
     else
       @work.posted = @chapter.posted = true if params[:post_button]
       @work.set_revised_at_by_chapter(@chapter)
 
-      render :new and return unless @work.save
+      (render_work_form(:new) and return) unless @work.save
 
       if @work.posted
         # We check here to see if we are attempting to post to moderated collection
@@ -375,7 +382,7 @@ class WorksController < ApplicationController
     set_work_form_fields
 
     if params[:edit_button] || work_cannot_be_saved?
-      render :edit
+      render_work_form(:edit)
     elsif params[:preview_button]
       flash[:notice] = t(".unposted_notice") unless @work.posted?
 
@@ -396,7 +403,7 @@ class WorksController < ApplicationController
         redirect_to work_path(@work)
       else
         @chapter.errors.full_messages.each { |err| @work.errors.add(:base, err) }
-        render :edit
+        render_work_form(:edit)
       end
     end
   end
@@ -795,6 +802,19 @@ class WorksController < ApplicationController
     !(@work.errors.empty? && @work.valid?)
   end
 
+  def work_form_props(errors: nil)
+    WorkFormPresenter.new(
+      work: @work, chapter: @chapter, current_user: current_user,
+      series: @series || [], languages: Language.default_order, errors: errors
+    ).as_props
+  end
+
+  # Render the React WorkForm (carrying validation errors) unless ?ui=legacy,
+  # in which case fall back to the ERB view.
+  def render_work_form(view)
+    render(view) unless render_react("WorkForm") { work_form_props(errors: @work.errors.to_hash(true)) }
+  end
+
   def set_work_form_fields
     @work.reset_published_at(@chapter)
     @series = current_user.series.distinct
@@ -874,7 +894,7 @@ class WorksController < ApplicationController
     @work.attributes = work_tag_params
 
     if params[:edit_button] || work_cannot_be_saved?
-      render :edit
+      render_work_form(:edit)
     elsif params[:preview_button]
       @preview_mode = true
       render :preview_tags
