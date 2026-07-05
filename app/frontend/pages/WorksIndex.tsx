@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
 import { Button } from "@/design-system/components/ui/button";
@@ -118,8 +118,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
   const inputCls = "w-full rounded-md border border-border bg-input px-2.5 py-1.5 text-sm outline-none focus:border-ring focus:ring-3 focus:ring-ring/40";
 
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
-      <AppShellHeader />
+    <AppShell>
 
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-6 px-4 pt-6 pb-16 md:grid-cols-[290px_1fr] md:gap-7 md:px-5">
         <aside className="self-start md:sticky md:top-4">
@@ -197,6 +196,6 @@ export default function WorksIndex({ context, works, pagination, facets, filters
           )}
         </main>
       </div>
-    </div>
+    </AppShell>
   );
 }

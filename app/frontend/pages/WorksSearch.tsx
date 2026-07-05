@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
 import { Button } from "@/design-system/components/ui/button";
@@ -93,8 +93,7 @@ export default function WorksSearch({ context, works, pagination, resultCount, f
   const inputCls = "w-full rounded-md border border-border bg-input px-3 py-2 text-sm outline-none focus:border-ring focus:ring-3 focus:ring-ring/40";
 
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
-      <AppShellHeader />
+    <AppShell>
 
       <div className="mx-auto max-w-[900px] px-4 pt-6 pb-16 md:px-5">
         <h2 className="font-bold text-2xl">{context.heading || "Search Works"}</h2>
@@ -141,6 +140,6 @@ export default function WorksSearch({ context, works, pagination, resultCount, f
           </nav>
         )}
       </div>
-    </div>
+    </AppShell>
   );
 }

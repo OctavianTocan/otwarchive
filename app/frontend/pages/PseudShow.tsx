@@ -12,14 +12,14 @@ type WorkBlurb = {
   stats: { language?: string; words?: number; chapters?: string; comments?: number; kudos?: number; bookmarks?: number; hits?: number };
   published?: string; updated?: string; complete?: boolean;
 };
-type Pseud = { name: string; url: string | null };
 type SeriesRef = { id: number; title: string; url: string | null; summaryHtml: string | null };
 type FandomRef = { name: string; url: string | null; count: number | null };
 type Props = {
-  context: { heading: string; login: string };
-  pseuds: Pseud[];
+  context: { heading: string };
+  name: string;
+  userLogin: string | null;
+  userUrl: string | null;
   bioHtml: string | null;
-  joined: string | null;
   counts: { works: number; bookmarks: number };
   recentWorks: WorkBlurb[];
   recentSeries: SeriesRef[];
@@ -101,8 +101,9 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export default function UserProfile({ context, pseuds, bioHtml, joined, counts, recentWorks, recentSeries, fandoms }: Props) {
+export default function PseudShow({ context, name, userLogin, userUrl, bioHtml, counts, recentWorks, recentSeries, fandoms }: Props) {
   const empty = recentWorks.length === 0 && recentSeries.length === 0 && fandoms.length === 0;
+  const showParent = !!userLogin && userLogin !== name;
 
   return (
     <AppShell>
@@ -112,21 +113,18 @@ export default function UserProfile({ context, pseuds, bioHtml, joined, counts, 
           <Card className="px-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0">
-                <h2 className="break-words font-bold text-2xl">{context.heading || context.login}</h2>
-                {pseuds.length > 0 && (
-                  <p className="mt-1 flex flex-wrap gap-x-1.5 gap-y-1 text-muted-foreground text-sm">
-                    <span>Pseuds:</span>
-                    {pseuds.map((p, i) => (
-                      <span key={i}>
-                        {i > 0 && ", "}
-                        {p.url
-                          ? <a href={p.url} className="text-link hover:underline">{p.name}</a>
-                          : <span>{p.name}</span>}
-                      </span>
-                    ))}
-                  </p>
-                )}
-                {joined && <p className="mt-1 text-muted-foreground text-sm tabular-nums">Joined {joined}</p>}
+                <h2 className="break-words font-bold text-2xl">
+                  {context.heading || name}
+                  {showParent && (
+                    <span className="ml-1.5 font-normal text-muted-foreground text-lg">
+                      (
+                      {userUrl
+                        ? <a href={userUrl} className="text-link hover:underline">{userLogin}</a>
+                        : <span>{userLogin}</span>}
+                      )
+                    </span>
+                  )}
+                </h2>
               </div>
               <dl className="flex shrink-0 gap-4 text-muted-foreground text-sm tabular-nums">
                 <span><dt className="inline font-semibold">Works:</dt> <dd className="inline">{n(counts.works)}</dd></span>

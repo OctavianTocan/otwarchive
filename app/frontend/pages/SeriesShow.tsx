@@ -1,4 +1,4 @@
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { Card } from "@/design-system/components/ui/card";
 import { Badge } from "@/design-system/components/ui/badge";
 
@@ -87,8 +87,7 @@ function WorkCard({ part, w }: { part: number | null; w: WorkBlurb }) {
 
 export default function SeriesShow({ context, title, creators, summaryHtml, notesHtml, stats, updated, fandoms, works }: Props) {
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
-      <AppShellHeader />
+    <AppShell>
 
       <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main className="flex flex-col gap-5">
@@ -148,6 +147,6 @@ export default function SeriesShow({ context, title, creators, summaryHtml, note
           </section>
         </main>
       </div>
-    </div>
+    </AppShell>
   );
 }

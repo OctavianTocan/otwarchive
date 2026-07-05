@@ -48,6 +48,10 @@ class PseudsController < ApplicationController
     @series = visible_series.order("updated_at DESC").limit(ArchiveConfig.NUMBER_OF_ITEMS_VISIBLE_IN_DASHBOARD)
     @bookmarks = visible_bookmarks.order("updated_at DESC").limit(ArchiveConfig.NUMBER_OF_ITEMS_VISIBLE_IN_DASHBOARD)
 
+    return if @pseud.present? && render_react("PseudShow") do
+      PseudShowPresenter.new(pseud: @pseud, works: @works, series: @series, fandoms: @fandoms, heading: @page_subtitle).as_props
+    end
+
     return unless current_user.respond_to?(:subscriptions)
 
     @subscription = current_user.subscriptions.where(subscribable_id: @user.id,

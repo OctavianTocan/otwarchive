@@ -1,4 +1,4 @@
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { Badge } from "@/design-system/components/ui/badge";
 import { buttonVariants } from "@/design-system/components/ui/button";
 import { Card } from "@/design-system/components/ui/card";
@@ -50,8 +50,7 @@ export default function TagShow({
   merger,
 }: Props) {
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
-      <AppShellHeader />
+    <AppShell>
 
       <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main className="flex flex-col gap-5">
@@ -111,6 +110,6 @@ export default function TagShow({
           )}
         </main>
       </div>
-    </div>
+    </AppShell>
   );
 }

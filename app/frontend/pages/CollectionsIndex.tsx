@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
 import { Button } from "@/design-system/components/ui/button";
@@ -102,8 +102,7 @@ export default function CollectionsIndex({ context, collections, pagination }: P
   };
 
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
-      <AppShellHeader />
+    <AppShell>
 
       <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main>
@@ -122,6 +121,6 @@ export default function CollectionsIndex({ context, collections, pagination }: P
           )}
         </main>
       </div>
-    </div>
+    </AppShell>
   );
 }

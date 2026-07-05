@@ -1,5 +1,5 @@
 import { Card } from "@/design-system/components/ui/card";
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { Button } from "@/design-system/components/ui/button";
 import { Badge } from "@/design-system/components/ui/badge";
 
@@ -109,10 +109,8 @@ export default function WorkShow(props: Props) {
   const multi = chapters.length > 1;
 
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
+    <AppShell>
       {workskinCss && <style dangerouslySetInnerHTML={{ __html: scopeCss(workskinCss) }} />}
-
-      <AppShellHeader />
 
       <div className="mx-auto max-w-[880px] px-5 pt-6 pb-16">
         <Card className="px-6 py-5">
@@ -214,7 +212,7 @@ export default function WorkShow(props: Props) {
           <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}?ui=legacy`} />}>View legacy page</Button>
         </p>
       </div>
-    </div>
+    </AppShell>
   );
 }
 

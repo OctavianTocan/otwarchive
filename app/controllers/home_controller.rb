@@ -73,6 +73,11 @@ class HomeController < ApplicationController
     end
 
     @hide_dashboard = true
+
+    return if render_react("Home") do
+      HomePresenter.new(user: @current_user, homepage: @homepage, heading: nil).as_props
+    end
+
     render action: 'index', layout: 'application'
   end
 end

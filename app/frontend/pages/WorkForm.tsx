@@ -1,5 +1,5 @@
 import { router, useForm } from "@inertiajs/react";
-import AppShellHeader from "../components/AppShellHeader";
+import AppShell from "../components/AppShell";
 import { useState } from "react";
 import { Button } from "@/design-system/components/ui/button";
 import { Card } from "@/design-system/components/ui/card";
@@ -136,8 +136,7 @@ export default function WorkForm({ mode, action, method, posted, work, options, 
   const busy = processing || submitting !== null;
 
   return (
-    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
-      <AppShellHeader />
+    <AppShell>
 
       <div className="mx-auto grid max-w-[820px] gap-5 px-5 pt-6 pb-24">
         {errors?.base && (
@@ -314,7 +313,7 @@ export default function WorkForm({ mode, action, method, posted, work, options, 
           <a href={mode === "edit" ? action : "/works"} className="ml-auto self-center text-muted-foreground text-sm hover:underline">Cancel</a>
         </div>
       </div>
-    </div>
+    </AppShell>
   );
 }
 
