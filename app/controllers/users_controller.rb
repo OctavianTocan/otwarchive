@@ -28,6 +28,10 @@ class UsersController < ApplicationController
                                                        subscribable_type: 'User').first ||
                       current_user.subscriptions.build(subscribable: @user)
     end
+
+    return if @user.present? && render_react("UserProfile") do
+      UserProfilePresenter.new(user: @user, works: @works, series: @series, bookmarks: @bookmarks, fandoms: @fandoms, heading: @page_subtitle).as_props
+    end
   end
 
   def change_email

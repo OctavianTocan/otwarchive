@@ -109,6 +109,11 @@ class CollectionsController < ApplicationController
         per_page: ArchiveConfig.NUMBER_OF_ITEMS_VISIBLE_IN_DASHBOARD
       ).search_results
     end
+
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    return if @collection.present? && render_react("CollectionShow") do
+      CollectionShowPresenter.new(collection: @collection, heading: @page_subtitle).as_props
+    end
   end
 
   def new
