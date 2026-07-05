@@ -1,5 +1,6 @@
 import { Card } from "@/design-system/components/ui/card";
 import AppShell from "../components/AppShell";
+import KudosButton from "../components/KudosButton";
 import { Button } from "@/design-system/components/ui/button";
 import { Badge } from "@/design-system/components/ui/badge";
 
@@ -211,17 +212,18 @@ export default function ChapterShow(props: Props) {
         </Card>
 
         {/* Kudos */}
-        {(kudosCount > 0 || kudosNames.length > 0) && (
-          <Card className="mt-4 px-6 py-4 text-sm">
+        <div className="mt-6 flex flex-col gap-2 border-border border-t pt-5 text-sm">
+          <div className="flex items-center gap-3">
+            <KudosButton workId={(work as { id: number }).id} />
             <h3 className="font-semibold text-muted-foreground text-xs uppercase tracking-wide">Kudos ({n(kudosCount)})</h3>
-            {kudosNames.length > 0 && (
-              <p className="mt-1 text-foreground/90">
-                {kudosNames.join(", ")}
-                {kudosCount > kudosNames.length && ` and ${n(kudosCount - kudosNames.length)} more left kudos on this work!`}
-              </p>
-            )}
-          </Card>
-        )}
+          </div>
+          {kudosNames.length > 0 && (
+            <p className="text-foreground/90">
+              {kudosNames.join(", ")}
+              {kudosCount > kudosNames.length && ` and ${n(kudosCount - kudosNames.length)} more left kudos on this work!`}
+            </p>
+          )}
+        </div>
 
         <p className="mt-6 text-center text-muted-foreground text-xs">
           <Button variant="outline" size="sm" render={<a href={`${chapter ? `${work.url ?? ""}/chapters/${chapter.id}` : work.url ?? "#"}?ui=legacy`} />}>View legacy page</Button>
