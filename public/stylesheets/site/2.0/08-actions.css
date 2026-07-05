@@ -36,7 +36,7 @@ ul.actions {
   position: relative;
   text-decoration: none;
   border: 1px solid var(--ao3-border);
-  border-radius: var(--ao3-radius-sm);
+  border-radius: var(--ao3-radius-md);
   cursor: pointer;
   transition: background var(--ao3-duration) var(--ao3-ease), border-color var(--ao3-duration) var(--ao3-ease), color var(--ao3-duration) var(--ao3-ease);
   box-shadow: none;
@@ -307,9 +307,9 @@ display: none and secondary will always be open. */
 }
 .action.primary:hover, .actions .primary:hover,
 .action.primary:focus, .actions .primary:focus {
-  background: #3a3a3e;
+  background: var(--ao3-primary-hover);
   color: var(--ao3-primary-fg);
-  border-color: #3a3a3e;
+  border-color: var(--ao3-primary-hover);
 }
 .action.primary:focus-visible {
   border-color: var(--ao3-ring);

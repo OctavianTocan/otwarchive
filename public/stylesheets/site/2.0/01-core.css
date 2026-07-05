@@ -5,13 +5,22 @@ https://otwcode.github.io/docs/stylesheets-views.html#core
 body, .toggled form, .dynamic form, .secondary, .dropdown {
   background: var(--ao3-bg);
   color: var(--ao3-fg);
-  font: 100%/1.125 'Geist Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif, 'GNU Unifont';
+  font-family: var(--ao3-font-sans);
+  font-size: 100%;
+  line-height: 1.45;
+  letter-spacing: var(--ao3-tracking-body);
+  font-feature-settings: "ss01", "zero";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
 }
 
 .heading {
-  font-family: "Redaction", Georgia, serif;
+  font-family: var(--ao3-font-sans);
+  font-weight: 600;
+  letter-spacing: var(--ao3-tracking-tight);
 }
 
 a, a:link {
@@ -34,10 +43,21 @@ a, a:link {
 
 li.blurb, fieldset, form dl {
   border: 0;
-  border-radius: var(--ao3-radius-lg);
+  border-radius: var(--ao3-radius-xl);
   padding: 1em;
   overflow: hidden;
   box-shadow: var(--ao3-shadow-card);
+}
+
+/* Subtle card hover-lift (comcom-style, motion-safe). */
+@media (prefers-reduced-motion: no-preference) {
+  li.blurb, div.comment {
+    transition: transform var(--ao3-duration) var(--ao3-ease), box-shadow var(--ao3-duration) var(--ao3-ease);
+  }
+  li.blurb:hover, div.comment:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ao3-shadow-card-hover);
+  }
 }
 
 .blurb li, .actions>*, .stats>*, .meta ul li {

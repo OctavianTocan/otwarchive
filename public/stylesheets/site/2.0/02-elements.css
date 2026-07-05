@@ -22,7 +22,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 /* The global rules for normal elements */
 
 body {
-  font: 100%/1.125 'Geist Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Helvetica, sans-serif, 'GNU Unifont';
+  font-family: var(--ao3-font-sans);
+  font-size: 100%;
+  line-height: 1.45;
+  letter-spacing: var(--ao3-tracking-body);
+  font-feature-settings: "ss01", "zero";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   background: var(--ao3-bg);
   color: var(--ao3-fg);
 }
@@ -65,9 +72,17 @@ a:focus img {
 }
 
 h1, h2, h3, h4, h5, h6, .heading {
-  font-family: "Redaction", Georgia, serif;
-  font-weight: 400;
+  font-family: var(--ao3-font-sans);
+  font-weight: 600;
+  letter-spacing: var(--ao3-tracking-tight);
     word-wrap: break-word;
+}
+
+/* Display serif reserved for the top-level / hero heading only (comcom pattern). */
+h1, .splash h1 {
+  font-family: var(--ao3-font-display);
+  font-weight: 700;
+  letter-spacing: var(--ao3-tracking-display);
 }
 
 h1 {
@@ -80,6 +95,7 @@ h1 {
 /* Splash (home page) H1 uses the heavier Redaction 70 display cut. */
 .splash h1 {
   font-family: "Redaction 70", "Redaction", Georgia, serif;
+  font-weight: 400; /* Redaction 70 ships at 400 only; avoid faux-bold from h1's 700 */
 }
 
 h2 {
