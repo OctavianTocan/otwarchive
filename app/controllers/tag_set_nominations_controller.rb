@@ -71,6 +71,14 @@ class TagSetNominationsController < ApplicationController
       if @tag_set.user_is_moderator?(current_user)
         # reviewing nominations
         setup_for_review
+        @nominations = TagSetNomination.for_tag_set(@tag_set).
+          includes(:tag_nominations, pseud: :user).
+          order(created_at: :desc).
+          paginate(page: params[:page], per_page: ArchiveConfig.ITEMS_PER_PAGE)
+        @page_subtitle = ts("Review Nominations for %{title}", title: @tag_set.title)
+        return if render_react("TagSetNominationsIndex") do
+          TagSetNominationsIndexPresenter.new(tag_set: @tag_set, nominations: @nominations, heading: @page_subtitle).as_props
+        end
       else
         flash[:error] = ts("You can't see those nominations, sorry.")
         redirect_to tag_sets_path and return
