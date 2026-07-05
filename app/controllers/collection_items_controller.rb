@@ -47,6 +47,10 @@ class CollectionItemsController < ApplicationController
 
     sort = "created_at DESC"
     @collection_items = @collection_items.order(sort).paginate page: params[:page], per_page: ArchiveConfig.ITEMS_PER_PAGE
+
+    return if @collection.present? && render_react("CollectionItemsIndex") do
+      CollectionItemsIndexPresenter.new(items: @collection_items, collection: @collection, heading: (@collection.title rescue "Collection Items")).as_props
+    end
   end
 
   def load_collectible_item
