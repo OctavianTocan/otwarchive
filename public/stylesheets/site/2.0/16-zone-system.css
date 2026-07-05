@@ -476,21 +476,3 @@ For practicality, /archive_faqs are also .docs and .support and have the .userst
 #proxy-notice .submit {
   margin-bottom: 0;
 }
-
-/* Home browse tiles: white links on filled brand tiles (og AO3 white-on-color). */
-.splash .browse li a {
-  background: #900;
-  color: #fff;
-  border-radius: var(--ao3-radius-md);
-  padding: 0.5em 0.75em;
-  transition: background var(--ao3-duration) var(--ao3-ease);
-}
-
-.splash .browse li a:before {
-  content: none;
-}
-
-.splash .browse li a:hover, .splash .browse li a:focus {
-  background: #b30000;
-  color: #fff;
-}
