@@ -70,6 +70,10 @@ class CollectionParticipantsController < ApplicationController
 
   def index
     @collection_participants = @collection.collection_participants.reject {|p| p.pseud.nil?}.sort_by {|participant| participant.pseud.name.downcase }
+
+    return if @collection.present? && render_react("CollectionParticipantsIndex") do
+      CollectionParticipantsIndexPresenter.new(participants: @collection_participants, collection: @collection, heading: "Participants").as_props
+    end
   end
 
   def update
