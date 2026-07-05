@@ -5,14 +5,14 @@
 Legend: ✅ done+verified · 🔄 in progress · ⬜ todo
 
 ## Read / list & detail (highest traffic)
-- ✅ Works index (`works#index`, all owner variants) · ✅ Work show (`works#show`) · 🔄 Chapter show (`chapters#show`)
-- ✅ New/Edit Work (`works#new/edit/create/update`) · 🔄 Works search (`works#search`)
+- ✅ Works index (`works#index`, all owner variants) · ✅ Work show (`works#show`) · ✅ Chapter show (`chapters#show`)
+- ✅ New/Edit Work (`works#new/edit/create/update`) · ✅ Works search (`works#search`)
 - ✅ Bookmarks index (`bookmarks#index`) · ⬜ Bookmark show/new/edit
 - ✅ Collections index + show · ⬜ Collection new/edit, items, participants, profile
-- ✅ Series index · 🔄 Series show · ⬜ Series new/edit
-- ✅ User profile (`users#show`) · ⬜ Pseud show · ⬜ People/user search
-- 🔄 Tag show (`tags#show`) · ⬜ Media/fandoms browse · ⬜ Tag search
-- ⬜ Home (`home#index` — landing + dashboard)
+- ✅ Series index · ✅ Series show · ⬜ Series new/edit
+- ✅ User profile (`users#show`) · ✅ Pseud show · ⬜ People/user search
+- ✅ Tag show (`tags#show`) · ⬜ Media/fandoms browse · ⬜ Tag search
+- ✅ Home (`home#index` — landing + dashboard)
 
 ## Interaction / write (need CSRF-over-session; pattern proven by work-form)
 - ⬜ Kudos · ⬜ Bookmark create/edit · ⬜ Subscribe · ⬜ Comments (display + post) · ⬜ Collection post
