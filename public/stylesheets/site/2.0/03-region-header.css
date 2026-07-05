@@ -276,3 +276,107 @@ notice that CSS3 declarations sit are indented twice (four spaces) and always co
 }
 
 /* END == */
+
+/* == LEFT SIDEBAR PROTOTYPE (comcom-style app shell) — first CSS-only cut.
+   Re-flows the existing #header into a fixed left rail; page content shifts right.
+   Known TODO: logged-in user menu, login popup position, mobile, active state. == */
+
+#outer.wrapper {
+  box-sizing: border-box;
+  padding-left: 15em;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15em;
+  margin: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 0.75em 1.25em;
+  background: var(--ao3-bg);
+  border-right: 1px solid var(--ao3-border);
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* Logo / wordmark at the top. */
+#header .heading {
+  order: 1;
+  float: none;
+  padding: 0 0.5em;
+  margin: 0 0 1em;
+}
+#header .heading a {
+  color: #900;
+  font-size: 1.1em;
+  line-height: 1.2;
+  border-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+#header .logo { float: none; height: 30px; }
+
+/* Primary nav -> vertical list; drop the red texture bar. */
+#header nav { order: 2; }
+#header .primary {
+  background: none;
+  width: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125em;
+}
+#header .primary > li:first-of-type { margin-left: 0; }
+#header li { float: none; display: block; width: 100%; }
+#header .primary a {
+  display: block;
+  width: auto;
+  padding: 0.5em 0.75em;
+  border-radius: var(--ao3-radius-md);
+  color: var(--ao3-fg);
+  border-bottom: 0;
+  font-weight: 500;
+  background: none;
+}
+#header .primary > li > a:hover,
+#header .primary .dropdown:hover > a,
+#header .actions a:hover {
+  background: var(--ao3-muted);
+  color: var(--ao3-fg);
+}
+
+/* Dropdown menus fly out to the right of the sidebar. */
+#header .menu {
+  left: 100%;
+  top: 0;
+  margin-left: 0.4em;
+  width: 17em;
+  background: var(--ao3-card);
+  border: 1px solid var(--ao3-border);
+  border-radius: var(--ao3-radius-lg);
+  box-shadow: var(--ao3-shadow-popover);
+  padding: 0.375em;
+  z-index: 70;
+}
+#header .dropdown .menu a { color: var(--ao3-fg); border-radius: var(--ao3-radius-sm); }
+#header .dropdown .menu a:hover, #header .dropdown .menu a:focus { background: var(--ao3-muted); }
+
+/* User / login pinned to the bottom. */
+#header #login, #header .user {
+  order: 3;
+  margin-top: auto;
+  float: none;
+  width: auto;
+  padding: 0.5em 0.25em 0;
+  border-top: 1px solid var(--ao3-border);
+}
+#header #login a, #header .user a { color: var(--ao3-fg); }
+#header #small_login { left: 100%; top: auto; bottom: 0; margin-left: 0.4em; }
+
+/* Tidy leftovers from the old top bar. */
+#header .clear, #header .search { display: none; }
