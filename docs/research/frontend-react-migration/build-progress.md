@@ -4,26 +4,33 @@
 
 ## Done + verified live (committed & pushed)
 
-| Phase | What | Verification |
-|---|---|---|
-| **P0** Foundation | `InertiaConvertible` concern (`render_react`: React **default**, `?ui=legacy` → ERB, applicability guard); `inertia_share` flash/currentUser/csrf; `InertiaPresenter` base (work-blurb/tag/stats) | parity 5/5; bare `/works` no-500; shared props present |
-| **P1.1** Work-show | Detail page (single + `?view_full_work` multi; adult/chaptered/unrevealed guards preserved; `sanitize_field` parity; scoped work-skin CSS) | single→React, multi→redirect, `?ui=legacy`→ERB; parity 3/3 |
-| **P1.2** Work-form | New/edit via Inertia; **validation errors round-trip as props**; multiparam `published_at` + named submit buttons; CSRF over session | invalid POST→errors; **valid POST→created work + redirect to React work-show** |
-| **P2.2** CI parity | `harness.mjs`/`workshow.mjs`/`bookmarks.mjs`/`smoke.mjs` + `run.sh` + `.github/workflows/react-parity.yml` | **11/11 local** (index 5 + show 3 + bookmarks 1 + smoke 2) |
-| **P3** Bookmarks index | user/pseud faceted path; reuses `work_blurb` for Work bookmarkables | React default, `?ui=legacy` ERB; parity 1/1 |
-| **P3** Collections index | ES-faceted; all index variants; status/type badges | React default, 9 collections live |
-| **P3** Series index | plain-AR; creators/fandoms/stats | React default, "Test Series" live |
+**Foundation & infra**
+- **P0** `InertiaConvertible` concern (React **default**, `?ui=legacy` → ERB baseline, applicability guard) + `inertia_share` flash/currentUser/csrf + `InertiaPresenter` base.
+- **P2.1 SSR** — proved JS SSR (renderToString → real HTML); **ADR 0001** decides a standalone Node sidecar (works with unicorn; container stays Node-less), SSR for guest pages only.
+- **P2.2 CI parity** — 4 parity suites + `.github/workflows/react-parity.yml`; **11/11 local**.
+- **P4.1 nav shell + mobile** — shared responsive `AppShellHeader` (nav + hamburger + user area) across all pages; single-column stacking, no horizontal overflow, filter sidebar collapses on mobile.
 
-**Seven page shapes converted** (works-index + all owner variants tag/user/pseud/collection/language, work-show, work-form CRUD, bookmarks, collections, series), all React-by-default with the `?ui=legacy` ERB baseline retained. Built partly by parallel subagents at low marginal cost.
+**Pages converted (React default, `?ui=legacy` ERB fallback, responsive) — 9 shapes**
+| Page | Controller |
+|---|---|
+| Works index (+ tag/user/pseud/collection/language variants) | `works#index` |
+| Work detail | `works#show` (+ full-work / chapter guards) |
+| New/Edit work (CRUD, errors-as-props, live-verified create) | `works#new/create/edit/update` |
+| Bookmarks index | `bookmarks#index` |
+| Collections index | `collections#index` |
+| Series index | `series#index` |
+| Collection show | `collections#show` |
+| User profile / dashboard | `users#show` |
 
-## Remaining (pattern proven; each now incremental)
+Much of the breadth built by **parallel subagents** at low marginal cost.
 
-- **P2.1 SSR** — Node sidecar + unicorn-vs-Puma ADR (biggest infra decision; gates public SEO). Not started.
+## Remaining (pattern proven; incremental)
+
+- **Form depth** — TinyMCE rich-text + tag autocomplete in the work-form (endpoint URLs already passed as props); co-creators/series/collection pickers; per-chapter `chapters#show`.
 - **P2.3 i18n** — Rails-I18n→props bridge (pages currently ship English).
-- **Form depth** — TinyMCE rich-text, tag autocomplete wiring (endpoint URLs already in props), co-creators/series/collection pickers, per-chapter `ChaptersController#show`.
-- **More P3** — tags index, comments, user/pseud profile + dashboard; write actions (kudos/bookmark/subscribe/comment).
-- **P4 cutover** — app-wide nav shell, remaining filter controls (exclude-facets/autocomplete/date), caching/perf parity, admin area, retire ERB.
+- **More P3** — tags/media browse, comments (display+post), write actions (kudos/bookmark/subscribe).
+- **P4** — retire ERB per page once prod-confident (keep `?ui=legacy` as the deprecation window), caching/perf parity, admin area.
 
 ## Marginal cost per new page (established)
 
-controller one-liner (`render_react`) + a PORO presenter (`< InertiaPresenter`) + a React page (DS Card/Badge/Button) + a parity fixture. Subagent-buildable in parallel.
+controller one-liner (`render_react`) + a PORO presenter (`< InertiaPresenter`) + a React page (`<AppShellHeader/>` + DS Card/Badge/Button, responsive) + a parity fixture. Subagent-buildable in parallel.
