@@ -16,6 +16,7 @@ clean hover links.
   position: relative;
   padding: 2.5em 0 3em;
   width: 100%;
+  margin-top: auto;
 }
 
 #footer > ul {
@@ -106,3 +107,12 @@ clean hover links.
 }
 
 /* END == */
+
+
+/* Sticky footer: fill the viewport so the footer sits at the bottom of short
+   pages instead of floating up above the fold. */
+#outer.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
