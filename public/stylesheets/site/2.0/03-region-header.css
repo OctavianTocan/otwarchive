@@ -277,106 +277,190 @@ notice that CSS3 declarations sit are indented twice (four spaces) and always co
 
 /* END == */
 
-/* == LEFT SIDEBAR PROTOTYPE (comcom-style app shell) — first CSS-only cut.
-   Re-flows the existing #header into a fixed left rail; page content shifts right.
-   Known TODO: logged-in user menu, login popup position, mobile, active state. == */
+/* == LEFT SIDEBAR (comcom button geometry, AO3-red surface) ==
+   Fixed left rail; collapsible to an icon rail; drag-resizable.
+   Width driven by --ao3-sidebar-w (JS updates it); collapse via body.sidebar-collapsed. == */
+
+:root { --ao3-sidebar-w: 16rem; --ao3-sidebar-w-icon: 3.25rem; }
 
 #outer.wrapper {
   box-sizing: border-box;
-  padding-left: 15em;
+  padding-left: var(--ao3-sidebar-w);
+  transition: padding-left 200ms var(--ao3-ease);
 }
+body.sidebar-collapsed #outer.wrapper { padding-left: var(--ao3-sidebar-w-icon); }
+body.sidebar-resizing #outer.wrapper, body.sidebar-resizing #header { transition: none; }
 
 #header {
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 15em;
+  top: 0; left: 0; bottom: 0;
+  width: var(--ao3-sidebar-w);
   margin: 0;
   z-index: 60;
   display: flex;
   flex-direction: column;
-  padding: 1em 0.75em 1.25em;
-  background: var(--ao3-bg);
-  border-right: 1px solid var(--ao3-border);
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  color: #fff;
+  background: #900 url("/images/skins/textures/tiles/red-ao3.png");
+  border-right: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow: var(--ao3-shadow-md);
   overflow: visible;
   box-sizing: border-box;
+  transition: width 200ms var(--ao3-ease);
 }
+body.sidebar-collapsed #header { width: var(--ao3-sidebar-w-icon); }
 
-/* Logo / wordmark at the top. */
+/* Header row: logo + collapse toggle. */
 #header .heading {
   order: 1;
   float: none;
-  padding: 0 0.5em;
-  margin: 0 0 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  margin: 0 0 0.5rem;
+  padding: 0 0.35rem;
 }
 #header .heading a {
-  color: #900;
-  font-size: 1.1em;
-  line-height: 1.2;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: var(--ao3-tracking-tight);
+  line-height: 1.1;
   border-bottom: 0;
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 0.5rem;
+  min-width: 0;
+  overflow: hidden;
 }
-#header .logo { float: none; height: 30px; }
+#header .heading .wordmark { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#header .logo { float: none; height: 26px; flex-shrink: 0; }
 
-/* Primary nav -> vertical list; drop the red texture bar. */
+#header .sidebar-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem; height: 1.75rem;
+  border-radius: 0.375rem;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+}
+#header .sidebar-toggle:hover { background: rgba(255, 255, 255, 0.14); }
+#header .sidebar-toggle svg { width: 1.1rem; height: 1.1rem; }
+
+/* Primary nav = comcom menu buttons, recolored for red. */
 #header nav { order: 2; }
 #header .primary {
   background: none;
   width: auto;
-  padding: 0;
+  padding: 0 0.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.125em;
+  gap: 0.125rem;
 }
 #header .primary > li:first-of-type { margin-left: 0; }
 #header li { float: none; display: block; width: 100%; }
-#header .primary a {
-  display: block;
-  width: auto;
-  padding: 0.5em 0.75em;
-  border-radius: var(--ao3-radius-md);
-  color: var(--ao3-fg);
-  border-bottom: 0;
+#header .primary > li > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
   font-weight: 500;
+  color: #fff;
+  border-bottom: 0;
   background: none;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background 120ms var(--ao3-ease);
 }
+#header .primary > li > a > svg {
+  width: 1rem; height: 1rem;
+  flex-shrink: 0;
+  opacity: 0.65;
+  transition: opacity 120ms var(--ao3-ease);
+}
+#header .primary > li > a > span { overflow: hidden; text-overflow: ellipsis; }
 #header .primary > li > a:hover,
-#header .primary .dropdown:hover > a,
-#header .actions a:hover {
-  background: var(--ao3-muted);
-  color: var(--ao3-fg);
+#header .primary .dropdown:hover > a {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  text-shadow: 0.5px 0 0 currentColor;
 }
+#header .primary > li > a:hover > svg,
+#header .primary .dropdown:hover > a > svg { opacity: 1; }
 
-/* Dropdown menus fly out to the right of the sidebar. */
+/* Dropdown flyouts to the right (neutral popover). */
 #header .menu {
-  left: 100%;
-  top: 0;
-  margin-left: 0.4em;
+  left: 100%; top: 0;
+  margin-left: 0.4rem;
   width: 17em;
   background: var(--ao3-card);
   border: 1px solid var(--ao3-border);
   border-radius: var(--ao3-radius-lg);
   box-shadow: var(--ao3-shadow-popover);
   padding: 0.375em;
+  color: var(--ao3-fg);
   z-index: 70;
 }
-#header .dropdown .menu a { color: var(--ao3-fg); border-radius: var(--ao3-radius-sm); }
+#header .dropdown .menu a { color: var(--ao3-fg); border-radius: var(--ao3-radius-sm); border-bottom: 0; }
 #header .dropdown .menu a:hover, #header .dropdown .menu a:focus { background: var(--ao3-muted); }
 
 /* User / login pinned to the bottom. */
-#header #login, #header .user {
+#header #login, #header .user, #header #greeting {
   order: 3;
   margin-top: auto;
   float: none;
   width: auto;
-  padding: 0.5em 0.25em 0;
-  border-top: 1px solid var(--ao3-border);
+  padding: 0.5rem 0.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
-#header #login a, #header .user a { color: var(--ao3-fg); }
-#header #small_login { left: 100%; top: auto; bottom: 0; margin-left: 0.4em; }
+#header #login p.user { margin: 0; }
+#header #login a, #header .user > a, #header #greeting > ul > li > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  color: #fff;
+  border-bottom: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+#header #login a:hover, #header .user > a:hover, #header #greeting > ul > li > a:hover { background: rgba(255, 255, 255, 0.14); }
+#header #login a > svg, #header #greeting a > svg { width: 1rem; height: 1rem; flex-shrink: 0; opacity: 0.7; }
+
+/* Drag-resize handle on the right edge. */
+#header .sidebar-resize {
+  position: absolute;
+  top: 0; right: -3px; bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  z-index: 65;
+}
+#header .sidebar-resize:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* Collapsed icon-rail state. */
+body.sidebar-collapsed #header .primary > li > a > span,
+body.sidebar-collapsed #header .heading .wordmark,
+body.sidebar-collapsed #header #login a > span,
+body.sidebar-collapsed #header .sidebar-resize { display: none; }
+body.sidebar-collapsed #header .primary > li > a,
+body.sidebar-collapsed #header #login a { justify-content: center; padding: 0; }
+body.sidebar-collapsed #header .heading { justify-content: center; padding: 0; }
+body.sidebar-collapsed #header .heading .sidebar-toggle { margin-left: 0; }
 
 /* Tidy leftovers from the old top bar. */
 #header .clear, #header .search { display: none; }
