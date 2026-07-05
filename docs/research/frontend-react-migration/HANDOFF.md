@@ -74,11 +74,14 @@ required `@owner && @search` and silently fell through to ERB. These are exactly
 the **sidebar links** the user saw going to old pages. Fixed by relaxing the
 guard so the presenter (which already degrades gracefully for a plain array) runs:
 
-| Route | Sidebar link | Before | After |
+| Route | Reached from | Before | After |
 |---|---|---|---|
-| `/works` | **Works** | ERB (latest-works) | React `WorksIndex` |
-| `/bookmarks` | **Bookmarks** | ERB (latest-bookmarks) | React `BookmarksIndex` |
-| `/works/search` | **Search** | ERB (search form) | React `WorksSearch` (bare form) |
+| `/works` | Sidebar **Works** | ERB (latest-works) | React `WorksIndex` |
+| `/bookmarks` | Sidebar **Bookmarks** | ERB (latest-bookmarks) | React `BookmarksIndex` |
+| `/works/search` | Sidebar **Search** | ERB (search form) | React `WorksSearch` (bare form) |
+| `/media/:id/fandoms` | Sidebar **Browse** + MediaIndex | ERB | React `FandomsIndex` |
+| `/tags` | Tag pages / nav | ERB (tag cloud) | React `TagsIndex` |
+| `/users/:login/pseuds` | Profile / pseud pages | ERB | React `PseudsIndex` |
 
 - `WorksController#index` — removed the `@owner.present? && @search.present?`
   guard; presenter handles `owner: nil, search: nil` + plain array (verified via
@@ -112,9 +115,19 @@ lists *per submission* with **no inline actions** (approve/reject via
 `update_multiple` is a documented follow-up). ERB remains at `?ui=legacy`. Built
 against an empty DB (shape-verified via a Rails runner, not live rows).
 
+### 3d. Additional index conversions
+
+- `fandoms#index` (`/media/:id/fandoms`) → `FandomsIndex`: fandoms grouped by
+  first letter with alphabet nav + work counts. Collection variant keeps ERB.
+- `tags#index` (`/tags`) → `TagsIndex`: popular/random freeform tag cloud, sized
+  1–8 via the same log-scale as `TagsHelper#tag_cloud`.
+- `pseuds#index` (`/users/:login/pseuds`) → `PseudsIndex`: pseud cards with icon,
+  byline, work/rec counts, default badge, and owner edit/orphan/delete actions
+  (delete via Inertia `router.delete`).
+
 ### Current totals
 
-**41 React pages · 37 presenters · 29 controllers wired.** Parity harness 11/11.
+**44 React pages · 40 presenters · 32 controllers wired.** Parity harness 11/11.
 
 ---
 
@@ -164,14 +177,20 @@ these live:** `/works`, `/bookmarks`, `/works/search`, `/tag_sets/:id/nomination
 ## 5. What's next (priority order)
 
 ### High value, low effort — finish the "broken link" sweep
-Other routes still serving ERB that are linked from converted pages (found via
-the curl sweep in §4):
-- `/tags` (`TagsController#index`) — tag landing/cloud. ERB. (Not in sidebar, but
-  linked from tag pages.)
-- `/series` (bare) — currently 302-redirects; confirm target and convert.
-- `/faq`, and any other `*/index` that redirects or lacks an owner branch.
-- **Method:** run the curl sweep over every nav/blurb link, list the ERB ones,
-  apply the same guard-relax recipe. Most are 15-minute conversions.
+Remaining ERB routes reachable from converted pages (found via the §4 curl
+sweep). `/works`, `/bookmarks`, `/works/search`, `/media/:id/fandoms`, `/tags`,
+`/users/:login/pseuds` are **done**. Still ERB:
+- `/works/:id/comments` — comment threads (interactive; do with the write-actions
+  track, not a plain index).
+- `/abuse_reports/new`, `/support`, `/orphans/new` — forms.
+- Static content pages (`/tos`, `/tos_faq`, `/privacy`, `/takedown`,
+  `/diversity`, `/site_map`, `/donate`, `/about` — all `HomeController`).
+  **Skipped deliberately:** low traffic + they render `.landmark` sr-only
+  headings and nav partials that depend on AO3 CSS, so a clean React port needs a
+  small prose/landmark style shim. Batchable later via `render_to_string(action:,
+  layout: false)` → a generic `StaticPage` component.
+- **Method:** run the §4 curl sweep over every nav/blurb link, list the ERB ones,
+  apply the same guard-relax recipe. Most index pages are 15-minute conversions.
 
 ### The advanced works-search form
 `WorksSearch.tsx` is a **single query box** — it dropped the ERB advanced form

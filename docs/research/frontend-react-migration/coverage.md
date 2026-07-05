@@ -5,11 +5,12 @@ Legend: ✅ done+verified · ⬜ todo
 
 > **2026-07-05 update:** Fixed bare-index ERB fall-throughs — `/works`, `/bookmarks`,
 > `/works/search` (the sidebar Works/Bookmarks/Search links) now render React (guard
-> required `@owner && @search`; presenters already degrade). Added moderator tag-set
-> nominations review (`tag_set_nominations#index`). Mobile drawer nav buttons made
-> touch-friendly (mobile only). See `HANDOFF.md`. Totals now **29 controllers / 41 React pages**.
+> required `@owner && @search`; presenters already degrade). Converted `/media/:id/fandoms`
+> (FandomsIndex), `/tags` cloud (TagsIndex), `/users/:login/pseuds` (PseudsIndex), and the
+> moderator tag-set nominations review. Mobile drawer nav buttons made touch-friendly
+> (mobile only). See `HANDOFF.md`. Totals now **32 controllers / 44 React pages**.
 
-## Converted — 29 controllers / 41 React pages (React default, `?ui=legacy` ERB baseline, mobile-responsive, parity-verified)
+## Converted — 32 controllers / 44 React pages (React default, `?ui=legacy` ERB baseline, mobile-responsive, parity-verified)
 
 **Works & reading:** ✅ works index · ✅ work show · ✅ chapter show · ✅ new/edit work (CRUD) · ✅ works search · ✅ reading history · ✅ external work show
 **Bookmarks/Collections/Series:** ✅ bookmarks index · ✅ collections index · ✅ collection show · ✅ collection items · ✅ series index · ✅ series show
