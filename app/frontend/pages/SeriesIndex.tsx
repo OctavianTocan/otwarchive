@@ -1,4 +1,5 @@
 import { router } from "@inertiajs/react";
+import AppShellHeader from "../components/AppShellHeader";
 import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
 import { Button } from "@/design-system/components/ui/button";
@@ -31,8 +32,8 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
 function SeriesCard({ s }: { s: Series }) {
   return (
     <Card className="px-5 transition-shadow hover:shadow-md">
-      <div className="flex items-start justify-between gap-4">
-        <h4 className="font-semibold text-base leading-snug">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+        <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
           {s.url ? <a href={s.url} className="text-primary hover:underline">{s.title}</a> : s.title}
           <span className="font-normal text-muted-foreground"> by </span>
           {s.creators.map((c, i) => (
@@ -77,13 +78,10 @@ export default function SeriesIndex({ context, series, pagination }: Props) {
   };
 
   return (
-    <div className="min-h-svh bg-background text-foreground">
-      <header className="flex items-center gap-3 bg-primary px-5 py-3 text-primary-foreground">
-        <a href="/" className="font-bold text-lg hover:no-underline">Archive of Our Own</a>
-        <Badge variant="outline" className="ml-auto border-white/30 text-primary-foreground">React · Inertia spike</Badge>
-      </header>
+    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
+      <AppShellHeader />
 
-      <div className="mx-auto max-w-[1180px] px-5 pt-6 pb-16">
+      <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main>
           <h2 className="font-bold text-2xl">{context.heading || context.ownerName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} series · page {pagination.page} of {pagination.pages}</p>

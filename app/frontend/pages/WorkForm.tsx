@@ -1,4 +1,5 @@
 import { router, useForm } from "@inertiajs/react";
+import AppShellHeader from "../components/AppShellHeader";
 import { useState } from "react";
 import { Button } from "@/design-system/components/ui/button";
 import { Card } from "@/design-system/components/ui/card";
@@ -101,7 +102,7 @@ function FieldError({ errors, keys }: { errors: Props["errors"]; keys: string[] 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <Card className="gap-4 px-5 py-4">
-      <h3 className="font-semibold text-base">{title}</h3>
+      <h3 className="min-w-0 break-words font-semibold text-base">{title}</h3>
       {children}
     </Card>
   );
@@ -135,11 +136,8 @@ export default function WorkForm({ mode, action, method, posted, work, options, 
   const busy = processing || submitting !== null;
 
   return (
-    <div className="min-h-svh bg-background text-foreground">
-      <header className="flex items-center gap-3 bg-primary px-5 py-3 text-primary-foreground">
-        <a href="/" className="font-bold text-lg hover:no-underline">Archive of Our Own</a>
-        <span className="ml-auto text-sm opacity-80">{mode === "edit" ? "Edit Work" : "Post New Work"}</span>
-      </header>
+    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
+      <AppShellHeader />
 
       <div className="mx-auto grid max-w-[820px] gap-5 px-5 pt-6 pb-24">
         {errors?.base && (

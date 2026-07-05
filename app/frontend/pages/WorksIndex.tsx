@@ -1,4 +1,5 @@
 import { router } from "@inertiajs/react";
+import AppShellHeader from "../components/AppShellHeader";
 import { useState } from "react";
 import { Card } from "@/design-system/components/ui/card";
 import { Button } from "@/design-system/components/ui/button";
@@ -46,8 +47,8 @@ function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline"
 function Blurb({ w }: { w: WorkBlurb }) {
   return (
     <Card className="px-5 transition-shadow hover:shadow-md">
-      <div className="flex items-start justify-between gap-4">
-        <h4 className="font-semibold text-base leading-snug">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+        <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
           <a href={w.url} className="text-primary hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -101,6 +102,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
   const [inc, setInc] = useState<Record<string, string[]>>(filters.include ?? {});
   const [ws, setWs] = useState<Record<string, string>>(filters.work_search ?? {});
   const [busy, setBusy] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const go = (page = 1, nextInc = inc, nextWs = ws) => {
     setBusy(true);
@@ -116,19 +118,19 @@ export default function WorksIndex({ context, works, pagination, facets, filters
   const inputCls = "w-full rounded-md border border-border bg-input px-2.5 py-1.5 text-sm outline-none focus:border-ring focus:ring-3 focus:ring-ring/40";
 
   return (
-    <div className="min-h-svh bg-background text-foreground">
-      <header className="flex items-center gap-3 bg-primary px-5 py-3 text-primary-foreground">
-        <a href="/" className="font-bold text-lg hover:no-underline">Archive of Our Own</a>
-        <Badge variant="outline" className="ml-auto border-white/30 text-primary-foreground">React · Inertia spike</Badge>
-      </header>
+    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
+      <AppShellHeader />
 
-      <div className="mx-auto grid max-w-[1180px] grid-cols-[290px_1fr] gap-7 px-5 pt-6 pb-16">
-        <aside className="sticky top-4 self-start">
+      <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-6 px-4 pt-6 pb-16 md:grid-cols-[290px_1fr] md:gap-7 md:px-5">
+        <aside className="self-start md:sticky md:top-4">
           <Card className="max-h-[calc(100svh-2rem)] gap-0 overflow-auto px-4">
-            <div className="flex items-center gap-2 pb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide">
+            <button type="button" onClick={() => setFiltersOpen((o) => !o)}
+              className="flex w-full items-center gap-2 pb-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide md:pointer-events-none">
               Sort & Filter {busy && <span className="text-primary">…</span>}
-            </div>
+              <span className="ml-auto text-sm md:hidden">{filtersOpen ? "▲" : "▼"}</span>
+            </button>
 
+            <div className={(filtersOpen ? "block" : "hidden") + " md:block"}>
             <FacetSection title="Sort by">
               <select value={ws.sort_column ?? "_score"} onChange={(e) => setScalar("sort_column", e.target.value)} className={inputCls}>
                 {SORTS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
@@ -176,6 +178,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
             <div className="sticky bottom-0 mt-3 flex gap-2 bg-card pt-2.5">
               <Button variant="default" size="sm" onClick={() => go(1)} disabled={busy}>Sort and Filter</Button>
               <Button variant="outline" size="sm" onClick={clear} disabled={busy}>Clear</Button>
+            </div>
             </div>
           </Card>
         </aside>

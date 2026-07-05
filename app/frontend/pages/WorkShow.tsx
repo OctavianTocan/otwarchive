@@ -1,4 +1,5 @@
 import { Card } from "@/design-system/components/ui/card";
+import AppShellHeader from "../components/AppShellHeader";
 import { Button } from "@/design-system/components/ui/button";
 import { Badge } from "@/design-system/components/ui/badge";
 
@@ -108,13 +109,10 @@ export default function WorkShow(props: Props) {
   const multi = chapters.length > 1;
 
   return (
-    <div className="min-h-svh bg-background text-foreground">
+    <div className="min-h-svh overflow-x-hidden bg-background text-foreground">
       {workskinCss && <style dangerouslySetInnerHTML={{ __html: scopeCss(workskinCss) }} />}
 
-      <header className="flex items-center gap-3 bg-primary px-5 py-3 text-primary-foreground">
-        <a href="/" className="font-bold text-lg hover:no-underline">Archive of Our Own</a>
-        <Badge variant="outline" className="ml-auto border-white/30 text-primary-foreground">React · Inertia spike</Badge>
-      </header>
+      <AppShellHeader />
 
       <div className="mx-auto max-w-[880px] px-5 pt-6 pb-16">
         <Card className="px-6 py-5">
