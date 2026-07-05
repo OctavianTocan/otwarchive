@@ -42,22 +42,11 @@ a, a:link {
 }
 
 li.blurb, fieldset, form dl {
-  border: 0;
+  border: 1px solid var(--ao3-border);
   border-radius: var(--ao3-radius-xl);
   padding: 1em;
   overflow: hidden;
-  box-shadow: var(--ao3-shadow-card);
-}
-
-/* Subtle card hover-lift (comcom-style, motion-safe). */
-@media (prefers-reduced-motion: no-preference) {
-  li.blurb, div.comment {
-    transition: transform var(--ao3-duration) var(--ao3-ease), box-shadow var(--ao3-duration) var(--ao3-ease);
-  }
-  li.blurb:hover, div.comment:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--ao3-shadow-card-hover);
-  }
+  box-shadow: var(--ao3-shadow-xs);
 }
 
 .blurb li, .actions>*, .stats>*, .meta ul li {

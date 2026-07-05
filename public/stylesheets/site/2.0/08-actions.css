@@ -21,22 +21,22 @@ ul.actions {
 }
 
 .actions a, .actions a:link, .action, .action:link, .actions button, .actions input, input[type="submit"], button, .current, .actions label {
-  background: var(--ao3-muted);
+  background: var(--ao3-card);
   color: var(--ao3-fg);
   width: auto;
-  font-weight: 400;
-  font-size: 100%;
-  line-height: 1.286;
-  height: 1.286em;
+  font-weight: 500;
+  font-size: 0.9em;
+  line-height: 1.4;
+  height: auto;
   vertical-align: middle;
   display: inline-block;
-  padding: 0.25em 0.75em;
+  padding: 0.4em 0.85em;
   white-space: nowrap;
   overflow: visible;
   position: relative;
   text-decoration: none;
   border: 1px solid var(--ao3-border);
-  border-radius: var(--ao3-radius-md);
+  border-radius: var(--ao3-radius-lg);
   cursor: pointer;
   transition: background var(--ao3-duration) var(--ao3-ease), border-color var(--ao3-duration) var(--ao3-ease), color var(--ao3-duration) var(--ao3-ease);
   box-shadow: none;
@@ -84,7 +84,7 @@ ol.pagination, div.pagination, ol.year {
 }
 
 .actions a:hover, .actions button:hover, .actions input:hover, .actions a:focus, .actions button:focus, .actions input:focus, label.action:hover, .action:hover, .action:focus {
-  background: var(--ao3-border);
+  background: var(--ao3-muted);
   color: var(--ao3-fg);
   border-color: var(--ao3-border-strong);
   box-shadow: none;
