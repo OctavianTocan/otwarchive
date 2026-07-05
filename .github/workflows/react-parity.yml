@@ -1,0 +1,58 @@
+# Verifies each React (Inertia) page matches its ERB (?ui=legacy) baseline.
+# NOTE: first-run validation needed — boots the full app; mirrors automated-tests.yml.
+name: React Parity
+
+on:
+  pull_request:
+  push:
+    branches: [design/comcom-pass-1]
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    services:
+      database:
+        image: mariadb:10.5.4-focal
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: otwarchive_test
+        ports: ["3306:3306"]
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
+        ports: ["9200:9200"]
+        options: >-
+          -e="discovery.type=single-node" -e="xpack.security.enabled=false"
+      memcached:
+        image: memcached:1.5
+        ports: ["11211:11211"]
+    steps:
+      - uses: actions/checkout@v6
+      - run: sudo apt-get update
+      - name: Redis
+        run: sudo apt-get install -y redis-server && ./script/gh-actions/multiple_redis.sh
+      - name: Ruby + bundle
+        uses: ruby/setup-ruby@v1
+        with: { bundler-cache: true }
+      - name: Config
+        run: |
+          cp config/gh-actions/database.yml config/database.yml
+          cp config/gh-actions/redis.yml config/redis.yml
+          cp config/gh-actions/local.yml config/local.yml
+      - name: Database + seed
+        run: |
+          ./script/gh-actions/configure_database.sh
+          bundle exec rake db:create db:schema:load db:migrate db:otwseed
+      - name: Build search indexes (inline, no Resque worker in CI)
+        run: RESQUE_INLINE=true bundle exec rake search:update_all_mappings search:index_works search:index_tags
+      - name: Build the React client bundle
+        uses: oven-sh/setup-bun@v2
+        with: { bun-version: latest }
+      - run: cd app/frontend && bun install && bunx vite build
+      - name: Boot app
+        run: |
+          bundle exec rails server -e test -p 3013 -b 127.0.0.1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:3013/ >/dev/null && break; sleep 3; done
+      - name: Run parity suites
+        run: BASE=http://127.0.0.1:3013 ./spike/parity/run.sh
