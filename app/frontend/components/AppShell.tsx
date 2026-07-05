@@ -17,17 +17,17 @@ const NAV = [
 
 type Shared = { currentUser?: { id: number; login: string } | null };
 
-function NavItems({ current, collapsed, onNavigate }: { current: string; collapsed?: boolean; onNavigate?: () => void }) {
+function NavItems({ current, collapsed, mobile, onNavigate }: { current: string; collapsed?: boolean; mobile?: boolean; onNavigate?: () => void }) {
   return (
-    <nav className="flex flex-col gap-0.5">
+    <nav className={`flex flex-col ${mobile ? "gap-1.5" : "gap-0.5"}`}>
       {NAV.map(({ label, href, Icon }) => {
         const active = href === "/" ? current === "/" : current === href || current.startsWith(`${href}/`);
         return (
           <a key={href} href={href} onClick={onNavigate} title={collapsed ? label : undefined}
-            className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 font-medium text-[13px] transition-colors hover:no-underline ${collapsed ? "justify-center" : ""} ${
-              active ? "bg-accent text-accent-foreground" : "text-foreground/70 hover:bg-muted hover:text-foreground"
-            }`}>
-            <Icon className="size-[18px] shrink-0" />
+            className={`flex items-center font-medium transition-colors hover:no-underline ${
+              mobile ? "gap-3.5 rounded-xl px-4 py-3 text-[15px]" : `gap-2.5 rounded-md px-2 py-1.5 text-[13px] ${collapsed ? "justify-center" : ""}`
+            } ${active ? "bg-accent text-accent-foreground" : "text-foreground/70 hover:bg-muted hover:text-foreground active:bg-muted"}`}>
+            <Icon className={`shrink-0 ${mobile ? "size-[22px]" : "size-[18px]"}`} />
             {!collapsed && label}
           </a>
         );
@@ -43,11 +43,13 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
-  const userRow = (collapsed?: boolean) => (
+  const userRow = (collapsed?: boolean, mobile?: boolean) => (
     <div className="mt-auto border-border border-t pt-3">
       <a href={currentUser ? `/users/${currentUser.login}` : "/users/login"} title={collapsed ? (currentUser?.login ?? "Log in") : undefined}
-        className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 font-medium text-[13px] text-foreground/70 hover:bg-muted hover:text-foreground hover:no-underline ${collapsed ? "justify-center" : ""}`}>
-        <UserIcon className="size-[18px] shrink-0" />
+        className={`flex items-center font-medium text-foreground/70 transition-colors hover:bg-muted hover:text-foreground hover:no-underline active:bg-muted ${
+          mobile ? "gap-3.5 rounded-xl px-4 py-3 text-[15px]" : `gap-2.5 rounded-md px-2 py-1.5 text-[13px] ${collapsed ? "justify-center" : ""}`
+        }`}>
+        <UserIcon className={`shrink-0 ${mobile ? "size-[22px]" : "size-[18px]"}`} />
         {!collapsed && (currentUser ? currentUser.login : "Log in")}
       </a>
     </div>
@@ -81,13 +83,13 @@ export default function AppShell({ children }: { children: ReactNode }) {
       <Drawer.Root open={open} onOpenChange={setOpen} direction="right">
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-50 bg-black/40 md:hidden" />
-          <Drawer.Content className="fixed inset-y-0 right-0 z-50 flex w-[17rem] flex-col border-border border-l bg-sidebar p-3 outline-none md:hidden">
-            <a href="/" onClick={() => setOpen(false)} className="mb-3 flex items-center gap-2 px-1 font-semibold hover:no-underline">
-              <img src="/images/ao3_logos/logo.png" alt="AO3" className="h-8 w-auto object-contain" />
-              <span className="text-[15px]">Archive of Our Own</span>
+          <Drawer.Content className="fixed inset-y-0 right-0 z-50 flex w-[18rem] flex-col border-border border-l bg-sidebar p-4 outline-none md:hidden">
+            <a href="/" onClick={() => setOpen(false)} className="mb-4 flex items-center gap-2.5 px-1 font-semibold hover:no-underline">
+              <img src="/images/ao3_logos/logo.png" alt="AO3" className="h-9 w-auto object-contain" />
+              <span className="text-base">Archive of Our Own</span>
             </a>
-            <NavItems current={current} onNavigate={() => setOpen(false)} />
-            {userRow(false)}
+            <NavItems current={current} mobile onNavigate={() => setOpen(false)} />
+            {userRow(false, true)}
           </Drawer.Content>
         </Drawer.Portal>
       </Drawer.Root>

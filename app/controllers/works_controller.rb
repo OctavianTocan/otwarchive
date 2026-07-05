@@ -49,6 +49,11 @@ class WorksController < ApplicationController
       unless render_react("WorksSearch") { WorksSearchPresenter.new(search: @search, results: @works, heading: @page_subtitle).as_props }
         render 'search_results'
       end
+    elsif params[:work_search].blank? && params[:edit_search].blank?
+      # Bare /works/search (the sidebar "Search" link): render the React search
+      # page with an empty result set. The "edit search" flow keeps the ERB
+      # advanced form (?ui=legacy also stays on ERB).
+      render_react("WorksSearch") { WorksSearchPresenter.new(search: @search, results: [], heading: @page_subtitle).as_props }
     end
   end
 
@@ -140,9 +145,10 @@ class WorksController < ApplicationController
     @pagy = pagy_query_result(@works) if @works.respond_to?(:total_pages)
 
     # React by default; ?ui=legacy keeps the ERB view for parity/reference.
-    # Guard: only render React when an owner-scoped search is present (the bare
-    # /works "Latest Works" path has no @search/@owner yet).
-    return if @owner.present? && @search.present? && render_react("WorksIndex") do
+    # Handles both owner-scoped faceted searches and the bare /works "Latest
+    # Works" path (@works is a plain array, @owner/@search nil) — the presenter
+    # degrades gracefully.
+    return if render_react("WorksIndex") do
       WorksIndexPresenter.new(results: @works, owner: @owner, search: @search, heading: @page_subtitle).as_props
     end
   end

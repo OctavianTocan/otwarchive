@@ -84,6 +84,8 @@ function Blurb({ w }: { w: WorkBlurb }) {
 export default function WorksSearch({ context, works, pagination, resultCount, filters }: Props) {
   const [query, setQuery] = useState<string>(filters.work_search?.query ?? "");
   const [busy, setBusy] = useState(false);
+  // Bare search form (sidebar link) has no query/results yet — hide result chrome.
+  const searched = (context.query ?? "").length > 0 || resultCount > 0;
 
   const go = (page = 1, q = query) => {
     setBusy(true);
@@ -121,16 +123,18 @@ export default function WorksSearch({ context, works, pagination, resultCount, f
           )}
         </Card>
 
-        <p className="mt-5 mb-4 text-muted-foreground tabular-nums">
-          {n(resultCount)} {resultCount === 1 ? "work found" : "works found"}
-          {pagination.pages > 1 && <> · page {pagination.page} of {pagination.pages}</>}
-        </p>
+        {searched && (
+          <p className="mt-5 mb-4 text-muted-foreground tabular-nums">
+            {n(resultCount)} {resultCount === 1 ? "work found" : "works found"}
+            {pagination.pages > 1 && <> · page {pagination.page} of {pagination.pages}</>}
+          </p>
+        )}
 
-        {works.length === 0 ? (
+        {searched && (works.length === 0 ? (
           <p className="py-6 text-muted-foreground">No results found. You may want to edit your search to make it less specific.</p>
         ) : (
           <ol className="flex flex-col divide-y divide-border">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>
-        )}
+        ))}
 
         {pagination.pages > 1 && (
           <nav className="mt-6 flex items-center justify-center gap-4 text-muted-foreground">
