@@ -10,7 +10,7 @@ Legend: ✅ done+verified · 🔄 in progress · ⬜ todo
 - ✅ Bookmarks index (`bookmarks#index`) · ⬜ Bookmark show/new/edit
 - ✅ Collections index + show · ⬜ Collection new/edit, items, participants, profile
 - ✅ Series index · ✅ Series show · ⬜ Series new/edit
-- ✅ User profile (`users#show`) · ✅ Pseud show · 🔄 People search (agent misfired — todo)
+- ✅ User profile (`users#show`) · ✅ Pseud show · ✅ People search (`people#search`)
 - ✅ Tag show (`tags#show`) · ✅ Media/fandoms browse (`media#index`) · ⬜ Tag search
 - ✅ Home (`home#index` — landing + dashboard)
 
@@ -18,14 +18,14 @@ Legend: ✅ done+verified · 🔄 in progress · ⬜ todo
 - ⬜ Kudos · ⬜ Bookmark create/edit · ⬜ Subscribe · ⬜ Comments (display + post) · ⬜ Collection post
 
 ## Account / dashboard
-- ⬜ Inbox · ✅ Reading history (`readings#index`) · ⬜ Subscriptions · ⬜ Preferences · ⬜ Profile edit · ⬜ Gifts
+- ⬜ Inbox · ✅ Reading history (`readings#index`) · ✅ Subscriptions (`subscriptions#index`) · ⬜ Preferences · ⬜ Profile edit · ✅ Gifts (`gifts#index`)
 
 ## Challenges (large subsystem)
 - ⬜ Challenges, signups, assignments, claims, prompts, potential matches, nominations
 
 ## Misc
-- 🔄 Skins (agent misfired — todo) · ⬜ Related/external works · ⬜ Downloads · ⬜ Stats · ⬜ Invitations
-- ⬜ Static: FAQ/help/known issues/wrangling guidelines/troubleshooting
+- ✅ Skins (`skins#index`) · ⬜ Related/external works · ⬜ Downloads · ⬜ Stats · ⬜ Invitations
+- ✅ FAQ (`archive_faqs#index/show`) · ⬜ help/known issues/wrangling guidelines/troubleshooting
 
 ## Admin (low-traffic, batch last)
 - ⬜ ~120 admin templates + tag wrangling
