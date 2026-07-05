@@ -22,14 +22,15 @@ clean hover links.
   border: 0;
   clear: both;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 0 6%;
   float: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 2em 3.5em;
+  gap: 2.5em 3.5em;
   justify-content: center;
+  align-items: flex-start;
   text-align: left;
-  max-width: 64em;
+  max-width: 60em;
   width: 100%;
   box-sizing: border-box;
 }
@@ -40,10 +41,11 @@ clean hover links.
 }
 
 #footer .module {
-  max-width: none;
+  flex: 0 0 12.5em;
+  max-width: 12.5em;
+  min-width: 0;
   padding: 0;
-  flex: 0 1 13em;
-  min-width: 9em;
+  overflow-wrap: break-word;
 }
 
 #footer .menu {
