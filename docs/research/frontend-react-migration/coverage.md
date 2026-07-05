@@ -3,7 +3,13 @@
 **Goal:** convert the entire AO3 frontend to React (full parity). Branch `design/comcom-pass-1`.
 Legend: ✅ done+verified · ⬜ todo
 
-## Converted — 21 controllers / 30 React pages (React default, `?ui=legacy` ERB baseline, mobile-responsive, parity-verified)
+> **2026-07-05 update:** Fixed bare-index ERB fall-throughs — `/works`, `/bookmarks`,
+> `/works/search` (the sidebar Works/Bookmarks/Search links) now render React (guard
+> required `@owner && @search`; presenters already degrade). Added moderator tag-set
+> nominations review (`tag_set_nominations#index`). Mobile drawer nav buttons made
+> touch-friendly (mobile only). See `HANDOFF.md`. Totals now **29 controllers / 41 React pages**.
+
+## Converted — 29 controllers / 41 React pages (React default, `?ui=legacy` ERB baseline, mobile-responsive, parity-verified)
 
 **Works & reading:** ✅ works index · ✅ work show · ✅ chapter show · ✅ new/edit work (CRUD) · ✅ works search · ✅ reading history · ✅ external work show
 **Bookmarks/Collections/Series:** ✅ bookmarks index · ✅ collections index · ✅ collection show · ✅ collection items · ✅ series index · ✅ series show
