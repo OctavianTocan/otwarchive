@@ -70,6 +70,11 @@ class ChaptersController < ApplicationController
     # update the history.
     Reading.update_or_create(@work, current_user) if current_user
 
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    return if !request.format.js? && @work.present? && @chapter.present? && render_react("ChapterShow") do
+      ChapterShowPresenter.new(work: @work, chapter: @chapter, chapters: @chapters, kudos: @kudos).as_props
+    end
+
     respond_to do |format|
       format.html
       format.js

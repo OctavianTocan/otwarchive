@@ -69,6 +69,11 @@ class TagsController < ApplicationController
     end
 
     @has_mergers = @tag.canonical && @tag.mergers.exists?
+
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    return if @tag.present? && render_react("TagShow") do
+      TagShowPresenter.new(tag: @tag, heading: @page_subtitle).as_props
+    end
   end
 
   def feed

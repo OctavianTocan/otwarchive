@@ -58,6 +58,11 @@ class SeriesController < ApplicationController
                                    @series.title)
     end
 
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    return if @series.present? && render_react("SeriesShow") do
+      SeriesShowPresenter.new(series: @series, works: @works, heading: @series.title).as_props
+    end
+
     return unless current_user.respond_to?(:subscriptions)
 
     @subscription = current_user.subscriptions.where(subscribable: @series).first ||

@@ -45,7 +45,10 @@ class WorksController < ApplicationController
       @works = @search.search_results.scope(:for_blurb)
       set_own_works
       flash_search_warnings(@works)
-      render 'search_results'
+      # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+      unless render_react("WorksSearch") { WorksSearchPresenter.new(search: @search, results: @works, heading: @page_subtitle).as_props }
+        render 'search_results'
+      end
     end
   end
 
