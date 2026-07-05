@@ -55,6 +55,13 @@ class CollectionsController < ApplicationController
       @collections = @search.search_results.scope(:for_search)
       flash_search_warnings(@collections)
     end
+
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    owner = @user || @collection || @work
+    heading = @page_subtitle.presence || (@work ? ts("Collections including %{title}", title: @work.title) : ts("Collections"))
+    return if @collections.respond_to?(:total_pages) && render_react("CollectionsIndex") do
+      CollectionsIndexPresenter.new(results: @collections, owner: owner, heading: heading).as_props
+    end
   end
 
   # display challenges that are currently taking signups

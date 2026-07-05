@@ -37,6 +37,11 @@ class SeriesController < ApplicationController
       @series = @series.exclude_anonymous.for_user(@user)
     end
     @series = @series.paginate(page: params[:page])
+
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    return if @user.present? && @series.respond_to?(:total_pages) && render_react("SeriesIndex") do
+      SeriesIndexPresenter.new(results: @series, owner: @pseud || @user, heading: @page_subtitle).as_props
+    end
   end
 
   # GET /series/1
