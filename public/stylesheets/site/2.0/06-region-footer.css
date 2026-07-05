@@ -21,16 +21,15 @@ clean hover links.
 #footer > ul {
   border: 0;
   clear: both;
-  margin: 0 auto;
-  padding: 0 6%;
+  margin: 0;
+  padding: 0 3em;
   float: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 2.5em 3.5em;
-  justify-content: center;
+  gap: 2.5em 5em;
+  justify-content: space-between;
   align-items: flex-start;
   text-align: left;
-  max-width: 60em;
   width: 100%;
   box-sizing: border-box;
 }
