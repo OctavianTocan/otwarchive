@@ -135,6 +135,14 @@ class WorksController < ApplicationController
     set_own_works
 
     @pagy = pagy_query_result(@works) if @works.respond_to?(:total_pages)
+
+    if params[:ui] == "react" && @owner.present?
+      return render inertia: "WorksIndex",
+                    props: WorksIndexPresenter.new(
+                      results: @works, owner: @owner, search: @search, heading: @page_subtitle
+                    ).as_props,
+                    layout: "inertia"
+    end
   end
 
   def collected

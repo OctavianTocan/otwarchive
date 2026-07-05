@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "spike/hello" => "spike#hello" # frontend-react spike
   devise_scope :admin do
     get "admin/logout" => "admin/sessions#confirm_logout"
 

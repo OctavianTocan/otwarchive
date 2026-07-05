@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@source "../../**/*.{ts,tsx}";
+
+:root,
+.light {
+  --font-family-sans: "Geist Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-family-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* AO3-tuned surfaces + red identity over the ai-app-template palette */
+  --background: #fdfcfb;
+  --foreground: #2a2a2a;
+  --card: #ffffff;
+  --card-foreground: #2a2a2a;
+  --popover: #ffffff;
+  --popover-foreground: #2a2a2a;
+  --primary: #990000;
+  --primary-foreground: #fff7f5;
+  --secondary: #f2efe9;
+  --secondary-foreground: #2a2a2a;
+  --muted: #f4f0ea;
+  --muted-foreground: #6b6b6b;
+  --accent: #f4e9e6;
+  --accent-foreground: #7a0000;
+  --destructive: #b23a2e;
+  --destructive-foreground: #fff7f5;
+  --success: #007846;
+  --border: #e7e2da;
+  --input: #ffffff;
+  --ring: #cc7d5e;
+  --radius: 0.6rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2a2a2a;
+  --sidebar-border: #e7e2da;
+
+  --elevation-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --elevation-md: 0 4px 18px rgb(0 0 0 / 0.06);
+}
+
+@theme inline {
+  --font-sans: var(--font-family-sans);
+  --font-mono: var(--font-family-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-family-sans); }
+}

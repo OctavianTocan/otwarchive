@@ -79,3 +79,6 @@ coverage
 redis-cucumber-dump.rdb
 
 .rspec
+
+# agent research/plan scratch
+.context/
