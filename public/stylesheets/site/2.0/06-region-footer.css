@@ -18,7 +18,7 @@ clean hover links.
   width: 100%;
 }
 
-#footer ul {
+#footer > ul {
   border: 0;
   clear: both;
   margin: 0 auto;
@@ -49,8 +49,10 @@ clean hover links.
 }
 
 #footer .menu {
+  display: block;
   margin: 0.5em 0 0;
   padding: 0;
+  text-align: left;
 }
 
 #footer .menu li {
