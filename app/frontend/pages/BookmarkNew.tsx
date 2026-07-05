@@ -35,7 +35,7 @@ export default function BookmarkNew({ context, work, action, method, pseuds, val
   return (
     <AppShell>
       <div className="mx-auto max-w-[720px] px-4 pt-6 pb-16 md:px-5">
-        <h2 className="font-bold text-2xl">{context.heading}</h2>
+        <h2 className="font-semibold text-base">{context.heading}</h2>
         <p className="mt-0.5 mb-5 text-muted-foreground text-sm">
           for <a href={work.url ?? "#"} className="text-link hover:underline">{work.title}</a>
         </p>

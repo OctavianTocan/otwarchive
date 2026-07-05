@@ -75,7 +75,7 @@ function ChapterView({ ch, multi }: { ch: Chapter; multi: boolean }) {
     <section className="border-border border-t pt-6 first:border-t-0 first:pt-0">
       {multi && (
         <header className="mb-3">
-          <h3 className="font-semibold text-lg">
+          <h3 className="font-semibold text-base">
             {ch.header}
             {ch.title && <span className="font-normal text-muted-foreground">: {ch.title}</span>}
           </h3>
@@ -118,7 +118,7 @@ export default function WorkShow(props: Props) {
         <Card className="px-6 py-5">
           {/* Preface */}
           <div>
-            <h1 className="font-bold text-2xl leading-tight">
+            <h1 className="font-semibold text-lg leading-tight">
               {work.restricted && <span title="Restricted" className="mr-1 align-middle text-base">🔒</span>}
               <a href={work.url ?? "#"} className="text-link hover:underline">{work.title}</a>
             </h1>

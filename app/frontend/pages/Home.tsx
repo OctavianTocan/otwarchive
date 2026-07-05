@@ -79,7 +79,7 @@ function Blurb({ w }: { w: WorkBlurb }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -110,7 +110,7 @@ function IntroBlock({ intro }: { intro: Intro }) {
   const { account } = intro;
   return (
     <Card className="px-5">
-      <h2 className="font-bold text-2xl leading-snug">{intro.description}</h2>
+      <h2 className="font-semibold text-lg leading-snug">{intro.description}</h2>
       <p className="flex flex-wrap gap-x-4 gap-y-1 text-muted-foreground text-sm tabular-nums">
         <span><span className="font-semibold text-foreground">{n(intro.stats.fandoms)}</span> fandoms</span>
         <span><span className="font-semibold text-foreground">{n(intro.stats.users)}</span> users</span>
@@ -181,7 +181,7 @@ function NewsList({ news }: { news: NewsPost[] }) {
         {news.map((p) => (
           <li key={p.id}>
             <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
-              <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+              <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
                 <a href={p.url ?? "#"} className="text-link hover:underline" dangerouslySetInnerHTML={{ __html: p.title }} />
               </h4>
               <p className="flex flex-wrap gap-x-3 text-muted-foreground text-xs tabular-nums">

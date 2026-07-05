@@ -46,7 +46,7 @@ function WorkBlurbCard({ w }: { w: WorkBlurb }) {
   return (
     <>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -89,7 +89,7 @@ function WorkBlurbCard({ w }: { w: WorkBlurb }) {
 
 function BookmarkBlurbCard({ b }: { b: BookmarkBlurb }) {
   return (
-    <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+    <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
       {b.url ? <a href={b.url} className="text-link hover:underline">{b.title}</a> : <span className="text-muted-foreground">{b.title}</span>}
     </h4>
   );
@@ -130,7 +130,7 @@ export default function CollectionItemsIndex({ context, items, pagination }: Pro
 
       <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main>
-          <h2 className="font-bold text-2xl">{context.heading || context.collectionName}</h2>
+          <h2 className="font-semibold text-base">{context.heading || context.collectionName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} items · page {pagination.page} of {pagination.pages}</p>
           {items.length === 0 && <p className="py-6 text-muted-foreground">Nothing to review here!</p>}
           <ol className="flex flex-col divide-y divide-border">{items.map((item) => <li key={item.id}><ItemCard item={item} /></li>)}</ol>

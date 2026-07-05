@@ -48,7 +48,7 @@ function Blurb({ w }: { w: WorkBlurb }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -183,7 +183,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
         </aside>
 
         <main>
-          <h2 className="font-bold text-2xl">{context.heading || context.ownerName}</h2>
+          <h2 className="font-semibold text-base">{context.heading || context.ownerName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} works · page {pagination.page} of {pagination.pages}</p>
           {works.length === 0 && <p className="py-6 text-muted-foreground">No works matched these filters.</p>}
           <ol className="flex flex-col divide-y divide-border">{works.map((w) => <li key={w.id}><Blurb w={w} /></li>)}</ol>

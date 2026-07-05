@@ -53,7 +53,7 @@ export default function ExternalWorkShow({
         <Card className="px-6 py-5">
           {/* Preface */}
           <div>
-            <h1 className="font-bold text-2xl leading-tight">
+            <h1 className="font-semibold text-lg leading-tight">
               {externalUrl ? (
                 <a href={externalUrl} className="text-link hover:underline">{title}</a>
               ) : (

@@ -70,7 +70,7 @@ function WorkHeader({ w }: { w: WorkBlurb }) {
   return (
     <>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -105,7 +105,7 @@ function BookmarkCard({ b }: { b: Bookmark }) {
         <WorkHeader w={blurb} />
       ) : (
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-          <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-base leading-snug">
+          <h4 className="min-w-0 break-words min-w-0 break-words font-semibold text-[15px] leading-snug">
             {bm.url ? <a href={bm.url} className="text-link hover:underline">{bm.title ?? "(untitled)"}</a> : (bm.title ?? "(deleted)")}
           </h4>
           <Badge variant="outline" className="shrink-0">{bm.type}</Badge>
@@ -218,7 +218,7 @@ export default function BookmarksIndex({ context, bookmarks, pagination, facets,
         </aside>
 
         <main>
-          <h2 className="font-bold text-2xl">{context.heading || context.ownerName}</h2>
+          <h2 className="font-semibold text-base">{context.heading || context.ownerName}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">{n(pagination.count)} bookmarks · page {pagination.page} of {pagination.pages}</p>
           {bookmarks.length === 0 && <p className="py-6 text-muted-foreground">No bookmarks matched these filters.</p>}
           <ol className="flex flex-col divide-y divide-border">{bookmarks.map((b) => <li key={b.id}><BookmarkCard b={b} /></li>)}</ol>

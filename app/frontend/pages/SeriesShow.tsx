@@ -47,7 +47,7 @@ function WorkCard({ part, w }: { part: number | null; w: WorkBlurb }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           {part != null && <span className="mr-1.5 font-normal text-muted-foreground tabular-nums">Part {part}</span>}
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
@@ -93,7 +93,7 @@ export default function SeriesShow({ context, title, creators, summaryHtml, note
         <main className="flex flex-col gap-5">
           <header className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <h2 className="min-w-0 break-words font-bold text-2xl leading-tight">{title}</h2>
+              <h2 className="min-w-0 break-words font-semibold text-lg leading-tight">{title}</h2>
               <div className="flex shrink-0 flex-wrap gap-1 sm:justify-end">
                 <Badge variant={stats.complete ? "secondary" : "outline"}>{stats.complete ? "Complete" : "In Progress"}</Badge>
               </div>
@@ -137,7 +137,7 @@ export default function SeriesShow({ context, title, creators, summaryHtml, note
           )}
 
           <section className="flex flex-col gap-3.5">
-            <h3 className="font-semibold text-lg">Works in this series</h3>
+            <h3 className="font-semibold text-base">Works in this series</h3>
             {works.length === 0 && <p className="py-6 text-muted-foreground">No works to show.</p>}
             <ol className="flex flex-col divide-y divide-border">
               {works.map((sw) => (

@@ -33,7 +33,7 @@ function InvitationRow({ i }: { i: Invitation }) {
   return (
     <Card className="flex flex-col gap-2 px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
       <div className="min-w-0">
-        <h4 className="min-w-0 break-all font-semibold text-base leading-snug tabular-nums">{i.token}</h4>
+        <h4 className="min-w-0 break-all font-semibold text-[15px] leading-snug tabular-nums">{i.token}</h4>
         <p className="mt-0.5 text-muted-foreground text-sm">
           {i.used ? (
             <>Redeemed by <InvitedUserLabel user={i.invitedUser ?? { name: null, url: null }} /></>
@@ -72,7 +72,7 @@ export default function InvitationsIndex({ context, invitations, pagination }: P
     <AppShell>
       <div className="mx-auto max-w-[1180px] px-4 pt-6 pb-16 md:px-5">
         <main>
-          <h2 className="font-bold text-2xl">{context.heading}</h2>
+          <h2 className="font-semibold text-base">{context.heading}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">
             {n(pagination.count)} invitations · page {pagination.page} of {pagination.pages}
           </p>

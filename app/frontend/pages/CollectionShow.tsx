@@ -44,7 +44,7 @@ export default function CollectionShow({
         <main className="flex flex-col gap-5">
           <header className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <h2 className="min-w-0 break-words font-bold text-2xl leading-tight">{title}</h2>
+              <h2 className="min-w-0 break-words font-semibold text-lg leading-tight">{title}</h2>
               <div className="flex shrink-0 flex-wrap gap-1 sm:justify-end">
                 <Badge variant={open ? "secondary" : "outline"}>{open ? "Open" : "Closed"}</Badge>
                 <Badge variant="outline">{moderated ? "Moderated" : "Unmoderated"}</Badge>

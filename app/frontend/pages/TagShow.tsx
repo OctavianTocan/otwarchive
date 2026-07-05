@@ -56,7 +56,7 @@ export default function TagShow({
         <main className="flex flex-col gap-5">
           <header className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <h2 className="min-w-0 break-words font-bold text-2xl leading-tight">{name}</h2>
+              <h2 className="min-w-0 break-words font-semibold text-lg leading-tight">{name}</h2>
               <div className="flex shrink-0 flex-wrap gap-1 sm:justify-end">
                 {type && <Badge variant="secondary">{type}</Badge>}
                 <Badge variant="outline">{canonical ? "Canonical" : "Not canonical"}</Badge>

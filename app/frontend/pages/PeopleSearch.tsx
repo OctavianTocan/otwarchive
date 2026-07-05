@@ -35,7 +35,7 @@ function PersonBlurb({ p }: { p: Person }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={p.url ?? "#"} className="text-link hover:underline">{p.name}</a>
           {showLogin && (
             <span className="font-normal text-muted-foreground">
@@ -77,7 +77,7 @@ export default function PeopleSearch({ context, people, pagination, resultCount 
   return (
     <AppShell>
       <div className="mx-auto max-w-[900px] px-4 pt-6 pb-16 md:px-5">
-        <h2 className="font-bold text-2xl">{context.heading || "People Search"}</h2>
+        <h2 className="font-semibold text-base">{context.heading || "People Search"}</h2>
 
         <Card className="mt-4 px-5">
           <label htmlFor="people_search_name" className="font-medium text-muted-foreground text-xs uppercase tracking-wide">

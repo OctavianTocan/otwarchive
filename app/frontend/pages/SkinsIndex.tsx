@@ -34,7 +34,7 @@ function SkinCard({ s, isOwner }: { s: Skin; isOwner: boolean }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           {s.url
             ? <a href={s.url} className="text-link hover:underline">{s.title}</a>
             : <span>{s.title}</span>}
@@ -90,7 +90,7 @@ export default function SkinsIndex({ context, skins }: Props) {
     <AppShell>
       <div className="mx-auto max-w-[1180px] px-4 md:px-5 pt-6 pb-16">
         <main>
-          <h2 className="font-bold text-2xl">{context.heading || "Skins"}</h2>
+          <h2 className="font-semibold text-base">{context.heading || "Skins"}</h2>
           <p className="mt-1 mb-4 max-w-[70ch] text-muted-foreground text-sm">
             A site skin lets you change the way the Archive is presented when you are logged in
             to your account. You can use work skins to customize the way your own works are shown

@@ -17,7 +17,7 @@ const n = (v?: number) => (v ?? 0).toLocaleString("en-US");
 function SubscriptionCard({ s }: { s: Subscription }) {
   return (
     <Card className="flex flex-col gap-2 px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-      <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+      <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
         {s.url ? (
           <a href={s.url} className="text-link hover:underline">{s.name}</a>
         ) : (
@@ -49,7 +49,7 @@ export default function SubscriptionsIndex({ context, subscriptions, pagination 
     <AppShell>
       <div className="mx-auto max-w-[1180px] px-4 pt-6 pb-16 md:px-5">
         <main>
-          <h2 className="font-bold text-2xl">{context.heading}</h2>
+          <h2 className="font-semibold text-base">{context.heading}</h2>
           <p className="mt-0.5 mb-4 text-muted-foreground tabular-nums">
             {n(pagination.count)} subscriptions · page {pagination.page} of {pagination.pages}
           </p>

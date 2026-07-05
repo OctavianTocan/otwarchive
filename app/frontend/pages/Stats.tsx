@@ -49,7 +49,7 @@ export default function Stats({ context, totals, fandoms }: Props) {
     <AppShell>
       <div className="mx-auto max-w-[1180px] px-4 pt-6 pb-16 md:px-5">
         <main>
-          <h2 className="break-words font-bold text-2xl">{context.heading || "Statistics"}</h2>
+          <h2 className="break-words font-semibold text-base">{context.heading || "Statistics"}</h2>
 
           <Card className="mt-4 px-5">
             <h3 className="font-bold text-lg">Totals</h3>

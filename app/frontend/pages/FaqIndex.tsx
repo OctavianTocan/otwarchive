@@ -13,7 +13,7 @@ export default function FaqIndex({ context, faqs }: Props) {
       <div className="mx-auto max-w-[900px] px-4 md:px-5 pt-6 pb-16">
         <main className="flex flex-col gap-5">
           <header>
-            <h2 className="font-bold text-2xl leading-tight">{context.heading}</h2>
+            <h2 className="font-semibold text-lg leading-tight">{context.heading}</h2>
           </header>
 
           {faqs.length > 0 ? (

@@ -19,7 +19,7 @@ export default function FaqShow({ context, title, questions }: Props) {
                 {context.heading}
               </a>
             </p>
-            <h2 className="break-words font-bold text-2xl leading-tight">{title}</h2>
+            <h2 className="break-words font-semibold text-lg leading-tight">{title}</h2>
           </header>
 
           {questions.length > 0 ? (
@@ -40,7 +40,7 @@ export default function FaqShow({ context, title, questions }: Props) {
               <div className="flex flex-col gap-6">
                 {questions.map((q, i) => (
                   <section key={i} id={q.anchor} className="scroll-mt-20">
-                    <h3 className="font-semibold text-lg">{q.question}</h3>
+                    <h3 className="font-semibold text-base">{q.question}</h3>
                     {q.answerHtml && (
                       <div
                         className="userstuff mt-2 text-foreground/90 text-sm [&_a]:text-primary [&_a]:hover:underline [&_p]:my-2"

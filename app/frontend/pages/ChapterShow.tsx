@@ -117,7 +117,7 @@ export default function ChapterShow(props: Props) {
         <Card className="px-6 py-5">
           {/* Work preface */}
           <div>
-            <h1 className="font-bold text-2xl leading-tight">
+            <h1 className="font-semibold text-lg leading-tight">
               {work.restricted && <span title="Restricted" className="mr-1 align-middle text-base">🔒</span>}
               <a href={work.url ?? "#"} className="text-link hover:underline">{work.title}</a>
             </h1>

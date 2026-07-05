@@ -40,7 +40,7 @@ function Blurb({ w }: { w: WorkBlurb }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -96,7 +96,7 @@ export default function WorksSearch({ context, works, pagination, resultCount, f
     <AppShell>
 
       <div className="mx-auto max-w-[900px] px-4 pt-6 pb-16 md:px-5">
-        <h2 className="font-bold text-2xl">{context.heading || "Search Works"}</h2>
+        <h2 className="font-semibold text-base">{context.heading || "Search Works"}</h2>
 
         <Card className="mt-4 px-5">
           <label htmlFor="work_search_query" className="font-medium text-muted-foreground text-xs uppercase tracking-wide">

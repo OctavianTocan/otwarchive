@@ -37,7 +37,7 @@ function Blurb({ w }: { w: WorkBlurb }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+        <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
           <a href={w.url} className="text-link hover:underline">{w.title}</a>
           <span className="font-normal text-muted-foreground"> by </span>
           {w.authors.map((a, i) => (
@@ -77,7 +77,7 @@ function Blurb({ w }: { w: WorkBlurb }) {
 function SeriesCard({ s }: { s: SeriesRef }) {
   return (
     <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
-      <h4 className="min-w-0 break-words font-semibold text-base leading-snug">
+      <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
         {s.url
           ? <a href={s.url} className="text-link hover:underline">{s.title}</a>
           : <span>{s.title}</span>}
@@ -113,7 +113,7 @@ export default function PseudShow({ context, name, userLogin, userUrl, bioHtml, 
           <Card className="px-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0">
-                <h2 className="break-words font-bold text-2xl">
+                <h2 className="break-words font-semibold text-base">
                   {context.heading || name}
                   {showParent && (
                     <span className="ml-1.5 font-normal text-muted-foreground text-lg">
