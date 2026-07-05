@@ -19,7 +19,8 @@ const qs = (params) => Object.entries(params).map(([k, v]) => `${encodeURICompon
 const num = (s) => (s == null ? null : parseInt(String(s).replace(/[^0-9]/g, ""), 10) || 0);
 
 async function erbData(path, params) {
-  const url = `${BASE}${path}${Object.keys(params).length ? "?" + qs(params) : ""}`;
+  const p2 = { ...params, ui: "legacy" };
+  const url = `${BASE}${path}?${qs(p2)}`;
   const html = await (await fetch(url)).text();
   const { document } = parseHTML(html);
   const blurbs = [...document.querySelectorAll("li.work.blurb, li.blurb.work, li.work.blurb.group")];
@@ -41,7 +42,7 @@ async function erbData(path, params) {
 }
 
 async function reactData(path, params) {
-  const url = `${BASE}${path}?ui=react${Object.keys(params).length ? "&" + qs(params) : ""}`;
+  const url = `${BASE}${path}${Object.keys(params).length ? "?" + qs(params) : ""}`;
   const j = await (await fetch(url, { headers: { "X-Inertia": "true", "X-Requested-With": "XMLHttpRequest" } })).json();
   const p = j.props;
   return {
@@ -98,8 +99,8 @@ const browser = await chromium.launch({ executablePath: CHROME, args: ["--no-san
 for (const fx of FIXTURES) {
   const [erb, react] = await Promise.all([erbData(fx.path, fx.params), reactData(fx.path, fx.params)]);
   const issues = diff(erb, react);
-  const reactUrl = `${BASE}${fx.path}?ui=react${Object.keys(fx.params).length ? "&" + qs(fx.params) : ""}`;
-  const erbUrl = `${BASE}${fx.path}${Object.keys(fx.params).length ? "?" + qs(fx.params) : ""}`;
+  const reactUrl = `${BASE}${fx.path}${Object.keys(fx.params).length ? "?" + qs(fx.params) : ""}`;
+  const erbUrl = `${BASE}${fx.path}?${qs({ ...fx.params, ui: "legacy" })}`;
   const [a11yReact, a11yErb] = await Promise.all([a11y(browser, reactUrl), a11y(browser, erbUrl)]);
   const rec = {
     name: fx.name, dataParity: issues.length === 0 ? "PASS" : "FAIL",

@@ -33,7 +33,6 @@ const SORTS: [string, string][] = [
 
 function buildUrl(inc: Record<string, string[]>, ws: Record<string, string>, page: number) {
   const p = new URLSearchParams();
-  p.set("ui", "react");
   for (const [key, ids] of Object.entries(inc)) for (const id of ids) p.append(`include_work_search[${key}_ids][]`, id);
   for (const [k, v] of Object.entries(ws)) if (v) p.append(`work_search[${k}]`, v);
   if (page > 1) p.set("page", String(page));

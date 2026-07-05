@@ -136,12 +136,11 @@ class WorksController < ApplicationController
 
     @pagy = pagy_query_result(@works) if @works.respond_to?(:total_pages)
 
-    if params[:ui] == "react" && @owner.present?
-      return render inertia: "WorksIndex",
-                    props: WorksIndexPresenter.new(
-                      results: @works, owner: @owner, search: @search, heading: @page_subtitle
-                    ).as_props,
-                    layout: "inertia"
+    # React by default; ?ui=legacy keeps the ERB view for parity/reference.
+    # Guard: only render React when an owner-scoped search is present (the bare
+    # /works "Latest Works" path has no @search/@owner yet).
+    return if @owner.present? && @search.present? && render_react("WorksIndex") do
+      WorksIndexPresenter.new(results: @works, owner: @owner, search: @search, heading: @page_subtitle).as_props
     end
   end
 
