@@ -9,16 +9,16 @@ Legend: ✅ done+verified · ⬜ todo
 **Bookmarks/Collections/Series:** ✅ bookmarks index · ✅ collections index · ✅ collection show · ✅ collection items · ✅ series index · ✅ series show
 **People/Tags:** ✅ user profile · ✅ pseud show · ✅ people search · ✅ tag show · ✅ media/fandoms browse
 **Account/social:** ✅ home (landing + dashboard) · ✅ inbox (read-only) · ✅ gifts · ✅ subscriptions
-**Content/other:** ✅ skins · ✅ FAQ (index+show) · ✅ known issues (index+show) · ✅ wrangling guidelines (index+show)
+**Content/other:** ✅ stats · ✅ tag sets · ✅ related works · ✅ skins · ✅ FAQ (index+show) · ✅ known issues (index+show) · ✅ wrangling guidelines (index+show)
 
 ## Foundation & chrome (done)
-✅ Inverted switch + presenter base + shared props · ✅ cogram-style sidebar + sticky mobile + AO3 logo · ✅ AO3 palette (warm-mono + red brand/links) · ✅ SSR ADR 0001 · ✅ CI parity harness (11/11) · ✅ feed/JS format-guard
+✅ Inverted switch + presenter base + shared props · ✅ cogram-style sidebar + sticky mobile + AO3 logo · ✅ AO3 palette (warm-mono + red brand/links) · ✅ SSR ADR 0001 · ✅ CI parity harness (11/11) · ✅ feed/JS format-guard · ✅ modern-red palette · ✅ de-surfaced flat aesthetic · ✅ vaul mobile drawer
 
 ## Remaining (tracked; each = the same incremental recipe)
 - ⬜ **Write actions:** kudos, bookmark create/edit, subscribe/unsubscribe, comment post, work post-to-collection, inbox reply/approve, collection-items moderate — need Inertia form POSTs (pattern proven by work-form).
-- ⬜ **Account settings:** preferences, profile edit, tag_sets (owned_tag_sets misfired).
+- ⬜ **Account settings:** preferences, profile edit, .
 - ⬜ **Challenges subsystem:** challenges, signups, assignments, claims, prompts, potential_matches, nominations (large).
-- ⬜ **Misc:** related works, downloads, stats, invitations, orphans, questions, comments threads (interactive).
+- ⬜ **Misc:** downloads, invitations, orphans, questions, comments threads (interactive).
 - ⬜ **Admin:** ~120 admin templates + tag wrangling (batch last, low-traffic).
 - ⬜ **Enhancement tracks:** form depth (TinyMCE + tag autocomplete — endpoints already in props), i18n (Rails→props bridge), SSR sidecar deploy + retire-ERB cutover.
 
