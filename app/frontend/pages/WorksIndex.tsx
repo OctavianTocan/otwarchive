@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/design-system/components/ui/button";
 import WorkSheet from "../components/WorkSheet";
 import { FilterSection, FilterSidebar } from "../components/shared/FilterSidebar";
@@ -77,6 +77,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
   const [workSearch, setWorkSearch] = useState<Record<string, string>>(filters.work_search ?? {});
   const [busy, setBusy] = useState(false);
   const [sheet, setSheet] = useState<{ readonly id: number; readonly url: string } | null>(null);
+  const sheetDialogRef = useRef<HTMLDialogElement>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const go = (page = 1, nextInclude = include, nextWorkSearch = workSearch) => {
@@ -110,14 +111,27 @@ export default function WorksIndex({ context, works, pagination, facets, filters
     go(1, {}, {});
   };
 
+  const openSheet = (selectedWork: WorkBlurb) => {
+    setSheet({ id: selectedWork.id, url: selectedWork.url });
+    const dialog = sheetDialogRef.current;
+    if (!dialog?.open) dialog?.showModal();
+  };
+
+  const closeSheet = () => {
+    const dialog = sheetDialogRef.current;
+    if (dialog?.open) dialog.close();
+    setSheet(null);
+  };
+
   return (
     <PageFrame
       variant="withSidebar"
       after={(
         <WorkSheet
+          dialogRef={sheetDialogRef}
           workId={sheet?.id ?? null}
           workUrl={sheet?.url ?? null}
-          onClose={() => setSheet(null)}
+          onClose={closeSheet}
         />
       )}
     >
@@ -236,7 +250,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
             <li key={work.id}>
               <WorkBlurbCard
                 work={work}
-                onOpen={(selectedWork) => setSheet({ id: selectedWork.id, url: selectedWork.url })}
+                onOpen={openSheet}
               />
             </li>
           ))}

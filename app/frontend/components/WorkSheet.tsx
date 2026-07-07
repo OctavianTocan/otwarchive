@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { RefObject } from "react";
 import { XIcon } from "lucide-react";
 
 type TagRef = { readonly name: string };
@@ -86,7 +87,14 @@ async function loadWork(id: number): Promise<WorkProps | null> {
   }
 }
 
-export default function WorkSheet({ workId, workUrl, onClose }: { workId: number | null; workUrl: string | null; onClose: () => void }) {
+type WorkSheetProps = {
+  readonly dialogRef: RefObject<HTMLDialogElement | null>;
+  readonly workId: number | null;
+  readonly workUrl: string | null;
+  readonly onClose: () => void;
+};
+
+export default function WorkSheet({ dialogRef, workId, workUrl, onClose }: WorkSheetProps) {
   const [data, setData] = useState<WorkProps | null>(null);
   const [loading, setLoading] = useState(false);
   const open = workId != null;
@@ -100,20 +108,26 @@ export default function WorkSheet({ workId, workUrl, onClose }: { workId: number
   }, [workId]);
 
   const title = data?.work?.title ?? data?.pageTitle ?? "Loading…";
+  const close = () => {
+    const dialog = dialogRef.current;
+    if (dialog?.open) {
+      dialog.close();
+      return;
+    }
+
+    onClose();
+  };
 
   return (
     <dialog
-      open={open}
+      ref={dialogRef}
       aria-labelledby="work-sheet-title"
       className="fixed inset-x-0 bottom-0 top-auto z-50 m-0 h-[93svh] max-h-[93svh] w-full max-w-none rounded-t-2xl border-border border-t bg-background p-0 text-foreground shadow-[0_-8px_40px_rgba(0,0,0,0.18)] backdrop:bg-black/50 open:flex open:flex-col"
-      onCancel={(event) => {
-        event.preventDefault();
-        onClose();
-      }}
+      onClose={onClose}
     >
         <div className="mx-auto mt-2.5 h-1.5 w-10 shrink-0 rounded-full bg-border" aria-hidden />
         <header className="flex items-center gap-3 border-border border-b px-4 py-3">
-          <button type="button" onClick={onClose} aria-label="Close" className="grid size-8 shrink-0 place-items-center rounded-md hover:bg-muted"><XIcon className="size-5" /></button>
+          <button type="button" onClick={close} aria-label="Close" className="grid size-8 shrink-0 place-items-center rounded-md hover:bg-muted"><XIcon className="size-5" /></button>
           <h3 id="work-sheet-title" className="min-w-0 flex-1 truncate font-semibold text-[15px]">{title}</h3>
           {workUrl && <a href={workUrl} className="shrink-0 text-link text-sm hover:underline">Open →</a>}
         </header>
