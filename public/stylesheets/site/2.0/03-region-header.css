@@ -276,24 +276,3 @@ notice that CSS3 declarations sit are indented twice (four spaces) and always co
 }
 
 /* END == */
-
-/* == React-island sidebar (mounted design-system component in a Shadow DOM;
-   assets in public/ao3-island). Replaces the old custom CSS sidebar. == */
-#ao3-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: var(--ao3-sidebar-w, 16rem);
-  overflow: visible;
-  z-index: 60;
-}
-#header { margin: 0; }
-#outer.wrapper {
-  box-sizing: border-box;
-  padding-left: var(--ao3-sidebar-w, 16rem);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-#footer { margin-top: auto; }

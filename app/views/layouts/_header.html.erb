@@ -13,9 +13,6 @@
 <% end %>
 
 <header id="header" class="region<% if @collection %> collection<% end %>">
-  <!-- React-island sidebar mounts here (public/ao3-island/ao3-sidebar.js) -->
-  <div id="ao3-sidebar"></div>
-
   <% if logged_in_as_admin? %>
     <%= render "admin/header" %>
   <% end %>
@@ -28,15 +25,6 @@
     </h2>
   <% end %>
 </header>
-
-<script src="/ao3-island/ao3-sidebar.js" defer></script>
-<script>
-  document.addEventListener("turbolinks:load", function () {
-    if (window.AO3Sidebar && window.AO3Sidebar.mount) {
-      window.AO3Sidebar.mount(document.getElementById("ao3-sidebar"));
-    }
-  });
-</script>
 
 <%= render "layouts/banner" %>
 

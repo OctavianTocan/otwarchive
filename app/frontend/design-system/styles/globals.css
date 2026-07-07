@@ -42,9 +42,18 @@
   --link-hover: #e11d48;
   --link-visited: #7a0040;
 
+  --footer: #900;
+  --footer-foreground: rgb(255 255 255 / 0.72);
+  --footer-foreground-strong: #ffffff;
+  --footer-texture: url("/images/skins/textures/tiles/red-ao3.png");
+
   --sidebar: #f7f5f2;
   --sidebar-foreground: #232220;
   --sidebar-border: #e8e6e1;
+  --sidebar-width: 15rem;
+  --sidebar-width-collapsed: 4rem;
+  --sidebar-width-min: 13.75rem;
+  --sidebar-width-max: 30rem;
 
   --elevation-sm: 0 1px 2px -0.5px rgb(0 0 0 / 0.07), 0 2px 4px -1px rgb(0 0 0 / 0.06);
   --elevation-md: 0 2px 4px -1px rgb(0 0 0 / 0.07), 0 6px 12px -3px rgb(0 0 0 / 0.08), 0 12px 20px -8px rgb(0 0 0 / 0.06);
@@ -77,6 +86,9 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
+  --color-footer-foreground-strong: var(--footer-foreground-strong);
   --color-link: var(--link);
   --color-link-hover: var(--link-hover);
   --color-sidebar: var(--sidebar);
@@ -93,7 +105,42 @@
 
 @layer base {
   * { border-color: var(--border); }
-  body { background: var(--background); color: var(--foreground); font-family: var(--font-family-sans); letter-spacing: -0.011em; }
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-family-sans); letter-spacing: -0.011em; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+}
+
+.ao3-agent-spinner {
+  display: inline-grid;
+  width: 1.625rem;
+  height: 1.625rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.1875rem;
+  color: var(--link);
+}
+
+.ao3-agent-spinner span {
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.28;
+  transform: scale(0.72);
+  animation: ao3-spinner-pulse 0.9s ease-in-out infinite;
+}
+
+.ao3-agent-spinner span:nth-child(2),
+.ao3-agent-spinner span:nth-child(4) { animation-delay: 75ms; }
+.ao3-agent-spinner span:nth-child(3),
+.ao3-agent-spinner span:nth-child(5),
+.ao3-agent-spinner span:nth-child(7) { animation-delay: 150ms; }
+.ao3-agent-spinner span:nth-child(6),
+.ao3-agent-spinner span:nth-child(8) { animation-delay: 225ms; }
+.ao3-agent-spinner span:nth-child(9) { animation-delay: 300ms; }
+
+@keyframes ao3-spinner-pulse {
+  0%, 100% { opacity: 0.24; transform: scale(0.72); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ao3-agent-spinner span { animation: none; opacity: 0.72; transform: none; }
 }
 
 /* AO3 static/userstuff content rendered inside React (StaticPage, etc.). The
@@ -115,3 +162,26 @@
 .ao3-prose dl { margin: 0.7rem 0; }
 .ao3-prose dt { font-weight: 600; margin-top: 0.5rem; }
 .ao3-prose hr { border: 0; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+.ao3-prose form { margin: 1rem 0; }
+.ao3-prose fieldset { margin: 1rem 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 1rem; box-shadow: var(--elevation-sm); }
+.ao3-prose legend { padding: 0 0.35rem; font-weight: 600; }
+.ao3-prose label { font-weight: 600; }
+.ao3-prose input[type="text"],
+.ao3-prose input[type="email"],
+.ao3-prose input[type="password"] { min-height: 2.25rem; width: min(100%, 28rem); border: 1px solid var(--border-strong); border-radius: calc(var(--radius) - 0.125rem); background: var(--input); padding: 0.45rem 0.65rem; color: var(--foreground); }
+.ao3-prose input[type="checkbox"] { margin-right: 0.4rem; accent-color: var(--primary); }
+.ao3-prose input[type="submit"],
+.ao3-prose button,
+.ao3-prose .actions a { display: inline-flex; min-height: 2rem; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: var(--radius); background: var(--primary); padding: 0.4rem 0.75rem; color: var(--primary-foreground); font-weight: 600; font-size: 0.875rem; text-decoration: none; transition-property: background-color, color, border-color, box-shadow, opacity, transform; transition-duration: 150ms; transition-timing-function: ease-out; }
+.ao3-prose input[type="submit"]:hover,
+.ao3-prose button:hover,
+.ao3-prose .actions a:hover { background: var(--primary-hover); text-decoration: none; }
+.ao3-prose input[type="submit"]:active,
+.ao3-prose button:active,
+.ao3-prose .actions a:active { transform: scale(0.96); }
+.ao3-prose .footnote,
+.ao3-prose .note { color: var(--muted-foreground); font-size: 0.875rem; }
+.ao3-prose .notice,
+.ao3-prose .error,
+.ao3-prose .alert { border-radius: var(--radius); background: var(--muted); padding: 0.75rem 1rem; }
+.ao3-prose .tos.module { max-height: 18rem; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); padding: 1rem; }
