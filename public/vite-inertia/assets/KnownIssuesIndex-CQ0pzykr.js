@@ -1,1 +1,0 @@
-import{j as r}from"./jsx-runtime-D_zvdyIk.js";import{a as i}from"./ContentPage-HmcKfydQ.js";import"./card-DDi9p00Y.js";import"./utils-Bllh_ec8.js";import"./AppShell-CgGjhnCb.js";import"./index-BvBzorwV.js";function u({context:t,items:o}){return r.jsx(i,{heading:t.heading,items:o})}export{u as default};
