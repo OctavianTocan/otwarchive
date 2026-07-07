@@ -6,6 +6,7 @@ class InviteRequestsController < ApplicationController
   def index
     @invite_request = InviteRequest.new
     @page_subtitle = t(".page_title")
+    return if render_erb_as_react("invite_requests/index", heading: @page_subtitle)
   end
 
   # GET /invite_requests/1
@@ -19,7 +20,9 @@ class InviteRequestsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html
+      format.html do
+        render_erb_as_react("invite_requests/show", heading: @page_subtitle) || render
+      end
       format.js
     end
   end
@@ -59,11 +62,12 @@ class InviteRequestsController < ApplicationController
     @invite_request.ip_address = request.remote_ip
     if @invite_request.save
       flash[:notice] = t(".success",
-                         date: l(@invite_request.proposed_fill_time.to_date, format: :long),
-                         return_address: ArchiveConfig.RETURN_ADDRESS)
+                          date: l(@invite_request.proposed_fill_time.to_date, format: :long),
+                          return_address: ArchiveConfig.RETURN_ADDRESS)
       redirect_to invite_requests_path
     else
-      render action: :index
+      @page_subtitle = t("invite_requests.index.page_title")
+      render_erb_as_react("invite_requests/index", heading: @page_subtitle) || render(action: :index)
     end
   end
 
@@ -112,6 +116,7 @@ class InviteRequestsController < ApplicationController
 
   def status
     @page_subtitle = t(".browser_title")
+    return if render_erb_as_react("invite_requests/status", heading: @page_subtitle)
   end
 
   private

@@ -5,10 +5,6 @@ type Props = {
   contentHtml: string;
 };
 
-// Renders a static AO3 content page (TOS, donate, site map, …). The server
-// hands us the existing ERB body verbatim; `.ao3-prose` styles its
-// .userstuff/.heading/.landmark markup. The body carries its own <h2>, so we
-// don't render context.heading visibly.
 export default function StaticPage({ contentHtml }: Props) {
   return (
     <AppShell>

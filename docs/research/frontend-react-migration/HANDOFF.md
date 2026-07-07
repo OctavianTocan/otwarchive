@@ -136,10 +136,62 @@ to a string and hands it to `StaticPage`, styled by a new `.ao3-prose` block in
 route/Warden edge can 500 the page. This is the reusable recipe for any
 remaining static/legal pages elsewhere in the app.
 
+### 3f. Follow-up audit + home/account entry coverage (2026-07-06)
+
+Source audit found the previous totals were slightly stale and that the obvious
+home/nav gap was account entry, not browse/search/news. Added a root `DESIGN.md`
+that codifies the existing AO3 React design system (warm monochrome tokens,
+AO3-red links, AppShell, Base UI Button/Badge/Card/Input/Textarea, StaticPage,
+and the repeated work-blurb pattern to extract next).
+
+`StaticPage` is now a general trusted-ERB bridge, backed by a shared
+`render_erb_as_react(template, heading:)` helper in `InertiaConvertible`. It is
+used for low-risk account/invite pages where the Rails form/backend contract
+should remain intact while the user-visible shell becomes React:
+
+| Route | React default | Legacy fallback |
+|---|---|---|
+| `/invite_requests` | `StaticPage` wrapping existing invite request form/body | `?ui=legacy` |
+| `/invite_requests/status` | `StaticPage` wrapping existing status lookup form/body | `?ui=legacy` |
+| `/invite_requests/show` | `StaticPage` wrapping existing status result body | `?ui=legacy` |
+| `/users/login` | `StaticPage` wrapping existing Devise login form/body | `?ui=legacy` |
+| `/signup` / `/users/sign_up` | `StaticPage` wrapping existing Devise signup form/body | `?ui=legacy` |
+
+Also extended `.ao3-prose` to style Rails-rendered forms, fieldsets, inputs,
+submit buttons, notices, footnotes, and the scrollable TOS module with the React
+tokens. Verified against a temporary worktree-mounted Rails server on port 3014:
+all routes above returned `data-page="app"`, `?ui=legacy` returned ERB, the invite
+status lookup submitted and stayed in React, and Chromium reported no console
+errors on invite/login/signup. `/collections` still 500'd in that disposable
+server because Elasticsearch at `127.0.0.1:9400` was unavailable; this was an
+environment issue from the mounted local config, not a React-route regression.
+
 ### Current totals
 
-**45 page components (incl. `StaticPage` covering ~10 static routes) · 40
-presenters · 32 controllers wired.** Parity harness 11/11.
+**Source audit, 2026-07-06:**
+
+- **45 React page files** in `app/frontend/pages`; **44 are wired** from Rails
+  (`Hello.tsx` exists but is not connected to any `render_react` call).
+- **40 presenter files** in `app/decorators` (including the shared
+  `InertiaPresenter` base).
+- **47 direct `render_react` call sites** using **44 unique components**.
+- **30 controller files wired** with `render_react` (not 32; the older count in
+  `coverage.md` is stale).
+- **33 controller files now serve React shells** when including the `StaticPage`
+  ERB bridge for account/invite entry pages.
+- `StaticPage` covers **10 HomeController routes**: content, privacy, tos,
+  tos_faq, takedown, lost_cookie, diversity_statement, site_map, donate, about.
+- Browser surface estimate: **58 converted browser page actions out of ~250
+  action-backed browser templates = ~23.2%**. Against all non-mailer,
+  non-layout browser page templates, it is **58 / 309 = ~18.8%**. Against every
+  ERB file (`721`, including partials, mailers, layouts, JS/XLS/text templates),
+  the number is only ~8%, but that denominator is misleading for user-facing page
+  migration. The 58 includes five `StaticPage`-bridged account/invite actions;
+  full custom TSX page components remain at 44 wired components.
+- Controllers: **30 / 95 total controllers = ~31.6%**, or **30 / 84 controllers
+  with browser templates = ~35.7%** for direct `render_react`; **33 / 95 =
+  ~34.7%**, or **33 / 84 = ~39.3%**, when including `StaticPage` bridge routes.
+- Parity harness remains documented as **11/11**.
 
 ---
 
@@ -148,7 +200,7 @@ presenters · 32 controllers wired.** Parity harness 11/11.
 **Build the bundle** (required after any `.tsx`/design-system change):
 ```bash
 cd app/frontend
-bunx vite build          # outputs to ../../public/vite-inertia/{inertia.js,inertia.css}
+bunx vite build          # outputs manifest + split chunks under ../../public/vite-inertia/
 ```
 `node_modules` lives in `app/frontend/node_modules` (gitignored, 189M). In a
 fresh worktree, symlink it: `ln -sfn <main-checkout>/app/frontend/node_modules node_modules`.
@@ -191,18 +243,18 @@ these live:** `/works`, `/bookmarks`, `/works/search`, `/tag_sets/:id/nomination
 ### High value, low effort — finish the "broken link" sweep
 Remaining ERB routes reachable from converted pages (found via the §4 curl
 sweep). `/works`, `/bookmarks`, `/works/search`, `/media/:id/fandoms`, `/tags`,
-`/users/:login/pseuds` are **done**. Still ERB:
+`/users/:login/pseuds`, and the listed `HomeController` static/legal pages are
+**done**. Still ERB:
 - `/works/:id/comments` — comment threads (interactive; do with the write-actions
   track, not a plain index).
 - `/abuse_reports/new`, `/support`, `/orphans/new` — forms.
-- Static content pages (`/tos`, `/tos_faq`, `/privacy`, `/takedown`,
-  `/diversity`, `/site_map`, `/donate`, `/about` — all `HomeController`).
-  **Skipped deliberately:** low traffic + they render `.landmark` sr-only
-  headings and nav partials that depend on AO3 CSS, so a clean React port needs a
-  small prose/landmark style shim. Batchable later via `render_to_string(action:,
-  layout: false)` → a generic `StaticPage` component.
 - **Method:** run the §4 curl sweep over every nav/blurb link, list the ERB ones,
   apply the same guard-relax recipe. Most index pages are 15-minute conversions.
+
+Largest remaining template clusters by source count: `admin` (~41), `help`
+(~29), `works` (~15), `users` (~15), `challenge` (~8), `owned_tag_sets` (~7),
+`errors` (~7), then `challenge_signups`/`collections` (~6 each). These counts are
+template counts, not route-traffic weights.
 
 ### The advanced works-search form
 `WorksSearch.tsx` is a **single query box** — it dropped the ERB advanced form

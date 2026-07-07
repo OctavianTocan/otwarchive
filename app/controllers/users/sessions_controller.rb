@@ -3,6 +3,14 @@ class Users::SessionsController < Devise::SessionsController
   layout "session"
   before_action :admin_logout_required
 
+  def new
+    self.resource = resource_class.new(sign_in_params)
+    clean_up_passwords(resource)
+    return if render_erb_as_react("users/sessions/new", heading: t("users.sessions.new.login.log_in", default: "Log in"))
+
+    super
+  end
+
   # POST /users/login
   def create
     super do |resource|

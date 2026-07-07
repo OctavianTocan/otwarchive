@@ -4,14 +4,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def new
     @page_subtitle = t(".page_title")
-    super do |resource|
-      if params[:invitation_token]
-        @invitation = Invitation.find_by(token: params[:invitation_token])
-        resource.invitation_token = @invitation.token
-        resource.email = @invitation.invitee_email
-      end
+    prepare_new_resource
+    return if render_erb_as_react("users/registrations/new", heading: @page_subtitle)
 
-      @hide_dashboard = true
+    super do |resource|
+      prepare_new_resource(resource)
     end
   end
 
@@ -27,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.save
         notify_and_show_confirmation_screen
       else
-        render action: "new"
+        render_erb_as_react("users/registrations/new", heading: @page_subtitle) || render(action: "new")
       end
     end
   end
@@ -42,6 +39,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
                         activation_url: activate_path(resource.confirmation_token)).html_safe if Rails.env.development?
 
     render 'users/confirmation'
+  end
+
+  def prepare_new_resource(target = resource)
+    build_resource({}) unless target
+    target ||= resource
+
+    if params[:invitation_token]
+      @invitation = Invitation.find_by(token: params[:invitation_token])
+      target.invitation_token = @invitation.token
+      target.email = @invitation.invitee_email
+    end
+
+    @hide_dashboard = true
   end
 
   def configure_permitted_parameters

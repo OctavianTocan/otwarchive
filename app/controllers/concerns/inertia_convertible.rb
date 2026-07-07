@@ -31,4 +31,17 @@ module InertiaConvertible
     render inertia: component, props: props, layout: "inertia"
     true
   end
+
+  def render_erb_as_react(template, heading: nil)
+    return false if params[:ui] == "legacy"
+    return false if request.format.js? || request.format.atom? || request.format.rss? || request.format.xml?
+
+    html = render_to_string(template: template, layout: false, formats: [:html])
+    render_react("StaticPage") do
+      { context: { heading: heading.to_s }, contentHtml: html }
+    end
+  rescue => e
+    Rails.logger.warn("render_erb_as_react(#{template}) fell back to ERB: #{e.class}: #{e.message}")
+    false
+  end
 end

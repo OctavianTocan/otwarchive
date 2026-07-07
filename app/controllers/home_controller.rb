@@ -98,10 +98,6 @@ class HomeController < ApplicationController
   # rendered to a string (a partial needing context we don't have here), fall
   # back to the ERB view rather than erroring.
   def render_static(view)
-    html = render_to_string(template: "home/#{view}", layout: false, formats: [:html])
-    render_react("StaticPage") { { context: { heading: @page_subtitle.to_s }, contentHtml: html } }
-  rescue => e
-    Rails.logger.warn("render_static(#{view}) fell back to ERB: #{e.class}: #{e.message}")
-    false
+    render_erb_as_react("home/#{view}", heading: @page_subtitle)
   end
 end
