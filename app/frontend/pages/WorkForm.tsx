@@ -1,4 +1,5 @@
 import { router, useForm } from "@inertiajs/react";
+import type { FormDataConvertible, RequestPayload } from "@inertiajs/core";
 import AppShell from "../components/AppShell";
 import { useState } from "react";
 import { Button } from "@/design-system/components/ui/button";
@@ -57,9 +58,9 @@ type Props = {
 
 // Flatten the nested React form state into the exact `work[...]` params the
 // Rails controller permits, including the multiparameter published_at(Ni) keys.
-function toPayload(v: WorkValues, button: string) {
+function toPayload(v: WorkValues, button: string): RequestPayload {
   const pub = v.chapter?.published_at;
-  const work: Record<string, unknown> = {
+  const work: Record<string, FormDataConvertible> = {
     title: v.title ?? "",
     rating_string: v.rating_string ?? "",
     archive_warning_strings: v.archive_warning_strings ?? [],
@@ -112,7 +113,9 @@ export default function WorkForm({ mode, action, method, posted, work, options, 
   const { data, setData, processing } = useForm<WorkValues>(work);
   const [submitting, setSubmitting] = useState<string | null>(null);
 
-  const set = <K extends keyof WorkValues>(k: K, val: WorkValues[K]) => setData(k, val);
+  const set = <K extends keyof WorkValues>(k: K, val: WorkValues[K]) => {
+    setData((previous) => ({ ...previous, [k]: val }));
+  };
   const setChapter = (patch: Partial<NonNullable<WorkValues["chapter"]>>) =>
     setData("chapter", { ...(data.chapter ?? {}), ...patch });
   const setPub = (patch: Partial<PubDate>) =>
@@ -127,8 +130,8 @@ export default function WorkForm({ mode, action, method, posted, work, options, 
     setSubmitting(button);
     const payload = toPayload(data, button);
     const opts = { forceFormData: false, onFinish: () => setSubmitting(null) };
-    if (method === "put") router.put(action, payload as never, opts);
-    else router.post(action, payload as never, opts);
+    if (method === "put") router.put(action, payload, opts);
+    else router.post(action, payload, opts);
   };
 
   const inputCls =

@@ -1,24 +1,91 @@
 import { useEffect, useState } from "react";
 import { XIcon } from "lucide-react";
 
-type TagRef = { name: string };
+type TagRef = { readonly name: string };
 type WorkProps = {
-  work?: { title: string; authors?: { name: string }[]; ratings?: TagRef[]; warnings?: TagRef[]; fandoms?: TagRef[] };
-  pageTitle?: string;
-  summaryHtml?: string | null;
-  chapters?: { position: number; title?: string | null; contentHtml: string | null }[];
+  readonly work?: {
+    readonly title: string;
+    readonly authors?: readonly TagRef[];
+    readonly ratings?: readonly TagRef[];
+    readonly warnings?: readonly TagRef[];
+    readonly fandoms?: readonly TagRef[];
+  };
+  readonly pageTitle?: string;
+  readonly summaryHtml?: string | null;
+  readonly chapters?: readonly { readonly position: number; readonly title?: string | null; readonly contentHtml: string | null }[];
 };
+
+const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null;
+const isList = (value: unknown): value is readonly unknown[] => Array.isArray(value);
+const nullableString = (value: unknown) => (typeof value === "string" || value === null ? value : null);
+
+function tags(value: unknown): readonly TagRef[] | undefined {
+  if (!isList(value)) return undefined;
+
+  return value.flatMap((item) => {
+    if (!isRecord(item) || typeof item.name !== "string") return [];
+    return [{ name: item.name }];
+  });
+}
+
+function chapters(value: unknown): WorkProps["chapters"] {
+  if (!isList(value)) return undefined;
+
+  return value.flatMap((item) => {
+    if (!isRecord(item) || typeof item.position !== "number") return [];
+
+    return [{
+      contentHtml: nullableString(item.contentHtml),
+      position: item.position,
+      title: nullableString(item.title),
+    }];
+  });
+}
+
+function work(value: unknown): WorkProps["work"] {
+  if (!isRecord(value) || typeof value.title !== "string") return undefined;
+
+  const authors = tags(value.authors);
+  const fandoms = tags(value.fandoms);
+  const ratings = tags(value.ratings);
+  const warnings = tags(value.warnings);
+
+  return {
+    title: value.title,
+    ...(authors ? { authors } : {}),
+    ...(fandoms ? { fandoms } : {}),
+    ...(ratings ? { ratings } : {}),
+    ...(warnings ? { warnings } : {}),
+  };
+}
+
+function propsFromPage(value: unknown): WorkProps | null {
+  if (!isRecord(value) || !isRecord(value.props)) return null;
+
+  const parsedChapters = chapters(value.props.chapters);
+  const parsedWork = work(value.props.work);
+  const pageTitle = typeof value.props.pageTitle === "string" ? value.props.pageTitle : undefined;
+
+  return {
+    summaryHtml: nullableString(value.props.summaryHtml),
+    ...(pageTitle ? { pageTitle } : {}),
+    ...(parsedChapters ? { chapters: parsedChapters } : {}),
+    ...(parsedWork ? { work: parsedWork } : {}),
+  };
+}
 
 async function loadWork(id: number): Promise<WorkProps | null> {
   try {
     const html = await (await fetch(`/works/${id}?view_full_work=true&view_adult=true`, { headers: { Accept: "text/html" } })).text();
     const doc = new DOMParser().parseFromString(html, "text/html");
     const script = doc.querySelector('script[data-page="app"]');
-    return script?.textContent ? (JSON.parse(script.textContent).props as WorkProps) : null;
-  } catch { return null; }
+    return script?.textContent ? propsFromPage(JSON.parse(script.textContent)) : null;
+  } catch (error) {
+    if (error instanceof Error) return null;
+    throw error;
+  }
 }
 
-/** Mobile bottom sheet that reads a fic inline (cogram-style) without leaving the list. */
 export default function WorkSheet({ workId, workUrl, onClose }: { workId: number | null; workUrl: string | null; onClose: () => void }) {
   const [data, setData] = useState<WorkProps | null>(null);
   const [loading, setLoading] = useState(false);
@@ -48,7 +115,9 @@ export default function WorkSheet({ workId, workUrl, onClose }: { workId: number
       <div onClick={onClose} className={`fixed inset-0 z-50 bg-black/50 transition-opacity duration-300 ${open ? "opacity-100" : "pointer-events-none opacity-0"}`} aria-hidden />
       <div
         role="dialog"
-        aria-modal="true"
+        aria-hidden={!open}
+        aria-modal={open ? "true" : undefined}
+        inert={!open ? true : undefined}
         className={`fixed inset-x-0 bottom-0 z-50 flex h-[93svh] flex-col rounded-t-2xl border-border border-t bg-background shadow-[0_-8px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-out ${open ? "translate-y-0" : "translate-y-full"}`}
       >
         <div className="mx-auto mt-2.5 h-1.5 w-10 shrink-0 rounded-full bg-border" aria-hidden />

@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/react";
+import type { RequestPayload } from "@inertiajs/core";
 import AppShell from "../components/AppShell";
 import { Button } from "@/design-system/components/ui/button";
 import { Input } from "@/design-system/components/ui/input";
@@ -26,9 +27,10 @@ export default function BookmarkNew({ context, work, action, method, pseuds, val
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const opts = { preserveScroll: true };
-    const payload = { bookmark: form.data } as Record<string, unknown>;
-    if (method === "put") form.transform(() => payload).put(action, opts);
-    else form.transform(() => payload).post(action, opts);
+    const payload: RequestPayload = { bookmark: form.data };
+    form.transform(() => payload);
+    if (method === "put") form.put(action, opts);
+    else form.post(action, opts);
   };
   const err = (k: string) => errors?.[k]?.[0];
 

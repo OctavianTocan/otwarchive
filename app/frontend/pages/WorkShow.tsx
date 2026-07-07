@@ -1,64 +1,65 @@
 import { Card } from "@/design-system/components/ui/card";
-import AppShell from "../components/AppShell";
+import { AlertTriangleIcon, CheckIcon, LockIcon, StarIcon } from "lucide-react";
+import { PageFrame } from "../components/shared";
 import KudosButton from "../components/KudosButton";
 import SubscribeButton from "../components/SubscribeButton";
 import { Button } from "@/design-system/components/ui/button";
 import { Badge } from "@/design-system/components/ui/badge";
 
-type TagRef = { name: string; url: string | null; type: string };
+type TagRef = { readonly name: string; readonly url: string | null; readonly type: string };
 type Chapter = {
-  id: number;
-  position: number;
-  title: string | null;
-  header: string | null;
-  contentHtml: string | null;
-  summaryHtml: string | null;
-  notesHtml: string | null;
-  endnotesHtml: string | null;
+  readonly id: number;
+  readonly position: number;
+  readonly title: string | null;
+  readonly header: string | null;
+  readonly contentHtml: string | null;
+  readonly summaryHtml: string | null;
+  readonly notesHtml: string | null;
+  readonly endnotesHtml: string | null;
 };
 type Props = {
-  pageTitle: string;
-  work: {
-    id: number;
-    title: string;
-    url: string | null;
-    authors: { name: string; url: string | null }[];
-    anonymous: boolean;
-    restricted: boolean;
-    complete: boolean;
-    ratings: TagRef[];
-    warnings: TagRef[];
-    categories: TagRef[];
-    fandoms: TagRef[];
-    relationships: TagRef[];
-    characters: TagRef[];
-    freeforms: TagRef[];
+  readonly pageTitle: string;
+  readonly work: {
+    readonly id: number;
+    readonly title: string;
+    readonly url: string | null;
+    readonly authors: readonly { readonly name: string; readonly url: string | null }[];
+    readonly anonymous: boolean;
+    readonly restricted: boolean;
+    readonly complete: boolean;
+    readonly ratings: readonly TagRef[];
+    readonly warnings: readonly TagRef[];
+    readonly categories: readonly TagRef[];
+    readonly fandoms: readonly TagRef[];
+    readonly relationships: readonly TagRef[];
+    readonly characters: readonly TagRef[];
+    readonly freeforms: readonly TagRef[];
   };
-  summaryHtml: string | null;
-  notesHtml: string | null;
-  endnotesHtml: string | null;
-  stats: { language?: string; words?: number; chapters?: string; comments?: number; kudos?: number; bookmarks?: number; hits?: number };
-  published?: string;
-  updated?: string;
-  language: string | null;
-  series: { name: string; url: string | null; part: number }[];
-  collections: string[];
-  gifts: string[];
-  chapters: Chapter[];
-  kudosNames: string[];
-  kudosCount: number;
-  workskinCss: string | null;
+  readonly summaryHtml: string | null;
+  readonly notesHtml: string | null;
+  readonly endnotesHtml: string | null;
+  readonly stats: { readonly language?: string; readonly words?: number; readonly chapters?: string; readonly comments?: number; readonly kudos?: number; readonly bookmarks?: number; readonly hits?: number };
+  readonly published?: string;
+  readonly updated?: string;
+  readonly language: string | null;
+  readonly series: readonly { readonly name: string; readonly url: string | null; readonly part: number }[];
+  readonly collections: readonly string[];
+  readonly gifts: readonly string[];
+  readonly chapters: readonly Chapter[];
+  readonly kudosNames: readonly string[];
+  readonly kudosCount: number;
+  readonly workskinCss: string | null;
 };
 
 const n = (v?: number) => (v ?? 0).toLocaleString("en-US");
-const REAL_WARNINGS = (ws: TagRef[]) => ws.filter((x) => x.name !== "No Archive Warnings Apply");
+const REAL_WARNINGS = (ws: readonly TagRef[]) => ws.filter((x) => x.name !== "No Archive Warnings Apply");
 
 function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline" | "destructive" }) {
   return <Badge variant={variant ?? "secondary"} render={<a href={t.url ?? "#"} />}>{t.name}</Badge>;
 }
 
 function Userstuff({ html }: { html: string }) {
-  return <div className="userstuff [&_p]:my-2 [&_blockquote]:my-2 [&_a]:text-primary [&_a]:underline" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className="userstuff min-w-0 break-words leading-relaxed [&_blockquote]:my-3 [&_p]:my-3 [&_a]:text-link [&_a]:underline" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 function MetaRow({ label, children }: { label: string; children: React.ReactNode }) {
@@ -111,18 +112,17 @@ export default function WorkShow(props: Props) {
   const multi = chapters.length > 1;
 
   return (
-    <AppShell>
+    <PageFrame variant="narrow">
       {workskinCss && <style dangerouslySetInnerHTML={{ __html: scopeCss(workskinCss) }} />}
 
-      <div className="mx-auto max-w-[880px] px-5 pt-6 pb-16">
-        <Card className="px-6 py-5">
-          {/* Preface */}
-          <div>
-            <h1 className="font-semibold text-lg leading-tight">
-              {work.restricted && <span title="Restricted" className="mr-1 align-middle text-base">🔒</span>}
+      <article className="mx-auto max-w-[900px]">
+        <Card className="px-5 py-5 md:px-6">
+          <header>
+            <h1 className="break-words font-semibold text-xl leading-tight md:text-2xl">
+              {work.restricted && <LockIcon aria-label="Restricted" className="mr-1 inline size-4 align-[-2px] text-muted-foreground" />}
               <a href={work.url ?? "#"} className="text-link hover:underline">{work.title}</a>
             </h1>
-            <p className="mt-1 text-muted-foreground">
+            <p className="mt-1 break-words text-muted-foreground text-sm">
               by{" "}
               {work.authors.map((a, i) => (
                 <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
@@ -130,16 +130,17 @@ export default function WorkShow(props: Props) {
               {gifts.length > 0 && <span> for {gifts.join(", ")}</span>}
             </p>
 
-            {/* Required tags */}
             <div className="mt-3 flex flex-wrap gap-1.5">
               {work.ratings.map((t, i) => <Badge key={`r${i}`} variant="outline">{t.name}</Badge>)}
-              <Badge variant={hasWarnings ? "destructive" : "outline"}>{hasWarnings ? "⚠ Warnings apply" : "✓ No Archive Warnings"}</Badge>
+              <Badge variant={hasWarnings ? "destructive" : "outline"}>
+                {hasWarnings ? <AlertTriangleIcon className="mr-1 inline size-3" /> : <CheckIcon className="mr-1 inline size-3" />}
+                {hasWarnings ? "Warnings apply" : "No Archive Warnings"}
+              </Badge>
               {work.categories.map((t, i) => <Badge key={`c${i}`} variant="outline">{t.name}</Badge>)}
               <Badge variant="outline">{work.complete ? "Complete" : "Work in Progress"}</Badge>
             </div>
-          </div>
+          </header>
 
-          {/* Associations / tags */}
           <dl className="mt-4 border-border border-t border-dashed pt-4 text-sm">
             {work.fandoms.length > 0 && <MetaRow label="Fandoms">{work.fandoms.map((t, i) => <TagBadge key={i} t={t} variant="secondary" />)}</MetaRow>}
             {hasWarnings && <MetaRow label="Warnings">{warnings.map((t, i) => <TagBadge key={i} t={t} variant="destructive" />)}</MetaRow>}
@@ -157,7 +158,6 @@ export default function WorkShow(props: Props) {
             {collections.length > 0 && <MetaRow label="Collections">{collections.join(", ")}</MetaRow>}
           </dl>
 
-          {/* Stats */}
           <dl className="mt-3 flex flex-wrap gap-x-4 gap-y-0.5 border-border border-t border-dashed pt-3 text-muted-foreground text-xs tabular-nums">
             {props.published && <span><dt className="inline font-semibold">Published:</dt> <dd className="inline">{props.published}</dd></span>}
             {props.updated && props.updated !== props.published && <span><dt className="inline font-semibold">Updated:</dt> <dd className="inline">{props.updated}</dd></span>}
@@ -169,7 +169,6 @@ export default function WorkShow(props: Props) {
             <span><dt className="inline font-semibold">Hits:</dt> <dd className="inline">{n(stats.hits)}</dd></span>
           </dl>
 
-          {/* Work summary / notes */}
           {props.summaryHtml && (
             <div className="mt-4 border-border border-t border-dashed pt-4">
               <h3 className="font-semibold text-muted-foreground text-sm">Summary</h3>
@@ -184,8 +183,7 @@ export default function WorkShow(props: Props) {
           )}
         </Card>
 
-        {/* Chapter bodies (work skin applies here) */}
-        <Card id="workskin" className="mt-4 px-6 py-6">
+        <Card id="workskin" className="mt-4 overflow-hidden px-5 py-6 md:px-7">
           <div className="flex flex-col gap-8">
             {chapters.map((ch) => <ChapterView key={ch.id} ch={ch} multi={multi} />)}
           </div>
@@ -197,12 +195,11 @@ export default function WorkShow(props: Props) {
           )}
         </Card>
 
-        {/* Kudos */}
         <div className="mt-6 flex flex-col gap-2 border-border border-t pt-5 text-sm">
           <div className="flex flex-wrap items-center gap-2">
-            <KudosButton workId={(work as { id: number }).id} />
-            <SubscribeButton workId={(work as { id: number }).id} />
-            <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}/bookmarks/new`} />}>☆ Bookmark</Button>
+            <KudosButton workId={work.id} />
+            <SubscribeButton workId={work.id} />
+            <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}/bookmarks/new`} />}><StarIcon className="mr-1 inline size-3" />Bookmark</Button>
             <h3 className="ml-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide">Kudos ({n(kudosCount)})</h3>
           </div>
           {kudosNames.length > 0 && (
@@ -216,14 +213,11 @@ export default function WorkShow(props: Props) {
         <p className="mt-6 text-center text-muted-foreground text-xs">
           <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}?ui=legacy`} />}>View legacy page</Button>
         </p>
-      </div>
-    </AppShell>
+      </article>
+    </PageFrame>
   );
 }
 
-// Scope the work skin's author CSS under #workskin so it can't leak into the
-// surrounding page chrome. AO3 authors already write rules against #workskin;
-// prefix any that don't so nothing escapes the reading pane.
 function scopeCss(css: string): string {
   return css.replace(/([^{}]+)(\{[^{}]*\})/g, (_m, selectors: string, body: string) => {
     const scoped = selectors
