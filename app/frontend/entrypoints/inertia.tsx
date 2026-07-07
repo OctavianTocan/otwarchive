@@ -14,6 +14,12 @@ const AgentationPanel = enableReactDevTools
   ? lazy(() => import("agentation").then(({ Agentation }) => ({ default: Agentation })))
   : null;
 
+function agentationEndpoint() {
+  if (import.meta.env.VITE_AGENTATION_ENDPOINT) return import.meta.env.VITE_AGENTATION_ENDPOINT;
+  if (window.location.hostname.endsWith(".ts.net")) return `${window.location.protocol}//${window.location.hostname}:9482`;
+  return "http://localhost:4747";
+}
+
 if (enableReactDevTools) {
   const [{ init }, { scan }] = await Promise.all([import("grab"), import("react-scan")]);
   init();
@@ -35,7 +41,7 @@ createInertiaApp({
         <App {...props} />
         {AgentationPanel && (
           <Suspense fallback={null}>
-            <AgentationPanel />
+            <AgentationPanel endpoint={agentationEndpoint()} />
           </Suspense>
         )}
       </Suspense>,

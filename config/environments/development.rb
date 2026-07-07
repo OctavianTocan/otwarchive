@@ -97,4 +97,9 @@ Rails.application.configure do
     # Just disable it for now as a workaround.
     config.action_controller.forgery_protection_origin_check = false
   end
+
+  if ENV["TAILSCALE_DEV_HOST"].present?
+    config.hosts << ENV["TAILSCALE_DEV_HOST"]
+    config.action_controller.forgery_protection_origin_check = false
+  end
 end

@@ -3,6 +3,19 @@ module InertiaAssetsHelper
   VITE_INERTIA_MANIFEST_PATH = Rails.root.join("public/vite-inertia/.vite/manifest.json")
 
   def inertia_vite_tags
+    if (dev_server = inertia_vite_dev_server)
+      return safe_join([
+        javascript_tag(<<~JAVASCRIPT, type: "module"),
+          import { injectIntoGlobalHook } from "#{dev_server}#{VITE_INERTIA_PUBLIC_PATH}/@react-refresh";
+          injectIntoGlobalHook(window);
+          window.$RefreshReg$ = () => {};
+          window.$RefreshSig$ = () => (type) => type;
+        JAVASCRIPT
+        javascript_include_tag("#{dev_server}#{VITE_INERTIA_PUBLIC_PATH}/@vite/client", type: "module"),
+        javascript_include_tag("#{dev_server}#{VITE_INERTIA_PUBLIC_PATH}/entrypoints/inertia.tsx", type: "module")
+      ], "\n")
+    end
+
     entry = inertia_vite_entry
     tags = []
 
@@ -24,6 +37,12 @@ module InertiaAssetsHelper
   end
 
   private
+
+  def inertia_vite_dev_server
+    return unless Rails.env.development?
+
+    ENV["VITE_INERTIA_DEV_SERVER"].presence&.delete_suffix("/")
+  end
 
   def inertia_vite_manifest
     @inertia_vite_manifest ||= JSON.parse(File.read(VITE_INERTIA_MANIFEST_PATH))
