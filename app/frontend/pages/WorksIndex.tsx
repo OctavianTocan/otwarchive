@@ -2,18 +2,13 @@ import { router } from "@inertiajs/react";
 import { useState } from "react";
 import { Button } from "@/design-system/components/ui/button";
 import WorkSheet from "../components/WorkSheet";
-import {
-  FilterSection,
-  FilterSidebar,
-  PageFrame,
-  PaginationBar,
-  SectionHeader,
-  WorkBlurbCard,
-  formatCount,
-  type FacetGroup,
-  type Pagination,
-  type WorkBlurb,
-} from "../components/shared";
+import { FilterSection, FilterSidebar } from "../components/shared/FilterSidebar";
+import { PageFrame } from "../components/shared/PageFrame";
+import { PaginationBar } from "../components/shared/PaginationBar";
+import { SectionHeader } from "../components/shared/SectionHeader";
+import { WorkBlurbCard } from "../components/shared/WorkBlurbCard";
+import { formatCount } from "../components/shared/archiveFormat";
+import type { FacetGroup, Pagination, WorkBlurb } from "../components/shared/archiveTypes";
 
 type Filters = {
   readonly include: Record<string, string[]>;
@@ -176,6 +171,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
         <FilterSection title="Word Count">
           <div className="grid grid-cols-2 gap-1.5">
             <input
+              aria-label="Minimum word count"
               type="number"
               placeholder="From"
               value={workSearch.words_from ?? ""}
@@ -183,6 +179,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
               className={inputClassName}
             />
             <input
+              aria-label="Maximum word count"
               type="number"
               placeholder="To"
               value={workSearch.words_to ?? ""}
@@ -194,6 +191,7 @@ export default function WorksIndex({ context, works, pagination, facets, filters
 
         <FilterSection title="Search within results">
           <input
+            aria-label="Search within results"
             type="text"
             placeholder="Keywords"
             value={workSearch.query ?? ""}

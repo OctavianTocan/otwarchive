@@ -2,15 +2,12 @@ import { router } from "@inertiajs/react";
 import { useState } from "react";
 import { Button } from "@/design-system/components/ui/button";
 import { Card } from "@/design-system/components/ui/card";
-import {
-  PageFrame,
-  PaginationBar,
-  SectionHeader,
-  WorkBlurbCard,
-  formatCount,
-  type Pagination,
-  type WorkBlurb,
-} from "../components/shared";
+import { PageFrame } from "../components/shared/PageFrame";
+import { PaginationBar } from "../components/shared/PaginationBar";
+import { SectionHeader } from "../components/shared/SectionHeader";
+import { WorkBlurbCard } from "../components/shared/WorkBlurbCard";
+import { formatCount } from "../components/shared/archiveFormat";
+import type { Pagination, WorkBlurb } from "../components/shared/archiveTypes";
 
 type Props = {
   readonly context: {

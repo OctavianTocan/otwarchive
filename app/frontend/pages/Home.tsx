@@ -1,14 +1,12 @@
 import type { ReactNode } from "react";
 import { Button } from "@/design-system/components/ui/button";
 import { Card } from "@/design-system/components/ui/card";
-import {
-  PageFrame,
-  SectionHeader,
-  TagPill,
-  WorkBlurbCard,
-  formatCount,
-  type WorkBlurb,
-} from "../components/shared";
+import { PageFrame } from "../components/shared/PageFrame";
+import { SectionHeader } from "../components/shared/SectionHeader";
+import { TagPill } from "../components/shared/TagPill";
+import { WorkBlurbCard } from "../components/shared/WorkBlurbCard";
+import { formatCount } from "../components/shared/archiveFormat";
+import type { WorkBlurb } from "../components/shared/archiveTypes";
 
 type Link = { readonly text: string; readonly url: string };
 
@@ -62,6 +60,7 @@ type Props = {
 
 const formatDate = (iso: string | null) =>
   iso ? new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "";
+const stripTags = (html: string): string => html.replace(/<[^>]*>/g, "");
 
 function withLink(template: string, link: Link) {
   const [before, after] = template.split("%{link}");
@@ -115,7 +114,7 @@ function IntroBlock({ intro }: { readonly intro: Intro }) {
         {account.cta && (
           <div className="mt-3">
             {account.cta.note && <p className="mb-2 text-foreground/90 text-sm">{account.cta.note}</p>}
-            <Button variant="default" render={<a href={account.cta.url} />}>{account.cta.label}</Button>
+            <Button variant="default" render={<a aria-label={account.cta.label} href={account.cta.url} />}>{account.cta.label}</Button>
           </div>
         )}
       </div>
@@ -128,8 +127,8 @@ function FavoritesOrBrowse({ favorites, browse }: Pick<Props, "favorites" | "bro
     return (
       <Module title={browse.heading} className="md:col-span-5 md:row-start-2">
         <div className="flex flex-wrap gap-1.5">
-          {favorites.map((favorite, index) => (
-            <TagPill key={`${favorite.name}-${index}`} tag={favorite} />
+          {favorites.map((favorite) => (
+            <TagPill key={favorite.url ?? favorite.name} tag={favorite} />
           ))}
         </div>
       </Module>
@@ -141,8 +140,8 @@ function FavoritesOrBrowse({ favorites, browse }: Pick<Props, "favorites" | "bro
       {browse.note && <p className="mb-2 text-muted-foreground text-sm">{browse.note}</p>}
       <div className="flex flex-wrap gap-1.5">
         <TagPill tag={{ name: "All Fandoms", url: browse.allFandomsUrl }} variant="outline" />
-        {browse.media.map((media, index) => (
-          <TagPill key={`${media.name}-${index}`} tag={media} />
+        {browse.media.map((media) => (
+          <TagPill key={media.url ?? media.name} tag={media} />
         ))}
       </div>
     </Module>
@@ -160,7 +159,7 @@ function NewsList({ news }: { readonly news: readonly NewsPost[] }) {
           <li key={post.id}>
             <Card className="px-5 rounded-none border-x-0 border-t-0 py-5 transition-colors last:border-b-0 hover:bg-muted/30">
               <h4 className="min-w-0 break-words font-semibold text-[15px] leading-snug">
-                <a href={post.url ?? "#"} className="text-link hover:underline" dangerouslySetInnerHTML={{ __html: post.title }} />
+                <a aria-label={stripTags(post.title)} href={post.url ?? "#"} className="text-link hover:underline" dangerouslySetInnerHTML={{ __html: post.title }} />
               </h4>
               <p className="flex flex-wrap gap-x-3 text-muted-foreground text-xs tabular-nums">
                 {post.published && <span>Published: {formatDate(post.published)}</span>}
@@ -241,8 +240,8 @@ export default function Home({ loggedIn, intro, favorites, browse, news, reading
             {withLink(social.note, { text: social.otherOutlets.text, url: social.otherOutlets.url })}
           </p>
           <div className="mt-2 flex flex-wrap gap-2">
-            <Button variant="outline" render={<a href={social.bluesky.url} />}>{social.bluesky.label}</Button>
-            <Button variant="outline" render={<a href={social.tumblr.url} />}>{social.tumblr.label}</Button>
+            <Button variant="outline" render={<a aria-label={social.bluesky.label} href={social.bluesky.url} />}>{social.bluesky.label}</Button>
+            <Button variant="outline" render={<a aria-label={social.tumblr.label} href={social.tumblr.url} />}>{social.tumblr.label}</Button>
           </div>
         </Module>
       </div>
