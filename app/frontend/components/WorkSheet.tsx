@@ -99,31 +99,22 @@ export default function WorkSheet({ workId, workUrl, onClose }: { workId: number
     return () => { alive = false; };
   }, [workId]);
 
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = prev; window.removeEventListener("keydown", onKey); };
-  }, [open, onClose]);
-
   const title = data?.work?.title ?? data?.pageTitle ?? "Loading…";
 
   return (
-    <>
-      <div onClick={onClose} className={`fixed inset-0 z-50 bg-black/50 transition-opacity duration-300 ${open ? "opacity-100" : "pointer-events-none opacity-0"}`} aria-hidden />
-      <div
-        role="dialog"
-        aria-hidden={!open}
-        aria-modal={open ? "true" : undefined}
-        inert={!open ? true : undefined}
-        className={`fixed inset-x-0 bottom-0 z-50 flex h-[93svh] flex-col rounded-t-2xl border-border border-t bg-background shadow-[0_-8px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-out ${open ? "translate-y-0" : "translate-y-full"}`}
-      >
+    <dialog
+      open={open}
+      aria-labelledby="work-sheet-title"
+      className="fixed inset-x-0 bottom-0 top-auto z-50 m-0 h-[93svh] max-h-[93svh] w-full max-w-none rounded-t-2xl border-border border-t bg-background p-0 text-foreground shadow-[0_-8px_40px_rgba(0,0,0,0.18)] backdrop:bg-black/50 open:flex open:flex-col"
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
         <div className="mx-auto mt-2.5 h-1.5 w-10 shrink-0 rounded-full bg-border" aria-hidden />
         <header className="flex items-center gap-3 border-border border-b px-4 py-3">
           <button type="button" onClick={onClose} aria-label="Close" className="grid size-8 shrink-0 place-items-center rounded-md hover:bg-muted"><XIcon className="size-5" /></button>
-          <h3 className="min-w-0 flex-1 truncate font-semibold text-[15px]">{title}</h3>
+          <h3 id="work-sheet-title" className="min-w-0 flex-1 truncate font-semibold text-[15px]">{title}</h3>
           {workUrl && <a href={workUrl} className="shrink-0 text-link text-sm hover:underline">Open →</a>}
         </header>
         <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-5">
@@ -133,8 +124,14 @@ export default function WorkSheet({ workId, workUrl, onClose }: { workId: number
               <h2 className="font-semibold text-xl leading-tight">{data.work.title}</h2>
               {data.work.authors && <p className="mt-1 text-muted-foreground text-sm">by {data.work.authors.map((a) => a.name).join(", ")}</p>}
               <div className="mt-3 flex flex-wrap gap-1.5">
-                {[...(data.work.ratings ?? []), ...(data.work.fandoms ?? []), ...(data.work.warnings ?? [])].map((t, i) => (
-                  <span key={i} className="rounded-md border border-border px-2 py-0.5 text-muted-foreground text-xs">{t.name}</span>
+                {(data.work.ratings ?? []).map((tag) => (
+                  <span key={`rating-${tag.name}`} className="rounded-md border border-border px-2 py-0.5 text-muted-foreground text-xs">{tag.name}</span>
+                ))}
+                {(data.work.fandoms ?? []).map((tag) => (
+                  <span key={`fandom-${tag.name}`} className="rounded-md border border-border px-2 py-0.5 text-muted-foreground text-xs">{tag.name}</span>
+                ))}
+                {(data.work.warnings ?? []).map((tag) => (
+                  <span key={`warning-${tag.name}`} className="rounded-md border border-border px-2 py-0.5 text-muted-foreground text-xs">{tag.name}</span>
                 ))}
               </div>
               {data.summaryHtml && <div className="userstuff mt-4 rounded-md border-primary/30 border-l-2 bg-muted/40 px-3 py-2 text-sm" dangerouslySetInnerHTML={{ __html: data.summaryHtml }} />}
@@ -150,7 +147,6 @@ export default function WorkSheet({ workId, workUrl, onClose }: { workId: number
           )}
           {!loading && !data && open && <p className="py-10 text-center text-muted-foreground">Couldn't load. <a href={workUrl ?? "#"} className="text-link hover:underline">Open the page →</a></p>}
         </div>
-      </div>
-    </>
+    </dialog>
   );
 }
