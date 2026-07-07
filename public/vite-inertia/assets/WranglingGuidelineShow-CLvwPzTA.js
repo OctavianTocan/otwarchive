@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{C as e}from"./ContentPage-HmcKfydQ.js";import"./card-DDi9p00Y.js";import"./utils-Bllh_ec8.js";import"./AppShell-CgGjhnCb.js";import"./index-BvBzorwV.js";function d({context:i,title:r,contentHtml:n}){return t.jsx(e,{heading:"Wrangling Guidelines",title:r,contentHtml:n,indexUrl:i.indexUrl})}export{d as default};

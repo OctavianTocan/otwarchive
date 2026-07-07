@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{A as r}from"./AppShell-CgGjhnCb.js";import"./index-BvBzorwV.js";function s({contentHtml:e}){return t.jsx(r,{children:t.jsx("div",{className:"mx-auto max-w-[820px] px-4 pt-6 pb-16 md:px-5",children:t.jsx("article",{className:"ao3-prose text-[15px] text-foreground/90",dangerouslySetInnerHTML:{__html:e}})})})}export{s as default};

@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-D_zvdyIk.js";function r({name:i="world"}){return e.jsxs("div",{style:{padding:40,fontFamily:"system-ui, sans-serif"},children:[e.jsx("h1",{style:{margin:0},children:"Inertia + React live ✔"}),e.jsxs("p",{children:["Hello, ",i,". This page is rendered by React via Inertia, inside the AO3 Rails app — no backend rewrite."]})]})}export{r as default};

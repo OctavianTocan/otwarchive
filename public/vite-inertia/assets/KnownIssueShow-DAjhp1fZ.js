@@ -1,0 +1,1 @@
+import{j as n}from"./jsx-runtime-D_zvdyIk.js";import{C as i}from"./ContentPage-HmcKfydQ.js";import"./card-DDi9p00Y.js";import"./utils-Bllh_ec8.js";import"./AppShell-CgGjhnCb.js";import"./index-BvBzorwV.js";function a({context:o,title:r,contentHtml:t}){return n.jsx(i,{heading:"Known Issues",title:r,contentHtml:t,indexUrl:o.indexUrl})}export{a as default};
