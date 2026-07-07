@@ -61,10 +61,20 @@ class WorksIndexPresenter < InertiaPresenter
   end
 
   def current_filters
+    excluded_by_type = excluded_tags.group_by { |tag| tag.class.to_s.underscore }
+
     {
       include: FACET_GROUPS.to_h { |key, _| [key, Array(@opts["#{key}_ids"]).map(&:to_s)] },
+      exclude: FACET_GROUPS.to_h { |key, _| [key, Array(excluded_by_type[key]).map { |tag| tag.id.to_s }] },
       work_search: SCALARS.index_with { |k| @opts[k] }.compact_blank,
       page: (@opts["page"] || @opts[:page] || 1).to_i
     }
+  end
+
+  def excluded_tags
+    ids = Array(@opts[:excluded_tag_ids] || @opts["excluded_tag_ids"]).map(&:to_s)
+    return [] if ids.blank?
+
+    Tag.where(id: ids)
   end
 end
