@@ -1,6 +1,6 @@
 import { Card } from "@/design-system/components/ui/card";
 import { AlertTriangleIcon, CheckIcon, LockIcon, StarIcon } from "lucide-react";
-import { PageFrame } from "../components/shared";
+import { PageFrame } from "../components/shared/PageFrame";
 import KudosButton from "../components/KudosButton";
 import SubscribeButton from "../components/SubscribeButton";
 import { Button } from "@/design-system/components/ui/button";
@@ -55,7 +55,7 @@ const n = (v?: number) => (v ?? 0).toLocaleString("en-US");
 const REAL_WARNINGS = (ws: readonly TagRef[]) => ws.filter((x) => x.name !== "No Archive Warnings Apply");
 
 function TagBadge({ t, variant }: { t: TagRef; variant?: "secondary" | "outline" | "destructive" }) {
-  return <Badge variant={variant ?? "secondary"} render={<a href={t.url ?? "#"} />}>{t.name}</Badge>;
+  return <Badge variant={variant ?? "secondary"} render={<a aria-label={t.name} href={t.url ?? "#"} />}>{t.name}</Badge>;
 }
 
 function Userstuff({ html }: { html: string }) {
@@ -125,33 +125,33 @@ export default function WorkShow(props: Props) {
             <p className="mt-1 break-words text-muted-foreground text-sm">
               by{" "}
               {work.authors.map((a, i) => (
-                <span key={i}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
+                <span key={a.url ?? a.name}>{i > 0 && ", "}<a href={a.url ?? "#"} className="text-link hover:underline">{a.name}</a></span>
               ))}
               {gifts.length > 0 && <span> for {gifts.join(", ")}</span>}
             </p>
 
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {work.ratings.map((t, i) => <Badge key={`r${i}`} variant="outline">{t.name}</Badge>)}
+              {work.ratings.map((t) => <Badge key={t.url ?? `${t.type}-${t.name}`} variant="outline">{t.name}</Badge>)}
               <Badge variant={hasWarnings ? "destructive" : "outline"}>
                 {hasWarnings ? <AlertTriangleIcon className="mr-1 inline size-3" /> : <CheckIcon className="mr-1 inline size-3" />}
                 {hasWarnings ? "Warnings apply" : "No Archive Warnings"}
               </Badge>
-              {work.categories.map((t, i) => <Badge key={`c${i}`} variant="outline">{t.name}</Badge>)}
+              {work.categories.map((t) => <Badge key={t.url ?? `${t.type}-${t.name}`} variant="outline">{t.name}</Badge>)}
               <Badge variant="outline">{work.complete ? "Complete" : "Work in Progress"}</Badge>
             </div>
           </header>
 
           <dl className="mt-4 border-border border-t border-dashed pt-4 text-sm">
-            {work.fandoms.length > 0 && <MetaRow label="Fandoms">{work.fandoms.map((t, i) => <TagBadge key={i} t={t} variant="secondary" />)}</MetaRow>}
-            {hasWarnings && <MetaRow label="Warnings">{warnings.map((t, i) => <TagBadge key={i} t={t} variant="destructive" />)}</MetaRow>}
-            {work.relationships.length > 0 && <MetaRow label="Relationships">{work.relationships.map((t, i) => <TagBadge key={i} t={t} variant="outline" />)}</MetaRow>}
-            {work.characters.length > 0 && <MetaRow label="Characters">{work.characters.map((t, i) => <TagBadge key={i} t={t} variant="outline" />)}</MetaRow>}
-            {work.freeforms.length > 0 && <MetaRow label="Additional Tags">{work.freeforms.map((t, i) => <TagBadge key={i} t={t} variant="outline" />)}</MetaRow>}
+            {work.fandoms.length > 0 && <MetaRow label="Fandoms">{work.fandoms.map((t) => <TagBadge key={t.url ?? `${t.type}-${t.name}`} t={t} variant="secondary" />)}</MetaRow>}
+            {hasWarnings && <MetaRow label="Warnings">{warnings.map((t) => <TagBadge key={t.url ?? `${t.type}-${t.name}`} t={t} variant="destructive" />)}</MetaRow>}
+            {work.relationships.length > 0 && <MetaRow label="Relationships">{work.relationships.map((t) => <TagBadge key={t.url ?? `${t.type}-${t.name}`} t={t} variant="outline" />)}</MetaRow>}
+            {work.characters.length > 0 && <MetaRow label="Characters">{work.characters.map((t) => <TagBadge key={t.url ?? `${t.type}-${t.name}`} t={t} variant="outline" />)}</MetaRow>}
+            {work.freeforms.length > 0 && <MetaRow label="Additional Tags">{work.freeforms.map((t) => <TagBadge key={t.url ?? `${t.type}-${t.name}`} t={t} variant="outline" />)}</MetaRow>}
             {props.language && <MetaRow label="Language">{props.language}</MetaRow>}
             {series.length > 0 && (
               <MetaRow label="Series">
                 {series.map((s, i) => (
-                  <span key={i}>{i > 0 && ", "}Part {s.part} of <a href={s.url ?? "#"} className="text-link hover:underline">{s.name}</a></span>
+                  <span key={s.url ?? `${s.part}-${s.name}`}>{i > 0 && ", "}Part {s.part} of <a href={s.url ?? "#"} className="text-link hover:underline">{s.name}</a></span>
                 ))}
               </MetaRow>
             )}
@@ -199,7 +199,7 @@ export default function WorkShow(props: Props) {
           <div className="flex flex-wrap items-center gap-2">
             <KudosButton workId={work.id} />
             <SubscribeButton workId={work.id} />
-            <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}/bookmarks/new`} />}><StarIcon className="mr-1 inline size-3" />Bookmark</Button>
+            <Button variant="outline" size="sm" render={<a aria-label="Bookmark this work" href={`${work.url ?? "#"}/bookmarks/new`} />}><StarIcon className="mr-1 inline size-3" />Bookmark</Button>
             <h3 className="ml-1 font-semibold text-muted-foreground text-xs uppercase tracking-wide">Kudos ({n(kudosCount)})</h3>
           </div>
           {kudosNames.length > 0 && (
@@ -211,7 +211,7 @@ export default function WorkShow(props: Props) {
         </div>
 
         <p className="mt-6 text-center text-muted-foreground text-xs">
-          <Button variant="outline" size="sm" render={<a href={`${work.url ?? "#"}?ui=legacy`} />}>View legacy page</Button>
+          <Button variant="outline" size="sm" render={<a aria-label="View legacy page" href={`${work.url ?? "#"}?ui=legacy`} />}>View legacy page</Button>
         </p>
       </article>
     </PageFrame>

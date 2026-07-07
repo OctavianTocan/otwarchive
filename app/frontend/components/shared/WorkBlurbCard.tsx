@@ -85,7 +85,7 @@ export function WorkBlurbCard({
           </a>
           <span className="font-normal text-muted-foreground"> by </span>
           {work.authors.map((author, index) => (
-            <span key={`${author.name}-${author.url ?? "anonymous"}-${index}`}>
+            <span key={`${author.url ?? "anonymous"}-${author.name}`}>
               {index > 0 && ", "}
               <a
                 href={author.url ?? "#"}
@@ -116,8 +116,8 @@ export function WorkBlurbCard({
 
       {work.fandoms.length > 0 && (
         <div className="flex flex-wrap gap-1.5 leading-none">
-          {work.fandoms.map((tag, index) => (
-            <TagPill key={`${tag.name}-${index}`} tag={tag} variant="secondary" />
+          {work.fandoms.map((tag) => (
+            <TagPill key={tag.url ?? `${tag.type}-${tag.name}`} tag={tag} variant="secondary" />
           ))}
         </div>
       )}
@@ -127,11 +127,11 @@ export function WorkBlurbCard({
         work.characters.length > 0 ||
         work.freeforms.length > 0) && (
         <div className="flex flex-wrap gap-1 leading-none">
-          {warnings.map((tag, index) => (
-            <TagPill key={`warning-${tag.name}-${index}`} tag={tag} variant="destructive" />
+          {warnings.map((tag) => (
+            <TagPill key={tag.url ?? `${tag.type}-${tag.name}`} tag={tag} variant="destructive" />
           ))}
-          {[...work.relationships, ...work.characters, ...work.freeforms].map((tag, index) => (
-            <TagPill key={`tag-${tag.name}-${index}`} tag={tag} variant="outline" />
+          {[...work.relationships, ...work.characters, ...work.freeforms].map((tag) => (
+            <TagPill key={tag.url ?? `${tag.type}-${tag.name}`} tag={tag} variant="outline" />
           ))}
         </div>
       )}
