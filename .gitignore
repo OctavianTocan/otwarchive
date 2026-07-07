@@ -80,5 +80,8 @@ redis-cucumber-dump.rdb
 
 .rspec
 
+# frontend dependencies
+/app/frontend/node_modules
+
 # agent research/plan scratch
 .context/

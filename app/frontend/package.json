@@ -2,6 +2,10 @@
   "name": "ao3-inertia-spike",
   "private": true,
   "type": "module",
+  "scripts": {
+    "doctor": "react-doctor --no-score",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@inertiajs/react": "3.6.0",
@@ -15,8 +19,16 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "agentation": "^3.0.2",
+    "grab": "^0.1.48",
+    "react-doctor": "^0.7.1",
+    "react-scan": "^0.5.7",
     "tailwindcss": "^4.1.0",
+    "typescript": "^6.0.3",
     "vite": "^6.3.5"
   }
 }
