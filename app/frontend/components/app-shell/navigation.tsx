@@ -42,6 +42,22 @@ export function NavItems({ current, collapsed, mobile, onNavigate }: NavItemsPro
         );
 
         if (inertia) {
+          if (onNavigate) {
+            return (
+              <Link
+                key={href}
+                cacheFor="30s"
+                className={className}
+                href={href}
+                onClick={onNavigate}
+                prefetch="hover"
+                title={collapsed ? label : undefined}
+              >
+                {content}
+              </Link>
+            );
+          }
+
           return (
             <Link
               key={href}
@@ -50,24 +66,27 @@ export function NavItems({ current, collapsed, mobile, onNavigate }: NavItemsPro
               href={href}
               prefetch="hover"
               title={collapsed ? label : undefined}
-              {...(onNavigate ? { onClick: onNavigate } : {})}
             >
               {content}
             </Link>
           );
         }
 
-        return (
-          <a
-            key={href}
-            className={className}
-            href={href}
-            title={collapsed ? label : undefined}
-            {...(onNavigate ? { onClick: onNavigate } : {})}
-          >
-            {content}
-          </a>
-        );
+        if (onNavigate) {
+          return (
+            <a
+              key={href}
+              className={className}
+              href={href}
+              onClick={onNavigate}
+              title={collapsed ? label : undefined}
+            >
+              {content}
+            </a>
+          );
+        }
+
+        return <a key={href} className={className} href={href} title={collapsed ? label : undefined}>{content}</a>;
       })}
     </nav>
   );

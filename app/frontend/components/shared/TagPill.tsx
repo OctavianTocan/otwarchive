@@ -11,7 +11,7 @@ type TagPillProps = {
 
 export function TagPill({ tag, variant = "secondary" }: TagPillProps) {
   return (
-    <Badge variant={variant} render={<a href={tag.url ?? "#"} />}>
+    <Badge variant={variant} render={<a aria-label={tag.name} href={tag.url ?? "#"} />}>
       {tag.name}
     </Badge>
   );

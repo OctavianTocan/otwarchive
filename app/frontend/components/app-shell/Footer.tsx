@@ -32,7 +32,6 @@ export function Footer() {
   return (
     <footer
       className="mt-auto border-footer/30 border-t px-6 py-10 text-footer-foreground"
-      role="contentinfo"
       style={{ backgroundColor: "var(--footer)", backgroundImage: "var(--footer-texture)" }}
     >
       <h2 className="sr-only">Footer</h2>
